@@ -8,6 +8,8 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.util.ServletContextAware;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -51,4 +53,6 @@ public class SuperAction extends ActionSupport implements ServletRequestAware,
     public Map<?, ?> getMaps() {
         return maps;
     }
+
+
 }
