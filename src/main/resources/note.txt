@@ -1,0 +1,11 @@
+Ⅰ：使用flexpaper在线浏览
+    1.安装openoffice 4.0版本以上，
+        官网http://www.openoffice.org/zh-cn/download/，国内的中文破解版下载也行
+    2.安装SWFTools.exe,
+        http://www.swftools.org/download.html,选取安装版比较好！
+    3.FlexPaper在线浏览组件，在webapp中，不需要你们装，用了其中的js文件以及FlexPaperViewer.swf
+    4.JODConverter文件转换器,maven管理的pom，其中有两个是我自定义打包的依赖，
+        依赖包我放在了resource下，jodconverter包，你们直接把这个包放在你们的maven仓库下即可。
+    5.完成以上步骤（3，4不需要你们操作），运行转换后，会报错--》“OpenOffice监听器异常"，启动soffice.exe后在运行即可
+    6.需要修改的地方 》utils-ConstantPara的“PATH”常量改为你们自己的文件夹地址
+    7.用户上传的文件放在inFile下，预览预览的是.swf文件，输出文件夹为outSWFFile

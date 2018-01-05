@@ -6,15 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/User_login" method="post">
-        <input name="name" type="text">
-        <input name="password" type="text">
-        <input type="submit" value="ok">
-    </form>
+<s:form action="User_login" namespace="/method" method="post">
+    <s:token></s:token>
+    <s:textfield name="name" label="name"></s:textfield>
+    <s:textfield name="password" label="password"></s:textfield>
+        <s:submit/>
+</s:form>
+
+    <s:a namespace="/method" action="Upload_toUpload">toUploadPage</s:a>
 </body>
 </html>

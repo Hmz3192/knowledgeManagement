@@ -19,20 +19,20 @@
     </bean>
 
 
-    <!-- 第二种方式：加载多个properties文件
-    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <!-- 第二种方式：加载多个properties文件  -->
+   <!-- <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
-                <value>classpath:common.properties</value>
+                <value>classpath:OpenOfficeService.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
     </bean>
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties"/>
-    </bean>
-    -->
+    </bean>-->
+
 
     <!-- 配置C3P0连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
