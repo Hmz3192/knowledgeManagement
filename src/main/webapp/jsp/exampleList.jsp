@@ -28,7 +28,7 @@
     </script>
 </head>
 <body>
-<s:form action="Upload_upload" namespace="/method" method="post" enctype="multipart/form-data">
+<s:form action="Upload_upload" namespace="/method" method="post"  enctype="multipart/form-data">
     <s:token></s:token>
     <s:file name="myfile" label="选择上传文件"></s:file>
     <s:submit value="提交">123123123</s:submit>

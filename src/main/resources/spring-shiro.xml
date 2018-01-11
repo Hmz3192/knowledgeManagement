@@ -1,68 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
-       default-lazy-init="true">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <description>Shiro Configuration</description>
 
-    <!-- Shiro's main business-tier object for web-enabled applications -->
+    <!--
+   1. 配置 SecurityManager!  securityManager安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="shiroDbRealm"/>
-        <property name="cacheManager" ref="cacheManager"/>
+        <!-- 注入缓存管理器 -->
+        <property name="cacheManager" ref="cacheManager" />
+        <!--认证器-->
+        <!--<property name="authenticator" ref="authenticator"/>-->
+        <!-- 记住我 -->
+        <!--<property name="rememberMeManager" ref="rememberMeManager" />-->
+        <!--注入realm-->
+        <property name="realm" ref="ShiroRealm"/>
+        <!--  <property name="realms">
+              <list>
+                  <ref bean="ShiroRealm"/>
+              </list>
+          </property>-->
     </bean>
 
-    <!-- 項目自定义的Realm -->
-    <bean id="shiroDbRealm" class="com.realm.ShiroRealm">
-        <property name="cacheManager" ref="cacheManager"/>
+    <!--
+   2. 配置 Managers.
+   2.1 需要加入 ehcache 的 jar 包及配置文件.
+   -->
+    <!-- 缓存管理器 -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager">
+        <!--<property name="cacheManagerConfigFile" value="classpath:ehcache.xml" />-->
     </bean>
+    <!-- 会话管理器 -->
+<!--    <bean id="sessionManager"
+          class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        &lt;!&ndash; session的失效时长，单位毫秒 &ndash;&gt;
+        <property name="globalSessionTimeout" value="600000" />
+        &lt;!&ndash; 删除失效的session &ndash;&gt;
+        <property name="deleteInvalidSessions" value="true" />
+    </bean>-->
+    <!--认证器-->
+<!--    <bean id="authenticator"
+          class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        &lt;!&ndash;认证策略&ndash;&gt;
+        <property name="authenticationStrategy">
+            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
+        </property>
 
-    <!-- Shiro Filter -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <!--这个属性是必须的-->
-        <property name="securityManager" ref="securityManager"/>
-        <!--没有登录的用户请求需要登录的页面时自动跳转到登录页面，不是必须的属性，
-        不输入地址的话会自动寻找项目web项目的根目录下的”/login.jsp”页面。-->
-        <property name="loginUrl" value="/index.jsp"/>
-        <!--登录成功默认跳转页面，不配置则跳转至”/”。
-        如果登陆前点击的一个需要登录的页面，则在登录自动跳转到那个需要登录的页面。不跳转到此。-->
-        <property name="successUrl" value="/jsp/index.jsp"/>
-        <!--没有权限默认跳转的页面。-->
-        <property name="unauthorizedUrl" value="/jsp/index.jsp"/>
-        <!--anon:没有参数，表示可以匿名使用
-            authc:表示需要认证(登录)才能使用，没有参数
-            roles:/admins/user/**=roles[admin],参数可以写多个，多个时必须加上引号，并且参数之间用逗号分割，当有多个参数时，
-            例如admins/user/**=roles["admin,guest"],每个参数通过才算通过，相当于hasAllRoles()方法。
-            ......
-            anon，authcBasic，auchc，user是认证过滤器，
-            perms，roles，ssl，rest，port是授权过滤器
-        -->
+    </bean>-->
 
-        <property name="filterChainDefinitions">
-            <value>
-                /index.html = authc
-                /checkLogin.do = anon
-                /login.do = anon
-                /logout.html = anon
-                /** = anon
-            </value>
+    <!-- rememberMeManager管理器，写cookie，取出cookie生成用户信息 -->
+ <!--   <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cookie" ref="rememberMeCookie" />
+    </bean>-->
+    <!-- 记住我cookie -->
+ <!--   <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        &lt;!&ndash; rememberMe是cookie的名字 &ndash;&gt;
+        <constructor-arg value="rememberMe" />
+        &lt;!&ndash; 记住我cookie生效时间30天 &ndash;&gt;
+        <property name="maxAge" value="2592000" />
+    </bean>-->
+
+
+    <!--
+           3. 配置 Realm
+           3.1 直接配置实现了 org.apache.shiro.realm.Realm 接口的 bean
+       -->
+    <bean id="ShiroRealm" class="com.shiro.ShiroRealm">
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="MD5"/>
+                <!--输入密码加密次数-->
+                <property name="hashIterations" value="1024"/>
+            </bean>
         </property>
     </bean>
 
-    <!-- 用户授权信息Cache -->
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
-
-    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <!--
+   4. 配置 LifecycleBeanPostProcessor. 可以自定的来调用配置在 Spring IOC 容器中 shiro bean 的生命周期方法.
+   -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
-    <!-- AOP式方法级权限检查 -->
+    <!--
+       5. 启用 IOC 容器中使用 shiro 的注解. 但必须在配置了 LifecycleBeanPostProcessor 之后才可以使用.
+       -->
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-          depends-on="lifecycleBeanPostProcessor">
-        <property name="proxyTargetClass" value="true"/>
-    </bean>
-
+          depends-on="lifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+
+
+    <!--
+   6. 配置 ShiroFilter.
+   6.1 id 必须和 web.xml 文件中配置的 DelegatingFilterProxy 的 <filter-name> 一致.
+                     若不一致, 则会抛出: NoSuchBeanDefinitionException. 因为 Shiro 会来 IOC 容器中查找和 <filter-name> 名字对应的 filter bean.
+   -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/index.jsp"/>
+        <property name="successUrl" value="/list.jsp"/>
+        <!--没有权限的页面-->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
+        <!--<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>-->
+        <!--1.anon:没有参数，表示可以匿名使用
+           2.authc:表示需要认证(登录)才能使用，没有参数
+           3.roles:/admins/user/**=roles[admin],参数可以写多个，多个时必须加上引号，并且参数之间用逗号分割，当有多个参数时，
+           例如admins/user/**=roles["admin,guest"],每个参数通过才算通过，相当于hasAllRoles()方法。
+           ......
+           4.anon，authcBasic，auchc，user是认证过滤器，
+           5.perms，roles，ssl，rest，port是授权过滤器
+       -->
+        <!-- <property name="filterChainDefinitions">
+             <value>
+                 /login.jsp = anon
+                 /shiro/login = anon
+                 /shiro/logout = logout
+
+                 /user.jsp = roles[user]
+                 /admin.jsp = roles[admin]
+
+                  # everything else requires authentication:
+                 /** = authc
+             </value>
+         </property>-->
+    </bean>
+
+    <!-- 配置一个 bean, 该 bean 实际上是一个 Map. 通过实例工厂方法的方式 -->
+    <bean id="filterChainDefinitionMap"
+          factory-bean="filterChainDefinitionMapBuilder" factory-method="buildFilterChainDefinitionMap"/>
+
+    <bean id="filterChainDefinitionMapBuilder"
+          class="com.shiro.FilterChainDefinitionMapBuilder"/>
 </beans>

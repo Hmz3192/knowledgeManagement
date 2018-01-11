@@ -14,3 +14,22 @@
     ********************************************************************
 
     7.用户上传的文件放在inFile下，预览预览的是.swf文件，输出文件夹为outSWFFile
+
+
+
+Ⅱ：返回Json格式，参照JsonAction，用注解和JsonModel类
+
+
+Ⅲ：关于使用redis，环境我配好了，需要使用的地方主要是
+        1.在生成了Bean类之后，让他们实现 Serializable 接口
+        2.在生成的Mapper.xml 文件上加上缓存类-->RedisCache
+        3.在使用的ServiceImpl方法上，根据如下规则使用
+               -->  1.@Cacheable  让返回的值通过redis存储起来,下次执行该方法的时候就不会去MYSQL找，直接在内存获取
+                            （属性value--指定Cache的名称
+                              属性key--Cache下值存储的名称）
+               -->  2.@CacheEvict   清除缓存
+                             （属性allEntries--是否清除
+                               属性value--清除哪一个Cache下）
+               -->  3.@CachePut   无论是否有缓存，都去MYSQL查找，然后将返回结果放在指定的Cache下，没看到覆盖指定Key
+                              （指定Cahce）
+        4.尽量在查找的方法上指定@Cacheable，然后在增删改的时候用@CacheEvict清除缓存。

@@ -77,7 +77,7 @@ public class UploadAction extends SuperAction implements SessionAware, ModelDriv
     public String listFile() {
         FileUtil fileUtil = new FileUtil(ConstantPara.path + File.separator + fileModel.getSavePath());
         //获取当下文件的所有文件名和链接
-        objects = fileUtil.testPagemodels;
+//        list = fileUtil.testPagemodels;
         //用session传值 上下文继承自父类
 //        context.getSession().put("names", nameUrl);
         return "showList";

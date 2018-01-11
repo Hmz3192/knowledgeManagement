@@ -15,10 +15,11 @@
         <mybatis.version>3.2.8</mybatis.version>
         <struts.version>2.5.10</struts.version>
         <spring.version>4.3.8.RELEASE</spring.version>
-
+        <aspectj.version>1.7.1</aspectj.version>
         <!-- log4j日志包版本号 -->
         <slf4j.version>1.7.18</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
+
     </properties>
 
 
@@ -97,6 +98,13 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
@@ -108,7 +116,24 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.10</version>
+        </dependency>
+        <!-- AspectJ依赖 -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.10</version>
+        </dependency>
         <!-- 添加mybatis依赖 -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -169,13 +194,6 @@
             <artifactId>struts2-convention-plugin</artifactId>
             <version>${struts.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-json-plugin -->
-        <!--Struts2json数据-->
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-json-plugin</artifactId>
-            <version>${struts.version}</version>
-        </dependency>
 
         <!-- MySQL 依赖 -->
         <dependency>
@@ -189,12 +207,7 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.5</version>
         </dependency>
-        <!-- AspectJ依赖 -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.8.10</version>
-        </dependency>
+
 
         <!-- 添加fastjson -->
         <dependency>
@@ -343,6 +356,37 @@
               <artifactId>xwork-core</artifactId>
               <version>2.3.7</version>
           </dependency>-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.5.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
 
     </dependencies>
     <build>

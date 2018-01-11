@@ -14,8 +14,8 @@
 <body>
 <s:form action="User_login" namespace="/method" method="post">
     <s:token></s:token>
-    <s:textfield name="name" label="name"></s:textfield>
-    <s:textfield name="password" label="password"></s:textfield>
+    <s:textfield name="user" label="name"></s:textfield>
+    <%--<s:textfield name="password" label="password"></s:textfield>--%>
         <s:submit/>
 </s:form>
 

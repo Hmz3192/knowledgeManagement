@@ -1,16 +1,15 @@
 package com.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private Integer id;
 
-    private String name;
+    private String user;
 
-    private String password;
-
-    public User(Integer id, String name, String password) {
+    public User(Integer id, String user) {
         this.id = id;
-        this.name = name;
-        this.password = password;
+        this.user = user;
     }
 
     public User() {
@@ -25,19 +24,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setUser(String user) {
+        this.user = user == null ? null : user.trim();
     }
 }

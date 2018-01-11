@@ -5,6 +5,9 @@
 <struts>
     <!-- 开发提示：出错时打印更详细的信息-->
     <constant name="struts.devMode" value="true"/>
+    <!--开启注解，部分返回json的也可以直接用注解-->
+    <constant name="struts.convention.action.packages" value="com.controller" />
+
 
     <!-- 默认访问页面 -->
     <package name="default" extends="struts-default" namespace="/">
@@ -20,9 +23,13 @@
     <!--excludeMethods表示拦截器放行的方法，就是允许用户操作的,includeMethods表示要拦截的方法，就是不允许的操作-->
     <!-- Struts2在2.5版本后添加strict-method-invocation(严格方法访问)，默认为true，不能使用动态方法调用功能，故需设为false -->
     <package name="upload" extends="struts-default" namespace="/method" strict-method-invocation="false">
+      <!-- 指定全局的结果
+        <global-results>
+            <result name="testGlobal" type="">/testGlobal.jsp</result>
+        </global-results>-->
         <action name="*_*" class="com.controller.{1}Action" method="{2}">
             <interceptor-ref name="tokenSession"><param name="excludeMethods">toUpload</param></interceptor-ref>
-            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/jsp/success.jsp</result>
             <result name="forwardToUpload">/jsp/exampleList.jsp</result>
             <result name="forwardToLook">/jsp/readFile.jsp</result>
@@ -31,11 +38,11 @@
 
     </package>
 
-    <package name="json" extends="json-default" namespace="/json" strict-method-invocation="false">
-        <!-- 登陆 -->
+   <!-- <package name="json" extends="json-default" namespace="/json" strict-method-invocation="false">
+        &lt;!&ndash; 登陆 &ndash;&gt;
         <action name="*_*" class="com.controller.{1}Action" method="{2}">
             <result name="showList"  type="json"><param name="root">objects</param></result>
         </action>
-    </package>
+    </package>-->
 
 </struts>
