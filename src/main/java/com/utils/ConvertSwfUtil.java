@@ -48,7 +48,11 @@ public class ConvertSwfUtil {
         }
         String inputFile = filePath + File.separator + inFile + File.separator + fileName;//上传文件的全路径
         String outputFile = "";
-
+        File dir = new File(filePath + File.separator + outFile);
+        //如果目录不存在，则创建它
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         //如果是office文档，先转为pdf文件
         if (fileExt.equals(DOC) || fileExt.equals(DOCX) || fileExt.equals(XLS)
                 || fileExt.equals(XLSX)) {
