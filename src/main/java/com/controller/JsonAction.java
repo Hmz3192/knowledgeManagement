@@ -5,6 +5,8 @@ import com.model.User;
 import com.redis.JedisUtil;
 import com.service.UserService;
 import com.utils.SuperAction;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -22,6 +24,7 @@ import java.util.List;
 @Scope("prototype")
 public class JsonAction extends SuperAction {
 
+    private static Logger logger = LogManager.getLogger(JsonAction.class.getName());
     private User user;
     private List<User> users;
     private String mes;

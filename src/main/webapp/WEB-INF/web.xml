@@ -32,11 +32,6 @@
     <param-value>classpath*:spring*.xml,classpath:spring-shiro.xml</param-value>
   </context-param>
 
-  <context-param>
-    <param-name>log4jConfigLocation</param-name>
-    <param-value>classpath:log4j.properties</param-value>
-  </context-param>
-
 
   <filter>
     <filter-name>shiroFilter</filter-name>
