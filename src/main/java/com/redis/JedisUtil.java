@@ -49,8 +49,8 @@ public class JedisUtil {
 
     public static void returnResource(final Jedis jedis){
         if(jedis != null){
-
-            jedisPool.returnResource(jedis);
+            jedisPool.returnResourceObject(jedis);
+//            jedisPool.returnResource(jedis);
         }
     }
 }
