@@ -15,7 +15,7 @@ public class JedisUtil {
 
     private static int MAX_WAIT = 10000;
 
-    private static int TIMEOUT = 10000;
+    private static int TIMEOUT = 360000;
 
     private static boolean TEST_ON_BORROW = true;
 
@@ -24,6 +24,7 @@ public class JedisUtil {
     static {
         try{
             JedisPoolConfig config = new JedisPoolConfig();
+            config.setMaxTotal(MAX_ACTIVE);
             config.setMaxIdle(MAX_IDLE);
             config.setMaxWaitMillis(MAX_WAIT);
             config.setTestOnBorrow(TEST_ON_BORROW);

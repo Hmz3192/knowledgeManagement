@@ -23,7 +23,7 @@
 Ⅲ：关于使用redis，环境我配好了，需要使用的地方主要是
         1.在生成了Bean类之后，让他们实现 Serializable 接口
         2.在生成的Mapper.xml 文件上加上缓存类-->RedisCache
-        3.在使用的ServiceImpl方法上，根据如下规则使用
+        3.在使用的ServiceImpl类上需要加上事务回滚，@Transactional，在方法上，根据如下规则使用
                -->  1.@Cacheable  让返回的值通过redis存储起来,下次执行该方法的时候就不会去MYSQL找，直接在内存获取
                             （属性value--指定Cache的名称
                               属性key--Cache下值存储的名称）

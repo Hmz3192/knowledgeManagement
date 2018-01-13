@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Author Hu mingzhi
@@ -21,7 +22,7 @@ public class SuperAction extends ActionSupport implements ServletRequestAware,
     protected HttpServletResponse response;
     protected HttpSession session;
     protected ServletContext application;
-    protected ActionContext context=ActionContext.getContext();
+    protected ActionContext context;
 
 
 
@@ -39,6 +40,14 @@ public class SuperAction extends ActionSupport implements ServletRequestAware,
 
     public void setServletContext(ServletContext application) {
         this.application = application;
+    }
+
+
+    protected  static Map<String,Object> getHttpSession() {
+        return ActionContext.getContext().getSession();
+    }
+    protected  static Map<String,Object> getServletContext() {
+        return ActionContext.getContext().getApplication();
     }
 
 

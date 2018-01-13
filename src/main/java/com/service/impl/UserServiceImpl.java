@@ -1,18 +1,23 @@
 package com.service.impl;
 
 import com.dao.UserMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.model.User;
 import com.model.UserExample;
+import com.pojo.PageResult;
 import com.service.UserService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Resource
@@ -20,14 +25,12 @@ public class UserServiceImpl implements UserService {
 
     /* value属性是必须指定的，其表示当前方法的返回值是会被缓存在哪个Cache上的，
     对应Cache的名称。其可以是一个Cache也可以是多个Cache，当需要指定多个Cache时其是一个数组。*/
-    @Cacheable(value={"userInfoCache"},
-            key="T(com.utils.Md5Util).stringByMD5(#p0+'findByUserid')")
+    @Cacheable(value={"userInfoCache"})
     public void findByUserid(String userid){
     }
 
 
-    @Cacheable(value={"userInfoCache"},
-            key="T(com.utils.Md5Util).stringByMD5(#p0+'findByUserid')")
+    @Cacheable(value={"userInfoCache"})
     @Override
     public List<User> selectUsers() {
         UserExample userExample = new UserExample();
@@ -43,6 +46,15 @@ public class UserServiceImpl implements UserService {
         userMapper.insert(user);
     }
 
+
+    @Cacheable(value={"userInfoCache"})
+    @Override
+    public List<User> selectAll() {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        List<User> users = userMapper.selectByExample(userExample);
+        return users;
+    }
 
 
 }

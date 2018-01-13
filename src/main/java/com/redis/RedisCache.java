@@ -38,13 +38,11 @@ public class RedisCache implements Cache {
         Object value = SerializeUtil.deserialize(JedisUtil.getJedis().get(
                 SerializeUtil.serialize(key.toString())));
         return value;
-
     }
 
     public Object removeObject(Object key) {
         return JedisUtil.getJedis().expire(
                 SerializeUtil.serialize(key.toString()), 0);
-
     }
 
     public void clear() {

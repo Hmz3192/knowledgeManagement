@@ -14,11 +14,21 @@
 <body>
 <s:form action="User_login" namespace="/method" method="post">
     <s:token></s:token>
-    <s:textfield name="user" label="name"></s:textfield>
+    <s:textfield name="user" label="name"/>
     <%--<s:textfield name="password" label="password"></s:textfield>--%>
         <s:submit/>
 </s:form>
 
+<s:form action="User_page" namespace="/method" method="post">
+    <s:textfield name="currentPage" label="currentPage"/>
+    <s:textfield name="rows" label="rows"/>
+
+    <%--<s:textfield name="password" label="password"></s:textfield>--%>
+    <s:submit/>
+</s:form>
     <s:a namespace="/method" action="Upload_toUpload">toUploadPage</s:a>
+    <br>
+<s:a namespace="/method" action="User_toLoad">toLoadPage</s:a>
+
 </body>
 </html>
