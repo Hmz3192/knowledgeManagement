@@ -1,11 +1,13 @@
 package com.shiro;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
 import java.util.HashSet;
@@ -13,6 +15,10 @@ import java.util.Set;
 
 public class ShiroRealm extends AuthorizingRealm {
 
+
+    /**
+     *  认证信息，主要针对用户登录，
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("doGetAuthenticationInfo" + token);
@@ -60,7 +66,7 @@ public class ShiroRealm extends AuthorizingRealm {
     }
 
 
-    public static void main(String[] arg) {
+  /*  public static void main(String[] arg) {
         String hashAlgorithmName = "MD5";
         Object credentias = "123456";
         Object salt = null;
@@ -70,9 +76,10 @@ public class ShiroRealm extends AuthorizingRealm {
         System.out.println(result);
 
     }
-
-
-//    授权
+*/
+    /**
+     * 授权
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("jdbcrealm+请求授权");
@@ -91,5 +98,16 @@ public class ShiroRealm extends AuthorizingRealm {
 
         //4. 返回 SimpleAuthorizationInfo 对象.
         return info;
+    }
+
+
+    /**
+     * 清空当前用户权限信息
+     */
+    public  void clearCachedAuthorizationInfo() {
+        PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+        SimplePrincipalCollection principals = new SimplePrincipalCollection(
+                principalCollection, getName());
+        super.clearCachedAuthorizationInfo(principals);
     }
 }
