@@ -1,11 +1,8 @@
 package com.service.impl;
 
 import com.dao.UserMapper;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.model.User;
 import com.model.UserExample;
-import com.pojo.PageResult;
 import com.service.UserService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

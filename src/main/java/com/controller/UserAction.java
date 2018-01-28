@@ -3,17 +3,10 @@ package com.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.model.User;
-import com.model.UserExample;
 import com.opensymphony.xwork2.ModelDriven;
 import com.pojo.PageResult;
 import com.service.UserService;
 import com.utils.SuperAction;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
-import org.springframework.context.annotation.Scope;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;

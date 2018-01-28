@@ -3,6 +3,8 @@ package com.pojo;
 import java.util.List;
 
 public class PageResult {
+    /*分页用的模型类*/
+
     private long total;
     private List<?> amounts;
     private Integer currentPage;

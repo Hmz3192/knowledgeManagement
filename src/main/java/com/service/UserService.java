@@ -1,8 +1,6 @@
 package com.service;
 
-import com.github.pagehelper.PageInfo;
 import com.model.User;
-import com.pojo.PageResult;
 
 import java.util.List;
 

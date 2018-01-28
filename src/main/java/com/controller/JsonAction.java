@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @ParentPackage("json-default")

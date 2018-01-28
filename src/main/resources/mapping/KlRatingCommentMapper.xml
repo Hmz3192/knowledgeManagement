@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.KlRatingCommentMapper">
+  <!-- 缓存类配置 -->
+  <cache type="com.redis.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.model.KlRatingComment">
+    <constructor>
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="kl_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="kl_rating" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="kl_comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="kl_comment_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, kl_id, kl_rating, kl_comment, kl_comment_time
+  </sql>
+  <select id="selectByExample" parameterType="com.model.KlRatingCommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kl_rating_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.model.KlRatingCommentExample">
+    delete from kl_rating_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.model.KlRatingComment">
+    insert into kl_rating_comment (user_id, kl_id, kl_rating, 
+      kl_comment, kl_comment_time)
+    values (#{userId,jdbcType=INTEGER}, #{klId,jdbcType=INTEGER}, #{klRating,jdbcType=INTEGER}, 
+      #{klComment,jdbcType=VARCHAR}, #{klCommentTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.KlRatingComment">
+    insert into kl_rating_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="klId != null">
+        kl_id,
+      </if>
+      <if test="klRating != null">
+        kl_rating,
+      </if>
+      <if test="klComment != null">
+        kl_comment,
+      </if>
+      <if test="klCommentTime != null">
+        kl_comment_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="klId != null">
+        #{klId,jdbcType=INTEGER},
+      </if>
+      <if test="klRating != null">
+        #{klRating,jdbcType=INTEGER},
+      </if>
+      <if test="klComment != null">
+        #{klComment,jdbcType=VARCHAR},
+      </if>
+      <if test="klCommentTime != null">
+        #{klCommentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.model.KlRatingCommentExample" resultType="java.lang.Long">
+    select count(*) from kl_rating_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kl_rating_comment
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.klId != null">
+        kl_id = #{record.klId,jdbcType=INTEGER},
+      </if>
+      <if test="record.klRating != null">
+        kl_rating = #{record.klRating,jdbcType=INTEGER},
+      </if>
+      <if test="record.klComment != null">
+        kl_comment = #{record.klComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.klCommentTime != null">
+        kl_comment_time = #{record.klCommentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kl_rating_comment
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      kl_id = #{record.klId,jdbcType=INTEGER},
+      kl_rating = #{record.klRating,jdbcType=INTEGER},
+      kl_comment = #{record.klComment,jdbcType=VARCHAR},
+      kl_comment_time = #{record.klCommentTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

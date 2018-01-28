@@ -2,7 +2,7 @@ package com.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private Integer id;
 
     private String user;

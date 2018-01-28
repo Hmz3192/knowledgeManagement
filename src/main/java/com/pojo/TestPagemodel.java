@@ -1,6 +1,8 @@
 package com.pojo;
 
 public class TestPagemodel {
+
+    /*这个是递归获取文件名字的模型类*/
     private  String name;
     private String url;
 
