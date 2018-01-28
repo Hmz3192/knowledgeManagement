@@ -28,6 +28,7 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     private User user = new User();
     private Integer currentPage;
     private Integer rows;
+    private PageResult pageResult;
     //登陆
     public String login() {
         try {
@@ -63,7 +64,7 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
             total = info.getTotal() / rows;
         }else
             total = info.getTotal() / rows + 1;
-        PageResult pageResult = new PageResult(total, users, currentPage);
+        this.pageResult = new PageResult(total, users, currentPage);
         SuperAction.getServletContext().put("pageResult", pageResult);
         return "page";
     }
@@ -73,6 +74,14 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     }
 
     /*--------------------------get/set-----------------------------------*/
+
+    public PageResult getPageResult() {
+        return pageResult;
+    }
+
+    public void setPageResult(PageResult pageResult) {
+        this.pageResult = pageResult;
+    }
 
     public Integer getCurrentPage() {
         return currentPage;

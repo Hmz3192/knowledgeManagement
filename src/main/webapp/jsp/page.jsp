@@ -23,7 +23,7 @@
         <th style="width:20%">编号</th>
         <th style="width:20%">名称</th>
     </tr>
-    <s:iterator value="#application.pageResult.rows" var="usr">
+    <s:iterator value="#application.pageResult.amounts" var="usr">
     <tr>
         <td><s:property value="#usr.id"/></td>
         <td><s:property value="#usr.user"/></td>
