@@ -17,8 +17,7 @@ import com.utils.ConvertSwfUtil;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
-public class UploadAction extends SuperAction implements SessionAware, ModelDriven<FileAttri> {
-    private Map session;
+public class UploadAction extends SuperAction implements ModelDriven<FileAttri> {
     private FileAttri fileModel = new FileAttri();
 
     public String toUpload() {
@@ -26,9 +25,10 @@ public class UploadAction extends SuperAction implements SessionAware, ModelDriv
     }
 
     public String upload() {
-//        String path= ServletActionContext.getServletContext().getRealPath(savePath);
-        File dir = new File(ConstantPara.path + File.separator + fileModel.getSavePath());
-        System.out.println(ConstantPara.path + File.separator + fileModel.getSavePath());
+        /*获得绝对路径 */
+        String path = request.getServletContext().getRealPath("/") + "uploadFile";
+        File dir = new File(path + File.separator + fileModel.getSavePath());
+        System.out.println(path);
         //如果目录不存在，则创建它
         if (!dir.exists()) {
             dir.mkdirs();
@@ -41,7 +41,7 @@ public class UploadAction extends SuperAction implements SessionAware, ModelDriv
         newFileName = sdf.format(new Date()) + extname;//源文件名称  =日期+后缀
 
 //        newPath=path+File.separator+newFileName;//源文件路径
-        fileModel.setNewPath(ConstantPara.path + File.separator + fileModel.getSavePath() + File.separator + newFileName);
+        fileModel.setNewPath(path + File.separator + fileModel.getSavePath() + File.separator + newFileName);
 
         System.out.println("\n文件名:" + newFileName + "\n新路径:" + fileModel.getNewPath());
 
@@ -50,7 +50,7 @@ public class UploadAction extends SuperAction implements SessionAware, ModelDriv
         try {
             fins = new FileInputStream(fileModel.getMyfile());
             //创建输出流
-            FileOutputStream fous = new FileOutputStream(new File(ConstantPara.path + File.separator + fileModel.getSavePath(), newFileName));
+            FileOutputStream fous = new FileOutputStream(new File(path + File.separator + fileModel.getSavePath(), newFileName));
             //设置缓冲区
             byte[] buffer = new byte[4096];
             int len = -1;
@@ -63,24 +63,14 @@ public class UploadAction extends SuperAction implements SessionAware, ModelDriv
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String outPath = new ConvertSwfUtil().beginConvert(ConstantPara.path, fileModel.getSavePath(), newFileName);
+        String outPath = new ConvertSwfUtil().beginConvert(path, fileModel.getSavePath(), newFileName);
         System.out.println("生成swf文件:" + outPath);
         File swfFile = new File(outPath);
 //        swfPath = swfFile.getName();
         fileModel.setSwfPath(swfFile.getName());
-        session.put("swfPath", fileModel.getSwfPath());
+        session.setAttribute("swfPath", fileModel.getSwfPath());
 //		swfPath=outPath;
         return "forwardToLook";
-    }
-
-
-    public String listFile() {
-        FileUtil fileUtil = new FileUtil(ConstantPara.path + File.separator + fileModel.getSavePath());
-        //获取当下文件的所有文件名和链接
-//        list = fileUtil.testPagemodels;
-        //用session传值 上下文继承自父类
-//        context.getSession().put("names", nameUrl);
-        return "showList";
     }
 
 
@@ -89,8 +79,4 @@ public class UploadAction extends SuperAction implements SessionAware, ModelDriv
         return fileModel;
     }
 
-    @Override
-    public void setSession(Map<String, Object> map) {
-        this.session = map;
-    }
 }

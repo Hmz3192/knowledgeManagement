@@ -22,7 +22,6 @@
 <s:form action="User_page" namespace="/method" method="post">
     <s:textfield name="currentPage" label="currentPage"/>
     <s:textfield name="rows" label="rows"/>
-
     <%--<s:textfield name="password" label="password"></s:textfield>--%>
     <s:submit/>
 </s:form>

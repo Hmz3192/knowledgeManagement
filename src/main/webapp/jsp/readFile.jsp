@@ -24,9 +24,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div style="position:absolute;left:200px;top:10px;">
 		<center><a id="viewerPlaceHolder"style="margin-top:100px;width:1500px;height:800px;display:block">努力加载中............</a></center>
 		<script type="text/javascript">
-		
 	        $(document).ready(function(){
-					var fp = new FlexPaperViewer(	
+					var fp = new FlexPaperViewer(
 						'<%=ConstantPara.ServerPath%>/flexpaper/FlexPaperViewer',
 						'viewerPlaceHolder', { config : {
 						 SwfFile : escape('<%=ConstantPara.ServerPath%>/uploadFile/outSWFFile/<%=(String)(session.getAttribute("swfPath"))%>'),

@@ -65,7 +65,9 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
         }else
             total = info.getTotal() / rows + 1;
         this.pageResult = new PageResult(total, users, currentPage);
-        SuperAction.getServletContext().put("pageResult", pageResult);
+        application.setAttribute("pageResult", pageResult);
+        application.setAttribute("rows", rows);
+
         return "page";
     }
 

@@ -43,12 +43,5 @@ public class SuperAction extends ActionSupport implements ServletRequestAware,
     }
 
 
-    protected  static Map<String,Object> getHttpSession() {
-        return ActionContext.getContext().getSession();
-    }
-    protected  static Map<String,Object> getServletContext() {
-        return ActionContext.getContext().getApplication();
-    }
-
 
 }

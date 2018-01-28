@@ -35,7 +35,7 @@
                 size="2">第 ${application.pageResult.currentPage} 页</font>
             <s:if test="#application.pageResult.currentPage != 1">
             <s:url var="first" action="User_page" namespace="/method">
-                <s:param name="rows" value="2"/>
+                <s:param name="rows" value="#application.rows"/>
                 <s:param name="currentPage" value="1"/>
             </s:url>
             <s:a href="%{first}">首页</s:a>
@@ -44,7 +44,7 @@
 
             <s:if test="#application.pageResult.currentPage - 1 > 0">
             <s:url var="lastone" action="User_page" namespace="/method">
-                <s:param name="rows" value="2"/>
+                <s:param name="rows" value="#application.rows"/>
                 <s:param name="currentPage" value="#application.pageResult.currentPage - 1"/>
             </s:url>
             <s:a href="%{lastone}">上一页</s:a>
@@ -52,7 +52,7 @@
 
             <s:if test="#application.pageResult.currentPage + 1 <= #application.pageResult.total">
                 <s:url var="nextone" action="User_page" namespace="/method">
-                    <s:param name="rows" value="2"/>
+                    <s:param name="rows" value="#application.rows"/>
                     <s:param name="currentPage" value="#application.pageResult.currentPage + 1"/>
                 </s:url>
                 <s:a href="%{nextone}">下一页</s:a>
@@ -61,13 +61,11 @@
 
             <s:if test="#application.pageResult.currentPage != #application.pageResult.total">
                 <s:url var="first" action="User_page" namespace="/method">
-                    <s:param name="rows" value="2"/>
+                    <s:param name="rows" value="#application.rows"/>
                     <s:param name="currentPage" value="#application.pageResult.total"/>
                 </s:url>
                 <s:a href="%{first}">尾页</s:a>
             </s:if>
-
-
         </div>
     </tr>
     </s:else>
