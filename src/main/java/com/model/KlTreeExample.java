@@ -3,14 +3,14 @@ package com.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserExample {
+public class KlTreeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public UserExample() {
+    public KlTreeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,133 +104,193 @@ public class UserExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
+        public Criteria andFileIdIsNull() {
+            addCriterion("file_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
+        public Criteria andFileIdIsNotNull() {
+            addCriterion("file_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Integer value) {
-            addCriterion("id =", value, "id");
+        public Criteria andFileIdEqualTo(Integer value) {
+            addCriterion("file_id =", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Integer value) {
-            addCriterion("id <>", value, "id");
+        public Criteria andFileIdNotEqualTo(Integer value) {
+            addCriterion("file_id <>", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Integer value) {
-            addCriterion("id >", value, "id");
+        public Criteria andFileIdGreaterThan(Integer value) {
+            addCriterion("file_id >", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("id >=", value, "id");
+        public Criteria andFileIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("file_id >=", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Integer value) {
-            addCriterion("id <", value, "id");
+        public Criteria andFileIdLessThan(Integer value) {
+            addCriterion("file_id <", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
-            addCriterion("id <=", value, "id");
+        public Criteria andFileIdLessThanOrEqualTo(Integer value) {
+            addCriterion("file_id <=", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
+        public Criteria andFileIdIn(List<Integer> values) {
+            addCriterion("file_id in", values, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
+        public Criteria andFileIdNotIn(List<Integer> values) {
+            addCriterion("file_id not in", values, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Integer value1, Integer value2) {
-            addCriterion("id between", value1, value2, "id");
+        public Criteria andFileIdBetween(Integer value1, Integer value2) {
+            addCriterion("file_id between", value1, value2, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("id not between", value1, value2, "id");
+        public Criteria andFileIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("file_id not between", value1, value2, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIsNull() {
-            addCriterion("user is null");
+        public Criteria andFileNameIsNull() {
+            addCriterion("file_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIsNotNull() {
-            addCriterion("user is not null");
+        public Criteria andFileNameIsNotNull() {
+            addCriterion("file_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserEqualTo(String value) {
-            addCriterion("user =", value, "user");
+        public Criteria andFileNameEqualTo(String value) {
+            addCriterion("file_name =", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNotEqualTo(String value) {
-            addCriterion("user <>", value, "user");
+        public Criteria andFileNameNotEqualTo(String value) {
+            addCriterion("file_name <>", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserGreaterThan(String value) {
-            addCriterion("user >", value, "user");
+        public Criteria andFileNameGreaterThan(String value) {
+            addCriterion("file_name >", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserGreaterThanOrEqualTo(String value) {
-            addCriterion("user >=", value, "user");
+        public Criteria andFileNameGreaterThanOrEqualTo(String value) {
+            addCriterion("file_name >=", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserLessThan(String value) {
-            addCriterion("user <", value, "user");
+        public Criteria andFileNameLessThan(String value) {
+            addCriterion("file_name <", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserLessThanOrEqualTo(String value) {
-            addCriterion("user <=", value, "user");
+        public Criteria andFileNameLessThanOrEqualTo(String value) {
+            addCriterion("file_name <=", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserLike(String value) {
-            addCriterion("user like", value, "user");
+        public Criteria andFileNameLike(String value) {
+            addCriterion("file_name like", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNotLike(String value) {
-            addCriterion("user not like", value, "user");
+        public Criteria andFileNameNotLike(String value) {
+            addCriterion("file_name not like", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserIn(List<String> values) {
-            addCriterion("user in", values, "user");
+        public Criteria andFileNameIn(List<String> values) {
+            addCriterion("file_name in", values, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNotIn(List<String> values) {
-            addCriterion("user not in", values, "user");
+        public Criteria andFileNameNotIn(List<String> values) {
+            addCriterion("file_name not in", values, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserBetween(String value1, String value2) {
-            addCriterion("user between", value1, value2, "user");
+        public Criteria andFileNameBetween(String value1, String value2) {
+            addCriterion("file_name between", value1, value2, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andUserNotBetween(String value1, String value2) {
-            addCriterion("user not between", value1, value2, "user");
+        public Criteria andFileNameNotBetween(String value1, String value2) {
+            addCriterion("file_name not between", value1, value2, "fileName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdIsNull() {
+            addCriterion("file_parent_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdIsNotNull() {
+            addCriterion("file_parent_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdEqualTo(Integer value) {
+            addCriterion("file_parent_id =", value, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdNotEqualTo(Integer value) {
+            addCriterion("file_parent_id <>", value, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdGreaterThan(Integer value) {
+            addCriterion("file_parent_id >", value, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("file_parent_id >=", value, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdLessThan(Integer value) {
+            addCriterion("file_parent_id <", value, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("file_parent_id <=", value, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdIn(List<Integer> values) {
+            addCriterion("file_parent_id in", values, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdNotIn(List<Integer> values) {
+            addCriterion("file_parent_id not in", values, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdBetween(Integer value1, Integer value2) {
+            addCriterion("file_parent_id between", value1, value2, "fileParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileParentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("file_parent_id not between", value1, value2, "fileParentId");
             return (Criteria) this;
         }
     }

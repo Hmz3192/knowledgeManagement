@@ -9,8 +9,7 @@
     5.完成以上步骤（3，4不需要你们操作），运行转换后，会报错--》“OpenOffice监听器异常"，启动soffice.exe后在运行即可
 
     ********************************************************************
-    6.需要修改的地方 》utils-ConstantPara的“PATH”常量改为你们自己的文件夹地址
-                    》OpenOfficeService.properties中SWF_tool和OO_HOME
+    !!! 6.需要修改的地方 >>OpenOfficeService.properties中SWF_tool和OO_HOME
     ********************************************************************
 
     7.用户上传的文件放在inFile下，预览预览的是.swf文件，输出文件夹为outSWFFile
@@ -33,3 +32,9 @@
                -->  3.@CachePut   无论是否有缓存，都去MYSQL查找，然后将返回结果放在指定的Cache下，没看到覆盖指定Key
                               （指定Cahce）
         4.尽量在查找的方法上指定@Cacheable，然后在增删改的时候用@CacheEvict清除缓存。
+
+Ⅳ：session，request，application,这些我都在SuperAction中初始化了，继承之后直接用就可以了
+
+Ⅴ：防止表单重复提交问题，在form中加入一个 <s:token></s:token>就好了
+
+Ⅵ：在struts.xml 中开发者模式能够把问题信息报的更加详细

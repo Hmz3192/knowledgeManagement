@@ -3,17 +3,10 @@ package com.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.model.User;
-import com.model.UserExample;
 import com.opensymphony.xwork2.ModelDriven;
 import com.pojo.PageResult;
 import com.service.UserService;
 import com.utils.SuperAction;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
-import org.springframework.context.annotation.Scope;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -28,6 +21,7 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     private User user = new User();
     private Integer currentPage;
     private Integer rows;
+    private PageResult pageResult;
     //登陆
     public String login() {
         try {
@@ -63,8 +57,10 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
             total = info.getTotal() / rows;
         }else
             total = info.getTotal() / rows + 1;
-        PageResult pageResult = new PageResult(total, users, currentPage);
-        SuperAction.getServletContext().put("pageResult", pageResult);
+        this.pageResult = new PageResult(total, users, currentPage);
+        application.setAttribute("pageResult", pageResult);
+        application.setAttribute("rows", rows);
+
         return "page";
     }
 
@@ -73,6 +69,14 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     }
 
     /*--------------------------get/set-----------------------------------*/
+
+    public PageResult getPageResult() {
+        return pageResult;
+    }
+
+    public void setPageResult(PageResult pageResult) {
+        this.pageResult = pageResult;
+    }
 
     public Integer getCurrentPage() {
         return currentPage;

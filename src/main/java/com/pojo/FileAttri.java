@@ -3,6 +3,8 @@ package com.pojo;
 import java.io.File;
 
 public class FileAttri {
+    /*这个pojo是flexpaper的模型类型*/
+
     private File myfile;// 与upload中文件选择器的名称保持一致
     private String myfileFileName;// 用于获取上传文件类型
     private String myfileContentType;//用于获取文件类型
