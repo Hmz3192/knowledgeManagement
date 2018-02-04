@@ -28,8 +28,10 @@
             <result name="testGlobal" type="">/testGlobal.jsp</result>
         </global-results>-->
         <action name="*_*" class="com.controller.{1}Action" method="{2}">
-            <interceptor-ref name="tokenSession"><param name="excludeMethods">toUpload,page,toLoad</param></interceptor-ref>
+            <interceptor-ref name="tokenSession"><param name="excludeMethods">toUpload,page,toLoad,resource</param></interceptor-ref>
             <interceptor-ref name="defaultStack"/>
+            <result name="resource">/jsp/testRes.jsp</result>
+
             <result name="success">/jsp/success.jsp</result>
             <result name="forwardToUpload">/jsp/exampleList.jsp</result>
             <result name="forwardToLook">/jsp/readFile.jsp</result>

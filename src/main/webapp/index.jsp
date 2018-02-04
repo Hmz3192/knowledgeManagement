@@ -29,5 +29,7 @@
     <br>
 <s:a namespace="/method" action="User_toLoad">toLoadPage</s:a>
 
+<s:a namespace="/method" action="User_resource">页面调用资源文件</s:a>
+
 </body>
 </html>

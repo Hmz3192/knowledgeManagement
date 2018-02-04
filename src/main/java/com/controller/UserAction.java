@@ -3,6 +3,7 @@ package com.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.model.User;
 import com.opensymphony.xwork2.ModelDriven;
 import com.pojo.PageResult;
 import com.service.UserService;
@@ -22,6 +23,12 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     private Integer currentPage;
     private Integer rows;
     private PageResult pageResult;
+
+
+    //查看页面引用资源文件
+    public String resource() {
+        return "resource";
+    }
     //登陆
     public String login() {
         try {
