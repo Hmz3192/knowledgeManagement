@@ -25,6 +25,21 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     private PageResult pageResult;
 
 
+    //去create1
+    public String tocreate1() {
+        return "tocreate1";
+    }
+
+    //去create2
+    public String tocreate2() {
+        return "tocreate2";
+    }
+
+    //去create3
+    public String tocreate3() {
+        return "tocreate3";
+    }
+
     //查看页面引用资源文件
     public String resource() {
         return "resource";

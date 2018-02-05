@@ -87,7 +87,7 @@ public class ShiroRealm extends AuthorizingRealm {
         Object principal = principalCollection.getPrimaryPrincipal();
 
         //2. 利用登录的用户的信息来用户当前用户的角色或权限(可能需要查询数据库)
-        Set<String> roles = new HashSet<>();
+        Set<String> roles = new HashSet<String>();
         roles.add("user");
         if ("admin".equals(principal)) {
             roles.add("admin");

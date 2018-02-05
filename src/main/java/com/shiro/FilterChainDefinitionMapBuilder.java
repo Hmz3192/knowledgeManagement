@@ -15,7 +15,7 @@ public class FilterChainDefinitionMapBuilder {
  	5.perms，roles，ssl，rest，port是授权过滤器
  	*/
 	public LinkedHashMap<String, String> buildFilterChainDefinitionMap(){
-		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		
 		map.put("/index.jsp", "anon");
 		map.put("/**", "anon");

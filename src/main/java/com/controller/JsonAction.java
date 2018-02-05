@@ -37,7 +37,7 @@ public class JsonAction extends SuperAction {
 
     @Action(value = "selectUser", results = {@Result(name = "jsonUser",type = "json", params = {"root", "users"})})
     public String selectUser() {
-        users = new ArrayList<>();
+        users = new ArrayList<User>();
         users = userService.selectUsers();
         return "jsonUser";
     }

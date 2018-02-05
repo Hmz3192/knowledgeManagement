@@ -13,7 +13,7 @@ import java.util.Map;
 public class FileUtil {
 
     //    public Map<String, String> nameUrl = new HashMap<>();
-    public List<TestPagemodel> testPagemodels = new ArrayList<>();
+    public List<TestPagemodel> testPagemodels = new ArrayList<TestPagemodel>();
     public FileUtil(String inputPath) {
         getAllNames(inputPath);
     }
