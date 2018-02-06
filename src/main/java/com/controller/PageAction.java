@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import java.util.List;
 
 
-public class UserAction extends SuperAction implements ModelDriven<User> {
+public class PageAction extends SuperAction implements ModelDriven<User> {
 
 
     @Resource
@@ -44,16 +44,7 @@ public class UserAction extends SuperAction implements ModelDriven<User> {
     public String resource() {
         return "resource";
     }
-    //登陆
-    public String login() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(user.getId() + user.getUser()+"---------");
-        return SUCCESS;
-    }
+
 
 
     //退出
