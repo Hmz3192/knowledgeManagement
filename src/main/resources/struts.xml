@@ -22,9 +22,10 @@
         <!-- 文件上传 -->
         <action name="fileUploadAction" class="com.controller.BlogEditController" method="fileUpload">
             <result type="json" name="success">
-                <param name="contentType">text/html</param>
+                <!--<param name="contentType">text/html</param>-->
             </result>
         </action>
+
     </package>
     <!--避免重复提交》多次点击提交》成功提交回退后再次提交》已经为转发状态下/upload_upload刷新重新提交表单-->
     <!--在jsp使用<s:token>,配置token或tokensession拦截器，前者需要配合invalid.token，后者方便-->

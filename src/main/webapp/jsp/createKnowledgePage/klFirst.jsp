@@ -30,6 +30,8 @@
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
 
+    <link href="${path}/Resource/uploadify/css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="${path}/Resource/uploadify/css/fileUpload.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .icon-github {
             width: 16px;
@@ -255,7 +257,39 @@
             position: relative;
             top: 1px;
         }
+        /*a  upload */
+        .a-upload {
+            padding: 4px 10px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
 
+        .a-upload  input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
     </style>
     <script>
         $(function () {
@@ -267,8 +301,8 @@
             KindEditor.ready(function (K) {
                 editor1 = K.create('textarea[name="content1"]', {
                     cssPath: '${path}/kindeditor/plugins/code/prettify.css',
-                    uploadJson: '${path}/editor/image_upload',
-                    fileManagerJson: '${path}/editor/image_manage',
+                    uploadJson: '${path}/editor/image_upload.action',
+                    fileManagerJson: '${path}/editor/image_manage.action',
                     allowFileManager: true,
                     resizeType: 0,
                     afterCreate: function () {
@@ -307,7 +341,7 @@
                 </div>
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <form name="example" method="post" action="${path}/method/User_tocreate1">
+                        <form name="example" method="post" action="${path}/method/User_tocreate1.action">
                             <fieldset>
                                 <legend>标题</legend>
                                 <div class="controls">
@@ -346,19 +380,19 @@
                                 <input type="text" class="form-control" style="width: 100px;" name="tags" id="tags"
                                        data-role="tagsinput" placeholder="请输入标签"/>
                             </fieldset>
-                            <!--<input type="submit" name="butto
                             <fieldset>
                                 <input type="button" id="finish" class="myButton" name="finish" value="发布"/>
                                 <input type="button" id="save" class="myButton" value="保存" name="getHtml"/>
+                            </fieldset>
                                 <!--<input type="button"  id="saveCover" class="myButton" value="保存封面" />-->
 
-                            </fieldset>
+
                         </form>
                     </div>
                 </div>
 
             </div>
-            n" value="提交内容"/> (提交快捷键: Ctrl + Enter)-->
+
             <br>
         </div>
         <%--      <form name="example" method="post" action="${path}/method/User_tocreate1">
@@ -376,15 +410,24 @@
                     <div class="muted pull-left" style="font-size: 30px;color: #000">附件上传</div>
                 </div>
                 <div class="collapse in" style="border:1px solid black">
-                    <form action="" enctype="multipart/form-data">
-                        <input type="file" id="file1" name="file" /><a id="add" href="javascript:void();" onclick="addFile();">添加</a>
+
+                    <div id="fileUploadContent" class="fileUploadContent"></div>
+
+                    <button onclick="testUpload()">提交</button>
+                    <%--<form action="" enctype="multipart/form-data">
+                        <input type="file" id="file1"  name="file" />
+                        <a id="add" href="javascript:void(0);" onclick="addFile();">添加</a>
                         <span>
 				<table id="down">
 				</table>
 			</span>
                         </br>
+
+
                         <input type="button" onclick="fileUpload();" value="上传">
-                    </form>
+                    </form>--%>
+
+
                 </div>
             </div>
         </div>
@@ -394,45 +437,52 @@
 <script charset="utf-8" src="${path}/kindeditor/kindeditor-all.js"></script>
 <script charset="utf-8" src="${path}/kindeditor/lang/zh-CN.js"></script>
 
-<%--uploadFile--%>
-<script type="text/javascript" src="${path}/Resource/uploadify/js/ajaxfileupload.js"></script>
-<script type="text/javascript">
-    //添加附件
-    function addFile(){
-        var fileLength = $("input[name=file]").length+1;
-        var inputFile = "<div id='addFile"+fileLength+"'><input type='file' id='file"+fileLength+"' name='file' />"
-            +"<a href='javascript:void();' onclick='delFile("+fileLength+");'>删除</a></div>";
-        $("#add").after(inputFile);
-    }
-    //删除附件
-    function delFile(id){
-        $("#addFile"+id).remove();
-    }
-    function fileUpload() {
-        var files = "";
-        //获取所有 <input type="file" id="file1" name="file" /> 的ID属性值
-        $("input[name=file]").each(function(){
-            files = files + $(this).attr("id")+",";
-        })
-        files = files.substring(0,files.length-1);
-        console.info(typeof(files));
-        $.ajaxFileUpload( {
-            url : '${path}/upload/fileUploadAction',     //用于文件上传的服务器端请求地址
-            secureuri : false,            //一般设置为false
-            fileElementId : files,        //文件上传空间的id属性  <input type="file" id="file" name="file" />
-            dataType : 'json',            //返回值类型 一般设置为json
-            success : function(data, status) {
-                var fileNames = data.fileFileName; //返回的文件名
-                var filePaths = data.filePath;     //返回的文件地址
-                for(var i=0;i<data.fileFileName.length;i++){
-                    $("#down").after("<tr><td height='25'>"+fileNames[i]+"</td><td><a href='downloadFile?downloadFilePath="+filePaths[i]+"'>下载</a></td></tr>")
-                }
-            }
-        })
-    }
-    $(function() {
+<script type="text/javascript" src="${path}/Resource/uploadify/js/fileUpload.js"></script>
 
-    })
+
+
+<script type="text/javascript">
+    $("#fileUploadContent").initUpload({
+        "uploadUrl":"#",//上传文件信息地址
+        "progressUrl":"#",//获取进度信息地址，可选，注意需要返回的data格式如下（{bytesRead: 102516060, contentLength: 102516060, items: 1, percent: 100, startTime: 1489223136317, useTime: 2767}）
+        "selfUploadBtId":"selfUploadBt",//自定义文件上传按钮id
+        "isHiddenUploadBt":false,//是否隐藏上传按钮
+        "isHiddenCleanBt":false,//是否隐藏清除按钮
+        "isAutoClean":true,//是否上传完成后自动清除
+        "velocity":10,//模拟进度上传数据
+        //"showSummerProgress":false,//总进度条，默认限制
+        //"scheduleStandard":true,//模拟进度的方式，设置为true是按总进度，用于控制上传时间，如果设置为false,按照文件数据的总量,默认为false
+        //"size":350,//文件大小限制，单位kb,默认不限制
+        //"maxFileNumber":3,//文件个数限制，为整数
+        //"filelSavePath":"",//文件上传地址，后台设置的根目录
+        //"beforeUpload":beforeUploadFun,//在上传前执行的函数
+        //"onUpload":onUploadFun，//在上传后执行的函数
+        // autoCommit:true,//文件是否自动上传
+        //"fileType":['png','jpg','docx','doc']，//文件类型限制，默认不限制，注意写的是文件后缀
+
+    });
+
+    function beforeUploadFun(opt){
+        opt.otherData =[{"name":"你要上传的参数","value":"你要上传的值"}];
+    }
+    function onUploadFun(opt,data){
+        alert(data);
+        uploadTools.uploadError(opt);//显示上传错误
+    }
+    function testUpload(){
+        var opt = uploadTools.getOpt("fileUploadContent");
+        console.info(opt);
+        uploadEvent.uploadFileEvent(opt);
+    }
+
+    function getFormData1(){
+        var formData = formTake.getData("myform");
+        alert(JSON.stringify(formData));
+    }
+    function getFormData2(){
+        var formData = formTake.getDataWithUploadFile("myform");
+        alert(JSON.stringify(formData));
+    }
 </script>
 </body>
 </html>

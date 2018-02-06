@@ -1,13 +1,18 @@
 package com.controller;
 
 import com.utils.SuperAction;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author Hu mingzhi
@@ -23,7 +28,7 @@ public class BlogEditController extends SuperAction{
 
 
     /**
-     * 文件上传
+     * 附件上传
      * @return
      */
     public String fileUpload() {
@@ -103,6 +108,8 @@ public class BlogEditController extends SuperAction{
         return null;
     }
 
+
+
     public File[] getFile() {
         return file;
     }
@@ -140,6 +147,8 @@ public class BlogEditController extends SuperAction{
     }
 
     public void setInputStream(InputStream inputStream) {
+
         this.inputStream = inputStream;
     }
+
 }

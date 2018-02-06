@@ -24,6 +24,7 @@ public class UploadAction extends SuperAction implements ModelDriven<FileAttri> 
         return "forwardToUpload";
     }
 
+    /*预览用的上传文件*/
     public String upload() {
         /*获得绝对路径 */
         String path = request.getServletContext().getRealPath("/") + "uploadFile";

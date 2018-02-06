@@ -18,7 +18,7 @@
                 //Ajax调用处理
                 $.ajax({
                     type: "GET",
-                    url: "${pageContext.request.contextPath}/json/Upload_listFile",
+                    url: "${pageContext.request.contextPath}/json/Upload_listFile.action",
                     success: function (data) {
                         alert("ok");
                     }
@@ -28,7 +28,7 @@
     </script>
 </head>
 <body>
-<s:form action="Upload_upload" namespace="/method" method="post"  enctype="multipart/form-data">
+<s:form action="Upload_upload.action" namespace="/method" method="post"  enctype="multipart/form-data">
     <s:token></s:token>
     <s:file name="myfile" label="选择上传文件"></s:file>
     <s:submit value="提交">123123123</s:submit>
@@ -48,7 +48,7 @@
 <div id="table" align="center"></div>  <!--用于显示数据的div-->
 <div id="page" class="page"></div>  <!--div的class要设置成引入的css文件中的.page-->
 <script type="text/javascript">
-    var url = "${pageContext.request.contextPath}/json/Upload_listFile";
+    var url = "${pageContext.request.contextPath}/json/Upload_listFile.action";
     var $table = $("<table border='2px' id='a' width='300px' height='200px'></table>");
     var $tr = $("<tr display='none'></tr>");
     var $td = $("<td>编号</td><td>姓名</td><td>url</td><td>操作</td>");

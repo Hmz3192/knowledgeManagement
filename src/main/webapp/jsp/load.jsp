@@ -73,12 +73,12 @@
         }
     </style>
     <!-- 引入jquery -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/Resource/js/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/Resource/tags/js/jquery.js"></script>
     <!--  -->
     <script type="text/javascript">
         $(function(){
             //请求数据接口
-            var url="${pageContext.request.contextPath}/json/page";
+            var url="${pageContext.request.contextPath}/json/page.action";
             //渲染数据集合dom
             var list=$("#list");
             //加载更多dom

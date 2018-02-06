@@ -5,7 +5,27 @@
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <description>上传大文件视屏</description>
+    <servlet-name>uploadvedio</servlet-name>
+    <servlet-class>com.controller.servlet.UploadVideo</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+    <servlet-name>uploadvedio</servlet-name>
+    <url-pattern>/uploadvedio</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description>实现断点续传</description>
+    <servlet-name>video</servlet-name>
+    <servlet-class>com.controller.servlet.VideoPoint</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>video</servlet-name>
+    <url-pattern>/video</url-pattern>
+  </servlet-mapping>
   <!-- 指定Spring配置文件所在路径 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -24,9 +44,12 @@
   <filter-mapping>
     <filter-name>struts2</filter-name>
     <!--/*-->
-    <url-pattern>/*</url-pattern>
+    <url-pattern>*.action</url-pattern>
   </filter-mapping>
-
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
   <!-- 配置Spring的监听器 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -72,4 +95,7 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+
+
+
 </web-app>
