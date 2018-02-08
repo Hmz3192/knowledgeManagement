@@ -7,6 +7,7 @@ import com.model.User;
 import com.opensymphony.xwork2.ModelDriven;
 import com.pojo.PageResult;
 import com.service.UserService;
+import com.utils.IDUtils;
 import com.utils.SuperAction;
 
 import javax.annotation.Resource;
@@ -45,7 +46,10 @@ public class PageAction extends SuperAction implements ModelDriven<User> {
         return "resource";
     }
 
-
+    /*文章详情页*/
+    public String toKlDetail() {
+        return "klDetail";
+    }
 
     //退出
     public String out() {

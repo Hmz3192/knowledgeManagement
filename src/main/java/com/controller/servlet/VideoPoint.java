@@ -1,5 +1,8 @@
 package com.controller.servlet;
 
+import com.model.KlKnowledge;
+import com.utils.IDUtils;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -16,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 合并分块
@@ -33,10 +37,12 @@ public class VideoPoint extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String savePath = request.getServletContext().getRealPath("/")+"attached/vedio/";
+		String saveUrl  = request.getContextPath() + "/attached/vedio/";
+		HttpSession session = request.getSession();
 
 		String folad = "vedioFile";
 		savePath = savePath  + folad + "/";
-
+		saveUrl = saveUrl + folad + "/";
 		String action = request.getParameter("action");
 
 		if (action.equals("mergeChunks")) {
@@ -70,6 +76,7 @@ public class VideoPoint extends HttpServlet {
 			});
 			// UUID.randomUUID().toString()-->随机名
 			File outputFile = new File(savePath + fileMd5 + "."+fileSuffix);
+			saveUrl = saveUrl + fileMd5 + "." + fileSuffix;
 			// 创建文件
 			outputFile.createNewFile();
 			// 输出流
@@ -90,6 +97,32 @@ public class VideoPoint extends HttpServlet {
 				tempFile.delete();
 			}
 			System.out.println("合并成功");
+
+			//保存路径
+			String url = saveUrl;
+			if (session.getAttribute("KlId") != null) {
+				// 不是第一次
+				String urls = (String) session.getAttribute("urls");
+				if (url != null) {
+					urls += "," + url;
+				}
+				session.setAttribute("urls", urls);
+			} else {
+				//第一个文件
+				Integer KlId = IDUtils.genIntegerId();
+				session.setAttribute("KlId", KlId);
+				session.setAttribute("urls", url);
+			}
+
+			/*Integer KlId = IDUtils.genIntegerId();
+			String name = new String(request.getParameter("name").getBytes("UTF-8"),"UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json; charset=utf-8");
+			//拼接json数据
+			String jsonStr = "{\"KlId\":\""+KlId+"\",\"age\":\"20\"}";
+			//将数据写入流中
+			response.getWriter().write(jsonStr);*/
 		} else if (action.equals("checkChunk")) {
 			// 检查当前分块是否上传成功
 			String fileMd5 = request.getParameter("fileMd5");

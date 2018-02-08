@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.net.ConnectException;
 
@@ -25,12 +27,14 @@ public class ConvertSwfUtil {
 
     /**
      * 入口方法-通过此方法转换文件至swf格式
-     * @param filePath	上传文件所在文件夹的绝对路径
-     * @param inFile	文件夹名称
-     * @param fileName	文件名称
+     *
+     * @param outPutPath
+     * @param filePath    上传文件所在文件夹的绝对路径
+     * @param fileName    文件名称
      * @return			生成swf文件名
      */
-    public String beginConvert(String filePath, String inFile, String fileName) {
+    public String beginConvert(String outPutPath, String filePath, String fileName) {
+        int tempPdf = 0;
         final String DOC = ".doc";
         final String DOCX = ".docx";
         final String XLS = ".xls";
@@ -41,14 +45,18 @@ public class ConvertSwfUtil {
         String outFile = "outSWFFile";
         String fileNameOnly = "";
         String fileExt = "";
+        String newFileName = "";
         if (null != fileName && fileName.indexOf(".") > 0) {
             int index = fileName.indexOf(".");
             fileNameOnly = fileName.substring(0, index);//文件名
             fileExt = fileName.substring(index).toLowerCase();//文件后缀
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+            newFileName = sdf.format(new Date()) + fileExt;//源文件名称  =日期+后缀
         }
-        String inputFile = filePath + File.separator + inFile + File.separator + fileName;//上传文件的全路径
+        String inputFile = filePath;//上传文件的全路径
         String outputFile = "";
-        File dir = new File(filePath + File.separator + outFile);
+        File dir = new File(outPutPath + outFile);
         //如果目录不存在，则创建它
         if (!dir.exists()) {
             dir.mkdirs();
@@ -56,18 +64,24 @@ public class ConvertSwfUtil {
         //如果是office文档，先转为pdf文件
         if (fileExt.equals(DOC) || fileExt.equals(DOCX) || fileExt.equals(XLS)
                 || fileExt.equals(XLSX)) {
-            outputFile = filePath + File.separator + outFile + File.separator + fileNameOnly + PDF;
+            outputFile = outPutPath + outFile + "/" + newFileName + PDF;
             System.out.println("转换时源文件路径"+inputFile + "\nout的路径" + outputFile);
             office2PDF(inputFile, outputFile);//源文件，pdf文件
             inputFile = outputFile;
             fileExt = PDF;
+            tempPdf = 1;
         }
 
         if (fileExt.equals(PDF)) {
             String toolFile = SWF_tool + File.separator+ TOOL;//转化工具
-            outputFile = filePath + File.separator + outFile +File.separator + fileNameOnly + SWF;
+            outputFile = outPutPath + outFile + "/" + newFileName + SWF;
             convertPdf2Swf(inputFile, outputFile, toolFile);
             outFile = outputFile;
+            if (tempPdf == 1) {
+                File file = new File(inputFile);
+                file.delete();
+                tempPdf = 0;
+            }
         }
         return outFile;//返回一个文件路径
     }

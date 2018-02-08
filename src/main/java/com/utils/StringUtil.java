@@ -1,5 +1,7 @@
 package com.utils;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,39 @@ public class StringUtil {
         return s2.length;
     }
 
+    public static String ConvertListToString(List<String> s1) {
+        String ls = "";
+        for(int i = 0 ;i<s1.size();i++) {
+            ls += "," + s1.get(i);
+        }
+        ls = ls.substring(1,ls.length());
+        System.out.println(ls);
+        return ls;
+    }
+
+    public static String getFileNameOnly(String s1) {
+        String[] s2 = s1.split("/");
+        String fileNameOnly = s2[s2.length-1];
+        return fileNameOnly;
+    }
+
+    @Test
+    public void test() {
+        List<String> a = new ArrayList<String>();
+        for(int i = 0 ;i<5;i++) {
+            a.add("//ad/fsf/" + i + ".txt");
+        }
+        ConvertListToString(a);
+    }
+
+    @Test
+    public void test2() {
+        String fileName = "/attached/multFile/20180208/浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx";
+        String[] s2 = fileName.split("/");
+        String fileNameOnly = s2[s2.length-1];
+        System.out.println(fileNameOnly);
+
+    }
 
     //替换掉回车，换行
     public static String deleteRNB(String s1) {

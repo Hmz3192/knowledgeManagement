@@ -37,6 +37,8 @@
 
 <s:a namespace="/method" action="Page_tocreate3">create3</s:a>
 <br>
+<s:a namespace="/method" action="Page_toKlDetail">toKlDetail</s:a>
+
 
 
 </body>

@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class KlKnowledge implements Serializable{
     private Integer klId;
 
+    private Integer userId;
+
     private Integer klKind;
 
     private String klTitle;
@@ -31,8 +33,9 @@ public class KlKnowledge implements Serializable{
 
     private Integer klParentFileId;
 
-    public KlKnowledge(Integer klId, Integer klKind, String klTitle, String klIntroduction, String klContent, String klTags, String klAppendix, Integer klAppendixNumber, String klVideo, Integer klVideoNumber, Integer klHints, Integer klCollectionNumber, String klConnectIds, Integer klParentFileId) {
+    public KlKnowledge(Integer klId, Integer userId, Integer klKind, String klTitle, String klIntroduction, String klContent, String klTags, String klAppendix, Integer klAppendixNumber, String klVideo, Integer klVideoNumber, Integer klHints, Integer klCollectionNumber, String klConnectIds, Integer klParentFileId) {
         this.klId = klId;
+        this.userId = userId;
         this.klKind = klKind;
         this.klTitle = klTitle;
         this.klIntroduction = klIntroduction;
@@ -58,6 +61,14 @@ public class KlKnowledge implements Serializable{
 
     public void setKlId(Integer klId) {
         this.klId = klId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getKlKind() {

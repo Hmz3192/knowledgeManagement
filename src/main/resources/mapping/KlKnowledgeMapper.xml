@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.KlKnowledgeMapper">
-  <!-- 缓存类配置 -->
   <cache type="com.redis.RedisCache" />
   <resultMap id="BaseResultMap" type="com.model.KlKnowledge">
     <constructor>
       <idArg column="kl_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="kl_kind" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="kl_title" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="kl_introduction" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -80,8 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    kl_id, kl_kind, kl_title, kl_introduction, kl_content, kl_tags, kl_appendix, kl_appendix_number, 
-    kl_video, kl_video_number, kl_hints, kl_collection_number, kl_connect_ids, kl_parent_file_id
+    kl_id, user_id, kl_kind, kl_title, kl_introduction, kl_content, kl_tags, kl_appendix, 
+    kl_appendix_number, kl_video, kl_video_number, kl_hints, kl_collection_number, kl_connect_ids, 
+    kl_parent_file_id
   </sql>
   <select id="selectByExample" parameterType="com.model.KlKnowledgeExample" resultMap="BaseResultMap">
     select
@@ -114,22 +115,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.model.KlKnowledge">
-    insert into kl_knowledge (kl_id, kl_kind, kl_title, 
-      kl_introduction, kl_content, kl_tags, 
-      kl_appendix, kl_appendix_number, kl_video, 
-      kl_video_number, kl_hints, kl_collection_number, 
-      kl_connect_ids, kl_parent_file_id)
-    values (#{klId,jdbcType=INTEGER}, #{klKind,jdbcType=INTEGER}, #{klTitle,jdbcType=VARCHAR}, 
-      #{klIntroduction,jdbcType=VARCHAR}, #{klContent,jdbcType=VARCHAR}, #{klTags,jdbcType=VARCHAR}, 
-      #{klAppendix,jdbcType=VARCHAR}, #{klAppendixNumber,jdbcType=INTEGER}, #{klVideo,jdbcType=VARCHAR}, 
-      #{klVideoNumber,jdbcType=INTEGER}, #{klHints,jdbcType=INTEGER}, #{klCollectionNumber,jdbcType=INTEGER}, 
-      #{klConnectIds,jdbcType=VARCHAR}, #{klParentFileId,jdbcType=INTEGER})
+    insert into kl_knowledge (kl_id, user_id, kl_kind, 
+      kl_title, kl_introduction, kl_content, 
+      kl_tags, kl_appendix, kl_appendix_number, 
+      kl_video, kl_video_number, kl_hints, 
+      kl_collection_number, kl_connect_ids, kl_parent_file_id
+      )
+    values (#{klId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{klKind,jdbcType=INTEGER}, 
+      #{klTitle,jdbcType=VARCHAR}, #{klIntroduction,jdbcType=VARCHAR}, #{klContent,jdbcType=VARCHAR}, 
+      #{klTags,jdbcType=VARCHAR}, #{klAppendix,jdbcType=VARCHAR}, #{klAppendixNumber,jdbcType=INTEGER}, 
+      #{klVideo,jdbcType=VARCHAR}, #{klVideoNumber,jdbcType=INTEGER}, #{klHints,jdbcType=INTEGER}, 
+      #{klCollectionNumber,jdbcType=INTEGER}, #{klConnectIds,jdbcType=VARCHAR}, #{klParentFileId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.model.KlKnowledge">
     insert into kl_knowledge
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="klId != null">
         kl_id,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="klKind != null">
         kl_kind,
@@ -174,6 +180,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="klId != null">
         #{klId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="klKind != null">
         #{klKind,jdbcType=INTEGER},
@@ -228,6 +237,9 @@
       <if test="record.klId != null">
         kl_id = #{record.klId,jdbcType=INTEGER},
       </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
       <if test="record.klKind != null">
         kl_kind = #{record.klKind,jdbcType=INTEGER},
       </if>
@@ -275,6 +287,7 @@
   <update id="updateByExample" parameterType="map">
     update kl_knowledge
     set kl_id = #{record.klId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
       kl_kind = #{record.klKind,jdbcType=INTEGER},
       kl_title = #{record.klTitle,jdbcType=VARCHAR},
       kl_introduction = #{record.klIntroduction,jdbcType=VARCHAR},
@@ -295,6 +308,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.model.KlKnowledge">
     update kl_knowledge
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
       <if test="klKind != null">
         kl_kind = #{klKind,jdbcType=INTEGER},
       </if>
@@ -339,7 +355,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.model.KlKnowledge">
     update kl_knowledge
-    set kl_kind = #{klKind,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=INTEGER},
+      kl_kind = #{klKind,jdbcType=INTEGER},
       kl_title = #{klTitle,jdbcType=VARCHAR},
       kl_introduction = #{klIntroduction,jdbcType=VARCHAR},
       kl_content = #{klContent,jdbcType=VARCHAR},

@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
 
     @Cacheable(value={"userInfoCache"})
-    @Override
     public List<User> selectUsers() {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
@@ -38,14 +37,12 @@ public class UserServiceImpl implements UserService {
 
     //清除值空间下的所有key缓存
     @CacheEvict(value="userInfoCache",allEntries = true)
-    @Override
     public void insertOne(User user) {
         userMapper.insert(user);
     }
 
 
     @Cacheable(value={"userInfoCache"})
-    @Override
     public List<User> selectAll() {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();

@@ -9,7 +9,8 @@
     <constant name="struts.convention.action.packages" value="com.controller" />
     <!-- 改变struts2默认为2M的上传文件大小限制 -->
     <constant name="struts.multipart.maxSize" value="1024000000"/>
-
+    <!--临时存放文件-->
+    <constant name="struts.multipart.saveDir" value="knowledgeManagement/temp"/>
     <!-- 默认访问页面 -->
     <package name="default" extends="struts-default" namespace="/">
         <default-action-ref name="default"/>
@@ -20,12 +21,12 @@
 
     <package name="p1" extends="json-default" namespace="/upload" >
         <!-- 文件上传 -->
-        <action name="fileUploadAction" class="com.controller.BlogEditController" method="fileUpload">
+        <action name="fileUploadAction" class="com.controller.BlogEditAction" method="fileUpload">
             <result type="json" name="success">
+                <param name="root">klKnowledge</param>
                 <!--<param name="contentType">text/html</param>-->
             </result>
         </action>
-
     </package>
     <!--避免重复提交》多次点击提交》成功提交回退后再次提交》已经为转发状态下/upload_upload刷新重新提交表单-->
     <!--在jsp使用<s:token>,配置token或tokensession拦截器，前者需要配合invalid.token，后者方便-->
@@ -50,6 +51,7 @@
             <result name="forwardToLook">/jsp/readFile.jsp</result>
             <result name="page">/jsp/page.jsp</result>
             <result name="toLoad">/jsp/load.jsp</result>
+            <result name="klDetail">/jsp/createKnowledgePage/KlPage.jsp</result>
         </action>
     </package>
 

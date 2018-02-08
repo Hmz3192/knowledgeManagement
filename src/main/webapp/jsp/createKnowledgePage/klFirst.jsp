@@ -291,63 +291,27 @@
             text-decoration: none
         }
     </style>
-    <script>
-        $(function () {
-            var editor1;
-            $('input[data-role="tagsinput"]').tagsinput({
-                maxTags: 5
-            });
-
-            KindEditor.ready(function (K) {
-                editor1 = K.create('textarea[name="content1"]', {
-                    cssPath: '${path}/kindeditor/plugins/code/prettify.css',
-                    uploadJson: '${path}/editor/image_upload.action',
-                    fileManagerJson: '${path}/editor/image_manage.action',
-                    allowFileManager: true,
-                    resizeType: 0,
-                    afterCreate: function () {
-                        var self = this;
-                        K.ctrl(document, 13, function () {
-                            self.sync();
-                            document.forms['example'].submit();
-                        });
-                        K.ctrl(self.edit.doc, 13, function () {
-                            self.sync();
-                            document.forms['example'].submit();
-                        });
-                        K('input[name=getHtml]').click(function (e) {
-                            var tags = $('input[data-role="tagsinput"]').val();
-                            alert(tags);
-                        });
-                    }
-                });
-                prettyPrint();
-            });
-        });
-
-    </script>
-
-
 </head>
 <body>
-<%=htmlData%>
+<%--<%=htmlData%>--%>
 <div style="width: 90%;margin: 0px auto">
     <div style="float:left;width: 65%!important; margin: 3% auto;border-radius:10px;">
 
         <div class="row-fluid">
             <div class="block">
                 <div class="navbar navbar-inner block-header">
-                    <div class="muted pull-left" style="font-size: 30px;color: #000">新建知识</div>
+                    <div class="muted pull-left" style="font-size: 30px;color: #000">新建知识--(类型一)</div>
                 </div>
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <form name="example" method="post" action="${path}/method/User_tocreate1.action">
+                        <form name="example" id="finishForm" method="post" action="${path}/method/BlogEdit_klSubmit.action">
+                            <input type="hidden" id="hiddenId" name="klKnowledge.klId" >
                             <fieldset>
                                 <legend>标题</legend>
                                 <div class="controls">
                                     <input type="text"
                                            id="title"
-                                           name="title"
+                                           name="klKnowledge.klTitle"
                                            style="width:30%;border-radius:5px;border: 1px solid #000; outline:none;"
                                            maxlength="30"
                                            placeholder="请输入标题，1-30个字">
@@ -355,23 +319,38 @@
                             </fieldset>
                             <br>
                             <fieldset>
+                                <legend>存放目录</legend>
+                                <span>一级目录</span>
+                                <select class="span2 m-wrap"
+                                        style="border-radius:3px;border: 1px solid #c4bab5; outline:none;" >
+                                    <option value="">请选择...</option>
+                                </select>
+                                &nbsp;&nbsp;
+                                <span>二级目录</span>
+                                <select class="span2 m-wrap"
+                                        style="border-radius:3px;border: 1px solid #c4bab5; outline:none;" >
+                                    <option value="">请选择...</option>
+                                </select>
+                                &nbsp;&nbsp;
+                                <span>三级目录</span>
+                                <select class="span2 m-wrap"
+                                        style="border-radius:3px;border: 1px solid #c4bab5; outline:none;" >
+                                    <option value="">请选择...</option>
+                                </select>
+                            </fieldset>
+                            <br>
+                            <fieldset>
                                 <legend>简介</legend>
                                 <div class="controls">
-                                    <c:if test="${articlePO.article.articleSummary != null}">
-                                       <textarea class="span8" id="summary" name="summary" cols="10" rows="4"
-                                                 style="resize:none;width:100%;height:50px;border-radius:5px;border: 1px solid #000; outline:none;"
-                                                 placeholder="请输入简介，1-60个字">${articlePO.article.articleSummary}</textarea>
-                                    </c:if>
-                                    <c:if test="${articlePO.article.articleSummary == null}">
-                                       <textarea class="span8" id="summary" name="summary" cols="10" rows="4"
+                                       <textarea class="span8" id="summary" name="klKnowledge.klIntroduction" cols="10" rows="4"
                                                  style="resize:none;width:100%;height:50px;border-radius:5px;border: 1px solid #000; outline:none;"
                                                  placeholder="请输入简介，1-60个字"></textarea>
-                                    </c:if>
                                 </div>
                             </fieldset>
+                            <br>
                             <fieldset>
                                 <legend>内容</legend>
-                                <textarea name="content1"
+                                <textarea name="content1" id="content1"
                                           style="width:100%;height:700px;visibility:hidden;margin: 5px"><%=htmlspecialchars(htmlData)%></textarea>
                             </fieldset>
                             <br>
@@ -380,13 +359,12 @@
                                 <input type="text" class="form-control" style="width: 100px;" name="tags" id="tags"
                                        data-role="tagsinput" placeholder="请输入标签"/>
                             </fieldset>
+                            <br>
                             <fieldset>
                                 <input type="button" id="finish" class="myButton" name="finish" value="发布"/>
-                                <input type="button" id="save" class="myButton" value="保存" name="getHtml"/>
+                                <%--<input type="button" id="save" class="myButton" value="保存" name="getHtml"/>--%>
                             </fieldset>
                                 <!--<input type="button"  id="saveCover" class="myButton" value="保存封面" />-->
-
-
                         </form>
                     </div>
                 </div>
@@ -413,7 +391,7 @@
 
                     <div id="fileUploadContent" class="fileUploadContent"></div>
 
-                    <button onclick="testUpload()">提交</button>
+                    <%--<button onclick="testUpload()">提交</button>--%>
                     <%--<form action="" enctype="multipart/form-data">
                         <input type="file" id="file1"  name="file" />
                         <a id="add" href="javascript:void(0);" onclick="addFile();">添加</a>
@@ -442,47 +420,110 @@
 
 
 <script type="text/javascript">
-    $("#fileUploadContent").initUpload({
-        "uploadUrl":"#",//上传文件信息地址
-        "progressUrl":"#",//获取进度信息地址，可选，注意需要返回的data格式如下（{bytesRead: 102516060, contentLength: 102516060, items: 1, percent: 100, startTime: 1489223136317, useTime: 2767}）
-        "selfUploadBtId":"selfUploadBt",//自定义文件上传按钮id
-        "isHiddenUploadBt":false,//是否隐藏上传按钮
-        "isHiddenCleanBt":false,//是否隐藏清除按钮
-        "isAutoClean":true,//是否上传完成后自动清除
-        "velocity":10,//模拟进度上传数据
-        //"showSummerProgress":false,//总进度条，默认限制
-        //"scheduleStandard":true,//模拟进度的方式，设置为true是按总进度，用于控制上传时间，如果设置为false,按照文件数据的总量,默认为false
-        //"size":350,//文件大小限制，单位kb,默认不限制
-        //"maxFileNumber":3,//文件个数限制，为整数
-        //"filelSavePath":"",//文件上传地址，后台设置的根目录
-        //"beforeUpload":beforeUploadFun,//在上传前执行的函数
-        //"onUpload":onUploadFun，//在上传后执行的函数
-        // autoCommit:true,//文件是否自动上传
-        //"fileType":['png','jpg','docx','doc']，//文件类型限制，默认不限制，注意写的是文件后缀
+    $(function () {
+        var editor1,finishState = 0;
 
+        $('input[data-role="tagsinput"]').tagsinput({
+            maxTags: 5
+        });
+
+        KindEditor.ready(function (K) {
+            editor1 = K.create('textarea[name="content1"]', {
+                cssPath: '${path}/kindeditor/plugins/code/prettify.css',
+                uploadJson: '${path}/editor/image_upload.action',
+                fileManagerJson: '${path}/editor/image_manage.action',
+                allowFileManager: true,
+                resizeType: 0,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                    K('input[name=getHtml]').click(function (e) {
+                        var tags = $('input[data-role="tagsinput"]').val();
+                        alert(tags);
+                    });
+
+                    var finishForm = document.getElementById('finishForm');
+                    var finish = document.getElementById('finish');
+                    finish.onclick = function(){
+                        if(finishState == 1) {
+                            $(window).unbind('beforeunload');
+                            var  content1 = editor1.html(),
+                                tags = $('input[data-role="tagsinput"]').val();
+                            document.getElementById("content1").value=content1;
+                            document.getElementById("tags").value=tags;
+                            //验证通过，提交表单数据
+                            finishForm.submit();
+                        }else
+                        {
+                            alert("请先上传文件！");
+                            return false;
+                        }
+
+                    }
+                }
+            });
+            prettyPrint();
+        });
+
+
+        $("#fileUploadContent").initUpload({
+            "uploadUrl":"${path}/upload/fileUploadAction.action",//上传文件信息地址
+            "progressUrl":"#",//获取进度信息地址，可选，注意需要返回的data格式如下（{bytesRead: 102516060, contentLength: 102516060, items: 1, percent: 100, startTime: 1489223136317, useTime: 2767}）
+            "selfUploadBtId":"selfUploadBt",//自定义文件上传按钮id
+            "isHiddenUploadBt":false,//是否隐藏上传按钮
+            "isHiddenCleanBt":false,//是否隐藏清除按钮
+//            "isAutoClean":false,//是否上传完成后自动清除
+            "velocity":10,//模拟进度上传数据
+            //"showSummerProgress":false,//总进度条，默认限制
+            //"scheduleStandard":true,//模拟进度的方式，设置为true是按总进度，用于控制上传时间，如果设置为false,按照文件数据的总量,默认为false
+            //"size":350,//文件大小限制，单位kb,默认不限制
+            //"maxFileNumber":3,//文件个数限制，为整数
+            //"filelSavePath":"",//文件上传地址，后台设置的根目录
+            //"beforeUpload":beforeUploadFun,//在上传前执行的函数
+            "onUpload":onUploadFun,//在上传后执行的函数
+//         autoCommit:true,//文件是否自动上传
+            "fileType":['png','jpg','docx','doc'],//文件类型限制，默认不限制，注意写的是文件后缀
+
+        });
+
+        function beforeUploadFun(opt){
+            opt.otherData =[{"name":"你要上传的参数","value":"你要上传的值"}];
+        }
+        function onUploadFun(opt,data){
+//        alert(data.klId);
+//        uploadTools.uploadError(opt);//显示上传错误
+            finishState = 1;
+            var id = data.klId;
+            document.getElementById("hiddenId").value = id;
+//        alert(document.getElementById("hiddenId").value);
+        }
+        function testUpload(){
+            var opt = uploadTools.getOpt("fileUploadContent");
+            console.info(opt);
+            uploadEvent.uploadFileEvent(opt);
+        }
+
+        function getFormData1(){
+            var formData = formTake.getData("myform");
+            alert(JSON.stringify(formData));
+        }
+        function getFormData2(){
+            var formData = formTake.getDataWithUploadFile("myform");
+            alert(JSON.stringify(formData));
+        }
     });
+    $(window).bind('beforeunload',function(){
+            return '您输入的内容尚未保存，确定离开此页面吗？';
+        }
+    );
 
-    function beforeUploadFun(opt){
-        opt.otherData =[{"name":"你要上传的参数","value":"你要上传的值"}];
-    }
-    function onUploadFun(opt,data){
-        alert(data);
-        uploadTools.uploadError(opt);//显示上传错误
-    }
-    function testUpload(){
-        var opt = uploadTools.getOpt("fileUploadContent");
-        console.info(opt);
-        uploadEvent.uploadFileEvent(opt);
-    }
-
-    function getFormData1(){
-        var formData = formTake.getData("myform");
-        alert(JSON.stringify(formData));
-    }
-    function getFormData2(){
-        var formData = formTake.getDataWithUploadFile("myform");
-        alert(JSON.stringify(formData));
-    }
 </script>
 </body>
 </html>
