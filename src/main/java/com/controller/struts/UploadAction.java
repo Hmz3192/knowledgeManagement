@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.struts;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.pojo.FileAttri;
@@ -25,8 +25,11 @@ public class UploadAction extends SuperAction implements ModelDriven<FileAttri> 
     }
 
     /*预览用的上传文件*/
+/*
     public String upload() {
-        /*获得绝对路径 */
+        */
+/*获得绝对路径 *//*
+
         String path = request.getServletContext().getRealPath("/") + "uploadFile";
         File dir = new File(path + File.separator + fileModel.getSavePath());
         System.out.println(path);
@@ -73,6 +76,7 @@ public class UploadAction extends SuperAction implements ModelDriven<FileAttri> 
 //		swfPath=outPath;
         return "forwardToLook";
     }
+*/
 
 
     public FileAttri getModel() {

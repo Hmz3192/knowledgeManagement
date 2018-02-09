@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.struts;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.utils.EditorUtils;

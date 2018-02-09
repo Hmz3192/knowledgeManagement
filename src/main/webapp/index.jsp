@@ -12,33 +12,36 @@
     <title>Title</title>
 </head>
 <body>
-<s:form action="Page_login" namespace="/method" method="post">
+<s:form action="Page_login"  method="post">
     <s:token></s:token>
     <s:textfield name="user" label="name"/>
     <%--<s:textfield name="password" label="password"></s:textfield>--%>
         <s:submit/>
 </s:form>
 
-<s:form action="Page_page" namespace="/method" method="post">
+<s:form action="Page_page"  method="post">
     <s:textfield name="currentPage" label="currentPage"/>
     <s:textfield name="rows" label="rows"/>
     <%--<s:textfield name="password" label="password"></s:textfield>--%>
     <s:submit/>
 </s:form>
-    <s:a namespace="/method" action="Upload_toUpload">toUploadPage</s:a>
+    <s:a  action="Upload_toUpload">toUploadPage</s:a>
     <br>
-<s:a namespace="/method" action="Page_toLoad">toLoadPage</s:a>
+<s:a  action="Page_toLoad">toLoadPage</s:a>
 <br>
 
 
-<s:a namespace="/method" action="Page_tocreate1">create1</s:a>    <br>
+<s:a  action="Page_tocreate1">create1</s:a>    <br>
 
-<s:a namespace="/method" action="Page_tocreate2">create2</s:a>    <br>
+<s:a  action="Page_tocreate2">create2</s:a>    <br>
 
-<s:a namespace="/method" action="Page_tocreate3">create3</s:a>
+<s:a  action="Page_tocreate3">create3</s:a>
 <br>
-<s:a namespace="/method" action="Page_toKlDetail">toKlDetail</s:a>
-
+<s:a  action="Page_toKlDetail">toKlDetail</s:a>
+<br>
+<s:a  action="Page_toIndex">toIndex</s:a>
+<br>
+<s:a  action="Page_totree">toTree</s:a>
 
 
 </body>

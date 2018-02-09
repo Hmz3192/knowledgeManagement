@@ -23,7 +23,9 @@ public class ConvertSwfUtil {
     public String OpenOffice_HOME = rb.getString("OO_HOME");
     public String host_Str = rb.getString("OO_host");
     public String port_Str = rb.getString("OO_port");
-    public String SWF_tool = rb.getString("SWF_tool");
+//    public String SWF_tool = rb.getString("SWF_tool");
+
+        public String SWF_tool = System.getProperty("ft.webapp") + File.separator + "Resource";
 
     /**
      * 入口方法-通过此方法转换文件至swf格式

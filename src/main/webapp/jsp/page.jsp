@@ -34,7 +34,7 @@
             <font size="2">共 ${application.pageResult.total} 页</font> <font
                 size="2">第 ${application.pageResult.currentPage} 页</font>
             <s:if test="#application.pageResult.currentPage != 1">
-            <s:url var="first" action="Page_page" namespace="/method">
+            <s:url var="first" action="Page_page" >
                 <s:param name="rows" value="#application.rows"/>
                 <s:param name="currentPage" value="1"/>
             </s:url>
@@ -43,7 +43,7 @@
 
 
             <s:if test="#application.pageResult.currentPage - 1 > 0">
-            <s:url var="lastone" action="Page_page" namespace="/method">
+            <s:url var="lastone" action="Page_page" >
                 <s:param name="rows" value="#application.rows"/>
                 <s:param name="currentPage" value="#application.pageResult.currentPage - 1"/>
             </s:url>
@@ -51,7 +51,7 @@
             </s:if>
 
             <s:if test="#application.pageResult.currentPage + 1 <= #application.pageResult.total">
-                <s:url var="nextone" action="Page_page" namespace="/method">
+                <s:url var="nextone" action="Page_page" >
                     <s:param name="rows" value="#application.rows"/>
                     <s:param name="currentPage" value="#application.pageResult.currentPage + 1"/>
                 </s:url>
@@ -60,7 +60,7 @@
 
 
             <s:if test="#application.pageResult.currentPage != #application.pageResult.total">
-                <s:url var="first" action="Page_page" namespace="/method">
+                <s:url var="first" action="Page_page" >
                     <s:param name="rows" value="#application.rows"/>
                     <s:param name="currentPage" value="#application.pageResult.total"/>
                 </s:url>

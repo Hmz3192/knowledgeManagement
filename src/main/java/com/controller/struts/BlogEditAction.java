@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.struts;
 
 import com.model.KlKnowledge;
 import com.service.KLKnowledgeService;
@@ -36,7 +36,7 @@ public class BlogEditAction extends SuperAction{
         String filePath = "/attached/multFile/20180208/浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx";
         String wholePath = path + filePath;
         String fileName = StringUtil.getFileNameOnly(filePath);
-        String outPutPath = request.getServletContext().getRealPath("/") + "uploadFile/" ;
+        String outPutPath = request.getServletContext().getRealPath("/") + "attached/" ;
         String outPath = new ConvertSwfUtil().beginConvert(outPutPath,wholePath, fileName);
         System.out.println("生成swf文件:" + outPath);
         File swfFile = new File(outPath);

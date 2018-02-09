@@ -125,7 +125,7 @@
             <div class="panel-heading"><h4 style="color: #4e4845">附件预览</h4></div>
             <div class="panel-body">
                 <div class="list-group">
-                    <a href="${path}/method/BlogEdit_toReadOnline.action" class="list-group-item" target="_blank">浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx</a>
+                    <a href="${path}/BlogEdit_toReadOnline.action" class="list-group-item" target="_blank">浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx</a>
                 </div>
             </div>
         </div>

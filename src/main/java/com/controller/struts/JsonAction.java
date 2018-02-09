@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.struts;
 
 
 import com.github.pagehelper.PageHelper;

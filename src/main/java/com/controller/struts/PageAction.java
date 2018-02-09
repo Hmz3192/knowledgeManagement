@@ -1,4 +1,4 @@
-package com.controller;
+package com.controller.struts;
 
 
 import com.github.pagehelper.PageHelper;
@@ -25,6 +25,10 @@ public class PageAction extends SuperAction implements ModelDriven<User> {
     private Integer rows;
     private PageResult pageResult;
 
+    //tree
+    public String totree() {
+        return "totree";
+    }
 
     //去create1
     public String tocreate1() {
@@ -49,6 +53,10 @@ public class PageAction extends SuperAction implements ModelDriven<User> {
     /*文章详情页*/
     public String toKlDetail() {
         return "klDetail";
+    }
+
+    public String toIndex() {
+        return "toIndex";
     }
 
     //退出
