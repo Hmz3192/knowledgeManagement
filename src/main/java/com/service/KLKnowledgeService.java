@@ -13,4 +13,6 @@ public interface KLKnowledgeService {
 
     Integer updateKl(KlKnowledge klKnowledge);
 
+    KlKnowledge selectByPrimaryKey(Integer klId);
+
 }

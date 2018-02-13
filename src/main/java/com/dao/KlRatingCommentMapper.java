@@ -19,4 +19,12 @@ public interface KlRatingCommentMapper {
     int updateByExampleSelective(@Param("record") KlRatingComment record, @Param("example") KlRatingCommentExample example);
 
     int updateByExample(@Param("record") KlRatingComment record, @Param("example") KlRatingCommentExample example);
+
+    /**
+     *
+     * @param KlId
+     * @return
+     * 需要检查一下在KlRatingCommentMapper.xml中配置一下sql语句
+     */
+    List<KlRatingComment> selectByKlId(Integer KlId);
 }

@@ -32,4 +32,9 @@ public class KLKnowledgeServiceImpl implements KLKnowledgeService {
         int i = klKnowledgeMapper.updateByExampleSelective(klKnowledge, example);
         return i;
     }
+
+    @Override
+    public KlKnowledge selectByPrimaryKey(Integer klId) {
+        return klKnowledgeMapper.selectByPrimaryKey(klId);
+    }
 }
