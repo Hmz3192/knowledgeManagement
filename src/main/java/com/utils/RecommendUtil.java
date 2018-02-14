@@ -94,9 +94,10 @@ public class RecommendUtil {
      * 根据用户的个性化推荐
      * @param userId 用户ID
      * @return 推荐的知识list
+     * @return 需要返回推荐的条数
      * @throws TasteException
      */
-    public List<KlKnowledge> recommendByUser(Integer userId) throws TasteException {
+    public List<KlKnowledge> recommendByUser(Integer userId, int n) throws TasteException {
         List<KlKnowledge> klKnowledgeList = null;
         List<KlRatingComment> klRatingCommentList;
         klRatingCommentList = klRatingCommentService.selectByRecommend();
@@ -109,7 +110,7 @@ public class RecommendUtil {
         //推荐集合
         Recommender recommender = new GenericUserBasedRecommender(model,neighborhood,similarity);
         //推荐数量 为3的一个合集,这里数量可以修改
-        List<RecommendedItem> recommendedItems = recommender.recommend(userId,3);
+        List<RecommendedItem> recommendedItems = recommender.recommend(userId,n);
         int kl_idArray[] = new int[recommendedItems.size()];
         for (int i=0;i<recommendedItems.size();i++){
             kl_idArray[i] = (int) recommendedItems.get(i).getItemID();
