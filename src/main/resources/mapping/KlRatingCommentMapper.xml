@@ -20,6 +20,14 @@
     <result property="klCommentTime" column="kl_comment_time"/>
 
   </resultMap>
+  <resultMap id="recommendMap" type="com.model.KlRatingComment">
+    <result property="userId" column="user_id"/>
+    <result property="klId" column="kl_id"/>
+    <result property="klRating" column="kl_rating"/>
+
+
+  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -187,6 +195,10 @@
 
   <select id="selectByKlId" resultMap="allKlMap" parameterType="java.lang.Integer">
     SELECT * FROM kl_rating_comment WHERE kl_id = #{record.klId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByRecommend" resultMap="recommendMap" >
+    SELECT user_id,kl_id,kl_rating FROM kl_rating_comment
   </select>
 
 </mapper>

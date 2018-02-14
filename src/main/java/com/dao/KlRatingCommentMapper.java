@@ -27,4 +27,6 @@ public interface KlRatingCommentMapper {
      * 需要检查一下在KlRatingCommentMapper.xml中配置一下sql语句
      */
     List<KlRatingComment> selectByKlId(Integer KlId);
+
+    List<KlRatingComment> selectByRecommend();
 }

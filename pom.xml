@@ -410,6 +410,15 @@
             <version>1.0.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-core -->
+        <!--mahout推荐算法核心包 -->
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-core</artifactId>
+            <version>0.7</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>knowledgeManagement</finalName>

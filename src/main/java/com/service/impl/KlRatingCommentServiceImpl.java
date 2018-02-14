@@ -22,4 +22,9 @@ public class KlRatingCommentServiceImpl  implements KlRatingCommentService{
     public List<KlRatingComment> selectByKlId(Integer KlId) {
         return klRatingCommentService.selectByKlId(KlId);
     }
+
+    @Override
+    public List<KlRatingComment> selectByRecommend() {
+        return klRatingCommentService.selectByRecommend();
+    }
 }

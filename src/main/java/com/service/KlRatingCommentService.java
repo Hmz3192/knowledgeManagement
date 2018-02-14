@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface KlRatingCommentService {
     List<KlRatingComment> selectByKlId(Integer KlId);
+
+    List<KlRatingComment> selectByRecommend();
 }

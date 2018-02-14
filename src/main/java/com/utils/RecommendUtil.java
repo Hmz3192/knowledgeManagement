@@ -4,6 +4,15 @@ import com.model.KlKnowledge;
 import com.model.KlRatingComment;
 import com.service.KLKnowledgeService;
 import com.service.KlRatingCommentService;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
+import org.apache.mahout.cf.taste.recommender.Recommender;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.junit.Test;
 import org.springframework.stereotype.Component;
 
@@ -81,6 +90,32 @@ public class RecommendUtil {
         return newList;
     }
 
+
+    public List<KlKnowledge> recommendByUser(Integer userId) throws TasteException {
+        List<KlKnowledge> klKnowledgeList = null;
+        List<KlRatingComment> klRatingCommentList;
+        klRatingCommentList = klRatingCommentService.selectByRecommend();
+        //获取模型
+        DataModel model = (DataModel) klRatingCommentList;
+        //计算相似度
+        UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
+        //计算阈值,选择邻近的2个用户
+        UserNeighborhood neighborhood = new NearestNUserNeighborhood(2 ,similarity,model);
+        //推荐集合
+        Recommender recommender = new GenericUserBasedRecommender(model,neighborhood,similarity);
+        //推荐数量 为3的一个合集,这里数量可以修改
+        List<RecommendedItem> recommendedItems = recommender.recommend(userId,3);
+        int kl_idArray[] = new int[recommendedItems.size()];
+        for (int i=0;i<recommendedItems.size();i++){
+            kl_idArray[i] = (int) recommendedItems.get(i).getItemID();
+        }
+        KlKnowledge klKnowledge;
+        for (int i=0;i<recommendedItems.size();i++){
+            klKnowledge = klKnowledgeService.selectByPrimaryKey(kl_idArray[i]);
+            klKnowledgeList.add(klKnowledge);
+        }
+        return klKnowledgeList;
+    }
 
 
 
