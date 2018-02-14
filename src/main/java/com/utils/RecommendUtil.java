@@ -90,7 +90,12 @@ public class RecommendUtil {
         return newList;
     }
 
-
+    /**
+     * 根据用户的个性化推荐
+     * @param userId 用户ID
+     * @return 推荐的知识list
+     * @throws TasteException
+     */
     public List<KlKnowledge> recommendByUser(Integer userId) throws TasteException {
         List<KlKnowledge> klKnowledgeList = null;
         List<KlRatingComment> klRatingCommentList;
