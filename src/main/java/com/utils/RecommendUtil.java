@@ -93,8 +93,9 @@ public class RecommendUtil {
     /**
      * 根据用户的个性化推荐
      * @param userId 用户ID
+     * @param n  需要返回推荐的条数
      * @return 推荐的知识list
-     * @return 需要返回推荐的条数
+     *
      * @throws TasteException
      */
     public List<KlKnowledge> recommendByUser(Integer userId, int n) throws TasteException {
