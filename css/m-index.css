@@ -1,0 +1,28 @@
+.col-sm-10{
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+}
+
+.home{
+    height: 700px;
+    background-color: #ff9933;
+    border-radius: 5px;
+}
+
+.block-up,
+.block-down{
+    height: 300px;
+}
+
+.block-down{
+
+}
+
+.block-left,
+.block-right{
+    width: 380px;
+}
+
+.block-right{
+}
+
