@@ -49,9 +49,18 @@
     <td>${kl.klConnectIds}</td>
     <td>${kl.klParentFileId}</td>
     <td>${kl.klCheckState}</td>
-    <td><button>查看正文</button><button>敏感词检测</button><button>审核通过</button></td>
+    <td><button>查看正文</button><button>查看附件</button><button>查看视屏</button><button>敏感词检测</button><button>审核通过</button></td>
     </tr>
     </c:forEach>
 </table>
+
+
+<br>
+<br>
+<br>
+<br>
+<div align="center">
+<input name="keywords" type="text" /> <button>搜索</button>
+</div>
 </body>
 </html>

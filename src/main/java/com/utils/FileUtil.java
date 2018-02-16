@@ -72,15 +72,6 @@ public class FileUtil {
 
     }
 
-    /**
-     *
-     * @Description: 将网页内容导出为word
-     * @param @param file
-     * @param @throws DocumentException
-     * @param @throws IOException 设定文件
-     * @return void 返回类型
-     * @throws
-     */
     public static void exportDoc(String myTitle,String myIntro,String myContent,String path) throws DocumentException, IOException {
 
         // 设置纸张大小
