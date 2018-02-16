@@ -19,6 +19,7 @@
       <arg column="kl_collection_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="kl_connect_ids" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="kl_parent_file_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="kl_check_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -82,7 +83,7 @@
   <sql id="Base_Column_List">
     kl_id, user_id, kl_kind, kl_title, kl_introduction, kl_content, kl_tags, kl_appendix, 
     kl_appendix_number, kl_video, kl_video_number, kl_hints, kl_collection_number, kl_connect_ids, 
-    kl_parent_file_id
+    kl_parent_file_id, kl_check_state
   </sql>
   <select id="selectByExample" parameterType="com.model.KlKnowledgeExample" resultMap="BaseResultMap">
     select
@@ -119,14 +120,14 @@
       kl_title, kl_introduction, kl_content, 
       kl_tags, kl_appendix, kl_appendix_number, 
       kl_video, kl_video_number, kl_hints, 
-      kl_collection_number, kl_connect_ids, kl_parent_file_id
-      )
+      kl_collection_number, kl_connect_ids, kl_parent_file_id, 
+      kl_check_state)
     values (#{klId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{klKind,jdbcType=INTEGER}, 
       #{klTitle,jdbcType=VARCHAR}, #{klIntroduction,jdbcType=VARCHAR}, #{klContent,jdbcType=VARCHAR}, 
       #{klTags,jdbcType=VARCHAR}, #{klAppendix,jdbcType=VARCHAR}, #{klAppendixNumber,jdbcType=INTEGER}, 
       #{klVideo,jdbcType=VARCHAR}, #{klVideoNumber,jdbcType=INTEGER}, #{klHints,jdbcType=INTEGER}, 
-      #{klCollectionNumber,jdbcType=INTEGER}, #{klConnectIds,jdbcType=VARCHAR}, #{klParentFileId,jdbcType=INTEGER}
-      )
+      #{klCollectionNumber,jdbcType=INTEGER}, #{klConnectIds,jdbcType=VARCHAR}, #{klParentFileId,jdbcType=INTEGER}, 
+      #{klCheckState,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.model.KlKnowledge">
     insert into kl_knowledge
@@ -176,6 +177,9 @@
       <if test="klParentFileId != null">
         kl_parent_file_id,
       </if>
+      <if test="klCheckState != null">
+        kl_check_state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="klId != null">
@@ -222,6 +226,9 @@
       </if>
       <if test="klParentFileId != null">
         #{klParentFileId,jdbcType=INTEGER},
+      </if>
+      <if test="klCheckState != null">
+        #{klCheckState,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -279,6 +286,9 @@
       <if test="record.klParentFileId != null">
         kl_parent_file_id = #{record.klParentFileId,jdbcType=INTEGER},
       </if>
+      <if test="record.klCheckState != null">
+        kl_check_state = #{record.klCheckState,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -300,7 +310,8 @@
       kl_hints = #{record.klHints,jdbcType=INTEGER},
       kl_collection_number = #{record.klCollectionNumber,jdbcType=INTEGER},
       kl_connect_ids = #{record.klConnectIds,jdbcType=VARCHAR},
-      kl_parent_file_id = #{record.klParentFileId,jdbcType=INTEGER}
+      kl_parent_file_id = #{record.klParentFileId,jdbcType=INTEGER},
+      kl_check_state = #{record.klCheckState,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -350,6 +361,9 @@
       <if test="klParentFileId != null">
         kl_parent_file_id = #{klParentFileId,jdbcType=INTEGER},
       </if>
+      <if test="klCheckState != null">
+        kl_check_state = #{klCheckState,jdbcType=INTEGER},
+      </if>
     </set>
     where kl_id = #{klId,jdbcType=INTEGER}
   </update>
@@ -368,7 +382,8 @@
       kl_hints = #{klHints,jdbcType=INTEGER},
       kl_collection_number = #{klCollectionNumber,jdbcType=INTEGER},
       kl_connect_ids = #{klConnectIds,jdbcType=VARCHAR},
-      kl_parent_file_id = #{klParentFileId,jdbcType=INTEGER}
+      kl_parent_file_id = #{klParentFileId,jdbcType=INTEGER},
+      kl_check_state = #{klCheckState,jdbcType=INTEGER}
     where kl_id = #{klId,jdbcType=INTEGER}
   </update>
 </mapper>

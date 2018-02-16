@@ -1073,6 +1073,66 @@ public class KlKnowledgeExample {
             addCriterion("kl_parent_file_id not between", value1, value2, "klParentFileId");
             return (Criteria) this;
         }
+
+        public Criteria andKlCheckStateIsNull() {
+            addCriterion("kl_check_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateIsNotNull() {
+            addCriterion("kl_check_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateEqualTo(Integer value) {
+            addCriterion("kl_check_state =", value, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateNotEqualTo(Integer value) {
+            addCriterion("kl_check_state <>", value, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateGreaterThan(Integer value) {
+            addCriterion("kl_check_state >", value, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("kl_check_state >=", value, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateLessThan(Integer value) {
+            addCriterion("kl_check_state <", value, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateLessThanOrEqualTo(Integer value) {
+            addCriterion("kl_check_state <=", value, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateIn(List<Integer> values) {
+            addCriterion("kl_check_state in", values, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateNotIn(List<Integer> values) {
+            addCriterion("kl_check_state not in", values, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateBetween(Integer value1, Integer value2) {
+            addCriterion("kl_check_state between", value1, value2, "klCheckState");
+            return (Criteria) this;
+        }
+
+        public Criteria andKlCheckStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("kl_check_state not between", value1, value2, "klCheckState");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

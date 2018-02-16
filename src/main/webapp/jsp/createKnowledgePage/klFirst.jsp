@@ -444,6 +444,7 @@
                     K('input[name=getHtml]').click(function (e) {
                         var tags = $('input[data-role="tagsinput"]').val();
                         alert(tags);
+                        editor1.text();
                     });
 
                     var finishForm = document.getElementById('finishForm');

@@ -6,8 +6,10 @@ import com.model.KlKnowledgeExample;
 import com.service.KLKnowledgeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.apache.lucene.document.Field.Index;
+import org.apache.lucene.document.Field.Store;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author Hu mingzhi
@@ -37,4 +39,14 @@ public class KLKnowledgeServiceImpl implements KLKnowledgeService {
     public KlKnowledge selectByPrimaryKey(Integer klId) {
         return klKnowledgeMapper.selectByPrimaryKey(klId);
     }
+
+    @Override
+    public List<KlKnowledge> getAll() {
+        KlKnowledgeExample example = new KlKnowledgeExample();
+        KlKnowledgeExample.Criteria criteria = example.createCriteria();
+        return klKnowledgeMapper.selectByExample(example);
+    }
+
+
+
 }

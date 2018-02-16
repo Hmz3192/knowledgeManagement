@@ -33,7 +33,9 @@ public class KlKnowledge implements Serializable{
 
     private Integer klParentFileId;
 
-    public KlKnowledge(Integer klId, Integer userId, Integer klKind, String klTitle, String klIntroduction, String klContent, String klTags, String klAppendix, Integer klAppendixNumber, String klVideo, Integer klVideoNumber, Integer klHints, Integer klCollectionNumber, String klConnectIds, Integer klParentFileId) {
+    private Integer klCheckState;
+
+    public KlKnowledge(Integer klId, Integer userId, Integer klKind, String klTitle, String klIntroduction, String klContent, String klTags, String klAppendix, Integer klAppendixNumber, String klVideo, Integer klVideoNumber, Integer klHints, Integer klCollectionNumber, String klConnectIds, Integer klParentFileId, Integer klCheckState) {
         this.klId = klId;
         this.userId = userId;
         this.klKind = klKind;
@@ -49,6 +51,7 @@ public class KlKnowledge implements Serializable{
         this.klCollectionNumber = klCollectionNumber;
         this.klConnectIds = klConnectIds;
         this.klParentFileId = klParentFileId;
+        this.klCheckState = klCheckState;
     }
 
     public KlKnowledge() {
@@ -173,5 +176,13 @@ public class KlKnowledge implements Serializable{
 
     public void setKlParentFileId(Integer klParentFileId) {
         this.klParentFileId = klParentFileId;
+    }
+
+    public Integer getKlCheckState() {
+        return klCheckState;
+    }
+
+    public void setKlCheckState(Integer klCheckState) {
+        this.klCheckState = klCheckState;
     }
 }

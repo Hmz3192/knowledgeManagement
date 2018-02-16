@@ -54,6 +54,7 @@ public class BlogEditAction extends SuperAction{
         klKnowledge1.setKlHints(0);
         klKnowledge1.setKlCollectionNumber(0);
         klKnowledge1.setKlVideoNumber(0);
+        klKnowledge1.setKlCheckState(0);
         klKnowledgeService.updateKl(klKnowledge1);
         return "success";
     }
@@ -72,6 +73,7 @@ public class BlogEditAction extends SuperAction{
         String urls = (String) session.getAttribute("urls");
         klKnowledge1.setKlVideoNumber(StringUtil.CountNumber(urls));
         klKnowledge1.setKlVideo(urls);
+        klKnowledge1.setKlCheckState(0);
         klKnowledgeService.saveKl(klKnowledge1);
         session.removeAttribute("urls");
         session.removeAttribute("KlId");
@@ -90,6 +92,7 @@ public class BlogEditAction extends SuperAction{
         String urls = (String) session.getAttribute("urls");
         klKnowledge1.setKlVideoNumber(StringUtil.CountNumber(urls));
         klKnowledge1.setKlVideo(urls);
+        klKnowledge1.setKlCheckState(0);
         klKnowledgeService.updateKl(klKnowledge1);
         return "success";
     }

@@ -64,6 +64,29 @@ public class StringUtil {
         String reg = "\r|\n";
         return s1.replaceAll(reg, "");
     }
+
+    public static String html2Text(String s1) {
+        String reg = "<[^>]+>";
+        return s1.replaceAll(reg, "");
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(html2Text("<p style=\"text-align:center;\">\n" +
+                "\t我啊谁家的<strong>撒吉萨多久啊的</strong>\n" +
+                "</p>\n" +
+                "<p style=\"text-align:center;\">\n" +
+                "\t<strong><span style=\"font-size:18px;\">撒大苏打上阿斯顿阿迪斯</span></strong>\n" +
+                "</p>\n" +
+                "<p style=\"text-align:center;\">\n" +
+                "\t<strong><span style=\"font-size:18px;\"><img src=\"/attached/image/20180125/20180125165158_376.png\" alt=\"\" /></span><br />\n" +
+                "</strong>\n" +
+                "</p>\n" +
+                "<p style=\"text-align:center;\">\n" +
+                "\t<strong><span style=\"font-size:18px;\">阿<em><u>斯顿打撒大厦</u></em></span></strong>\n" +
+                "</p>"));
+    }
+
     public static void main(String[] args) {
         System.out.println(deleteRNB("<p style=\"text-align:center;\">\n" +
                 "\t我啊谁家的<strong>撒吉萨多久啊的</strong>\n" +
