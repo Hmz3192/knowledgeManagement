@@ -1,15 +1,17 @@
 package com.controller.mvc;
 
-import com.beifeng.retrieve.api.FullTextIndexParams;
-import com.beifeng.retrieve.api.ServerFactory;
-import com.beifeng.retrieve.spi.LuceneService;
-import com.beifeng.util.DateUtils;
-import com.beifeng.util.StringUtils;
+import com.lucene.ConstantParams;
+import com.lucene.api.FullTextIndexParams;
+import com.lucene.api.FullTextService;
+import com.lucene.api.ServerFactory;
+import com.lucene.spi.LuceneService;
 import com.model.KlKnowledge;
 import com.service.KLKnowledgeService;
+import com.utils.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -23,47 +25,16 @@ import java.util.Map;
  */
 @Controller
 public class LuceneController {
-    private LuceneService luceneService = null;
     @Resource
     private KLKnowledgeService klKnowledgeService;
 
+    private LuceneService luceneService = null;
+    private FullTextService searchService = null;
     @RequestMapping("/checkIndex")
     public String checkIndex(Model model) {
         List<KlKnowledge> all = klKnowledgeService.getAll();
         model.addAttribute("Knowledges", all);
         return "search/search";
-    }
-
-
-    @RequestMapping("/createIndex")
-    public String createIndex() {
-        int indexId = 0;
-        String indexPath = "";
-        String sourcePath = "";
-        if (indexId != 0) {
-            //启动服务
-            beginService("writer", indexPath);
-
-            FullTextIndexParams fullTextIndexParams = new FullTextIndexParams();
-            List<Map<String, Object>> indexData = new ArrayList<Map<String, Object>>();
-
-            //获取所有下面的文件路径
-            StringUtils su = new StringUtils(sourcePath);
-            List<String> pathList = su.allPathResult;
-            Map<String, Object> map = null;
-            for (String path : pathList) {
-                map = new HashMap<String, Object>();
-                String fileName = StringUtils.getFileNameFromPath(path);
-                //读取文档内容
-                String content = StringUtils.getContent(path);
-                map.put("fileName", fileName);
-                map.put("content", content);
-                indexData.add(map);
-            }
-            fullTextIndexParams.setIndexData(indexData);
-            luceneService.doIndex(fullTextIndexParams);
-        }
-        return "forward:/checkIndex";
     }
 
     public void beginService(String flag,String indexPath){
@@ -77,5 +48,39 @@ public class LuceneController {
         luceneService = (LuceneService)serverFactory.beginService(params);
         luceneService.setServerName("test");
     }
+
+    @RequestMapping("/createIndex")
+    @ResponseBody
+    public String createIndex(){
+        int indexId = 1;
+        if(indexId != 0){
+            String indexPath = ConstantParams.INDEXPATH;
+            String sourcePath = "E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\attached\\multFile\\20180209\\test";
+
+            //启动服务
+            beginService("writer",indexPath);
+
+            FullTextIndexParams fullTextIndexParams = new FullTextIndexParams();
+            List<Map<String,Object>> indexData = new ArrayList<Map<String,Object>>();
+
+            StringUtil su = new StringUtil(sourcePath);
+            List<String> pathList = su.allPathResult;
+            Map<String,Object> map = null;
+            for(String path : pathList){
+                map = new HashMap<String,Object>();
+                String fileName = StringUtil.getFileNameFromPath(path);
+                String content = StringUtil.getContent(path);
+                map.put("fileName", fileName);
+                map.put("content", content);
+                indexData.add(map);
+            }
+            fullTextIndexParams.setIndexData(indexData);
+            luceneService.doIndex(fullTextIndexParams);
+        }
+        return "createIndex";
+    }
+
+
+
 
 }

@@ -1,3 +1,7 @@
+import com.beifeng.retrieve.api.FullTextIndexParams;
+import com.beifeng.retrieve.api.ServerFactory;
+import com.beifeng.retrieve.spi.LuceneService;
+import com.beifeng.util.StringUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.DateTools;
@@ -13,15 +17,63 @@ import org.apache.pdfbox.util.PDFTextStripper;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.junit.Test;
 
 import java.io.*;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @Author Hu mingzhi
  * Created by ThinKPad on 2018/2/16.
  */
 public class LuceneCreateIndex {
+
+    private LuceneService luceneService = null;
+
+    public void beginService(String flag,String indexPath){
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("type", "lucene");
+        params.put("serverName", "test");
+        params.put("flag", flag);
+        params.put("className", LuceneService.class.getName());
+        params.put("indexPath", indexPath);
+        ServerFactory serverFactory = new ServerFactory();
+        luceneService = (LuceneService)serverFactory.beginService(params);
+        luceneService.setServerName("test");
+    }
+
+    @Test
+    public void testIndex() {
+        int indexId = 1;
+        String indexPath = "E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\attached\\multFile\\20180209\\index";
+        String sourcePath = "E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\attached\\multFile\\20180209";
+        if (indexId != 0) {
+            //启动服务
+            beginService("writer", indexPath);
+
+            FullTextIndexParams fullTextIndexParams = new FullTextIndexParams();
+            List<Map<String, Object>> indexData = new ArrayList<Map<String, Object>>();
+
+            //获取所有下面的文件路径
+            StringUtils su = new StringUtils(sourcePath);
+            List<String> pathList = su.allPathResult;
+            Map<String, Object> map = null;
+            for (String path : pathList) {
+                map = new HashMap<String, Object>();
+                String fileName = StringUtils.getFileNameFromPath(path);
+                //读取文档内容
+                String content = StringUtils.getContent(path);
+                map.put("fileName", fileName);
+                map.put("content", content);
+                indexData.add(map);
+            }
+            fullTextIndexParams.setIndexData(indexData);
+            luceneService.doIndex(fullTextIndexParams);
+        }
+    }
+
+
+
     /**
      * @param args
      * @throws
