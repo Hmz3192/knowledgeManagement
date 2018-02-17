@@ -3,10 +3,7 @@ package com.utils;
 import com.lucene.ConstantParams;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,15 +72,15 @@ public class StringUtil {
             return result;
         }
         try {
-            File file = new File(inputPath);
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
+//            File file = new File(inputPath);
+//            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inputPath),"UTF-8"));
             String temp = "";
             while((temp=br.readLine()) != null){
                 result += (temp+ ConstantParams.CHENG_LINE);
             }
             br.close();
-            fr.close();
+//            fr.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

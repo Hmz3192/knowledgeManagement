@@ -80,7 +80,7 @@ public class LuceneService extends FullTextServiceImpl {
 					return 1;
 				}
 			}
-			if("search".equals(flag)){
+			if("cc".equals(flag)){
 				IndexSearcher indexSearcher = searchMap.get(serverName);
 				if(indexSearcher == null){
 					Directory dir = FSDirectory.open(new File(indexPath));

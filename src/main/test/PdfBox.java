@@ -108,7 +108,7 @@ public class PdfBox {
         PdfBox test = new PdfBox();
         try {
 //获取E:\Lucene项目下的C语言代码.pdf的内容
-            test.geText("E:\\LearnIngFile\\过程分析\\第二组-团队作业以及学期总结\\201532120120-胡明志-过程分析每周任务\\第二周\\work.pdf");
+            test.geText("E:/LearnIngFile/过程分析/第二组-团队作业以及学期总结/201532120120-胡明志-过程分析每周任务/第二周/work.pdf");
 
         } catch (Exception e) {
             e.printStackTrace();

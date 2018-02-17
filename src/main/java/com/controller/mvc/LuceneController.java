@@ -1,9 +1,7 @@
 package com.controller.mvc;
 
 import com.lucene.ConstantParams;
-import com.lucene.api.FullTextIndexParams;
-import com.lucene.api.FullTextService;
-import com.lucene.api.ServerFactory;
+import com.lucene.api.*;
 import com.lucene.spi.LuceneService;
 import com.model.KlKnowledge;
 import com.service.KLKnowledgeService;
@@ -49,6 +47,7 @@ public class LuceneController {
         luceneService.setServerName("test");
     }
 
+
     @RequestMapping("/createIndex")
     @ResponseBody
     public String createIndex(){
@@ -79,7 +78,40 @@ public class LuceneController {
         }
         return "createIndex";
     }
+    @RequestMapping("/search")
+    public String doQuery(String queryString, Model model) {
+        String indexPath = ConstantParams.INDEXPATH;
+        if (StringUtil.isNotEmpty(queryString)) {
+            beginService("search", indexPath);
+            FullTextSearchParams fullTextSearchParams = new FullTextSearchParams();
+            fullTextSearchParams.setQueryWord(queryString);
+            fullTextSearchParams.setReturnNums(1000);
 
+            List<String> assignmentFields = new ArrayList<String>();
+            assignmentFields.add("fileName");
+            assignmentFields.add("content");
+            fullTextSearchParams.setAssignmentFields(assignmentFields);
+
+            String[] viewFields = new String[]{"fileName", "content"};
+            fullTextSearchParams.setViewFields(viewFields);
+
+            fullTextSearchParams.setViewNums(150);
+            fullTextSearchParams.setIsHighlight(true);
+            fullTextSearchParams.setPreHighlight("<font color='red'>");
+            fullTextSearchParams.setPostHighlight("</font>");
+
+            FullTextResult result = luceneService.doQuery(fullTextSearchParams);
+            long numFound = result.getNumFound();
+            List tempList = result.getResultList();
+
+            int pageRow = tempList.size();
+            int pageSize = 10;
+
+            model.addAttribute("searchList", tempList);
+        }
+
+        return "search/search";
+    }
 
 
 

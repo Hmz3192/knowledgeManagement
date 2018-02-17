@@ -60,7 +60,26 @@
 <br>
 <br>
 <div align="center">
-<input name="keywords" type="text" /> <button>搜索</button>
+    <form action="${path}/search.mvc" method="post">
+<input name="queryString" type="text" /> <input type="submit">搜索</input>
+    </form>
+    <hr>
+
+    <br>
+    <div style="width:800px;height:1000px;text-align:left">
+        <c:forEach  items="${requestScope.searchList}" var="map">
+            <div style="width:798px;height:80px;padding:5px 0px 5px 0px;;font-size:14px;border:1px #BFDCE8 solid">
+                <font style="family:Arial Narrow;color:blue;size:3pt">
+                        ${map.fileName }</font><br>
+                <font style="size:10px">
+                        ${map.content }
+                </font><br>
+            </div>
+            <div style="width:800px;height:10px;">
+
+            </div>
+        </c:forEach>
+    </div>
 </div>
 </body>
 </html>
