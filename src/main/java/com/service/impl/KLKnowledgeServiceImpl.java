@@ -4,6 +4,9 @@ import com.dao.KlKnowledgeMapper;
 import com.model.KlKnowledge;
 import com.model.KlKnowledgeExample;
 import com.service.KLKnowledgeService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.lucene.document.Field.Index;
@@ -23,10 +26,14 @@ public class KLKnowledgeServiceImpl implements KLKnowledgeService {
     @Resource
     private KlKnowledgeMapper klKnowledgeMapper;
 
+    @CachePut(value="klKnow")
     public Integer saveKl(KlKnowledge klKnowledge) {
         return klKnowledgeMapper.insertSelective(klKnowledge);
     }
 
+
+
+    @CacheEvict(value="klKnow",allEntries = true)
     public Integer updateKl(KlKnowledge klKnowledge) {
         KlKnowledgeExample example = new KlKnowledgeExample();
         KlKnowledgeExample.Criteria criteria = example.createCriteria();
@@ -35,18 +42,25 @@ public class KLKnowledgeServiceImpl implements KLKnowledgeService {
         return i;
     }
 
-    @Override
+    @Cacheable(value={"klKnow"})
     public KlKnowledge selectByPrimaryKey(Integer klId) {
         return klKnowledgeMapper.selectByPrimaryKey(klId);
     }
 
-    @Override
+    @Cacheable(value={"klKnow"})
     public List<KlKnowledge> getAll() {
         KlKnowledgeExample example = new KlKnowledgeExample();
         KlKnowledgeExample.Criteria criteria = example.createCriteria();
         return klKnowledgeMapper.selectByExample(example);
     }
 
+    @Cacheable(value={"klKnow"})
+    public List<KlKnowledge> getIndexed() {
+        KlKnowledgeExample example = new KlKnowledgeExample();
+        KlKnowledgeExample.Criteria criteria = example.createCriteria();
+        criteria.andKlCheckStateEqualTo(1);
+        return klKnowledgeMapper.selectByExample(example);
+    }
 
 
 }

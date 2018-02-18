@@ -1,10 +1,10 @@
-<%--
+<!--
   Created by IntelliJ IDEA.
   User: ThinKPad
   Date: 2018/2/16
   Time: 16:07
   To change this template use File | Settings | File Templates.
---%>
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set value="${pageContext.request.contextPath}" var="path"
@@ -38,18 +38,23 @@
     <td>${kl.klId}</td>
     <td>${kl.userId}</td>
     <td>${kl.klKind}</td>
-    <td><%--${kl.klTitle}--%></td>
-    <td><%--${kl.klIntroduction}--%></td>
-    <td><%--${kl.klContent}--%></td>
+    <td><!--${kl.klTitle}--></td>
+    <td><!--${kl.klIntroduction}--></td>
+    <td><!--${kl.klContent}--></td>
     <td>${kl.klTags}</td>
-    <td><%--${kl.klAppendix}--%></td>
-    <td><%--${kl.klVideo}--%></td>
+    <td><!--${kl.klAppendix}--></td>
+    <td><!--${kl.klVideo}--></td>
     <td>${kl.klHints}</td>
     <td>${kl.klCollectionNumber}</td>
     <td>${kl.klConnectIds}</td>
     <td>${kl.klParentFileId}</td>
     <td>${kl.klCheckState}</td>
-    <td><button>查看正文</button><button>查看附件</button><button>查看视屏</button><button>敏感词检测</button><button>审核通过</button></td>
+    <td><button>查看正文</button><button>查看附件</button>
+        <button>查看视屏</button><button>敏感词检测</button>
+        <c:if test="${kl.klCheckState == 0}">
+        <button><a href="${path}/addIndex/${kl.klId}.mvc">审核通过</a></button>
+        </c:if>
+    </td>
     </tr>
     </c:forEach>
 </table>
@@ -68,11 +73,14 @@
     <br>
     <div style="width:800px;height:1000px;text-align:left">
         <c:forEach  items="${requestScope.searchList}" var="map">
-            <div style="width:798px;height:80px;padding:5px 0px 5px 0px;;font-size:14px;border:1px #BFDCE8 solid">
+            <div style="width:798px;height:100px;padding:5px 0px 5px 0px;;font-size:14px;border:1px #BFDCE8 solid">
                 <font style="family:Arial Narrow;color:blue;size:3pt">
-                        ${map.fileName }</font><br>
+                        ${map.klTitle }</font><br>
                 <font style="size:10px">
-                        ${map.content }
+                        ${map.klIntro }
+                </font><br>
+                <font style="size:10px">
+                        ${map.klContent }...
                 </font><br>
             </div>
             <div style="width:800px;height:10px;">

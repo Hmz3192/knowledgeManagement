@@ -25,9 +25,20 @@ public class PageAction extends SuperAction implements ModelDriven<User> {
     private Integer rows;
     private PageResult pageResult;
 
+    //root
+    public String toroot() {
+
+        return "toroot";
+    }
+
     //tree
     public String totree() {
         return "totree";
+    }
+
+    //tree
+    public String totreepage() {
+        return "totreepage";
     }
 
     //去create1

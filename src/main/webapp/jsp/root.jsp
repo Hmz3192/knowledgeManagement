@@ -13,7 +13,7 @@
 </head>
 <body>
 <s:form action="Page_login"  method="post">
-    <s:token></s:token>
+    <%--<s:token></s:token>--%>
     <s:textfield name="user" label="name"/>
     <%--<s:textfield name="password" label="password"></s:textfield>--%>
         <s:submit/>
@@ -41,7 +41,7 @@
 <br>
 <s:a  action="Page_toIndex">toIndex</s:a>
 <br>
-<s:a  action="Page_totree">toTree</s:a>
+<s:a  action="Page_totreepage">totreepage</s:a>
 
 
 </body>

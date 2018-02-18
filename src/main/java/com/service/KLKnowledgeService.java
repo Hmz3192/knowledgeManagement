@@ -19,4 +19,6 @@ public interface KLKnowledgeService {
 
     List<KlKnowledge> getAll();
 
+
+    List<KlKnowledge> getIndexed();
 }

@@ -7,61 +7,61 @@ import java.util.Map;
 
 public class FullTextSearchParams {
 
-	//ËÑË÷¹Ø¼ü´Ê
+	//æœç´¢å…³é”®è¯
 	private String queryWord = "";
 
-	//Ö¸¶¨ËÑË÷Óò£¬²¢ÇÒÄ¬ÈÏµÄ¹ØÏµÊÇOR
+	//æŒ‡å®šæœç´¢åŸŸï¼Œå¹¶ä¸”é»˜è®¤çš„å…³ç³»æ˜¯OR
 	private List<String> assignmentFields = new ArrayList<String>();
 	/**
-	 * Ö¸¶¨ËÑË÷ÓòÓëËÑË÷ÓòÖ®¼äµÄ¹ØÏµ
-	 * Map<String,String> µÚÒ»¸öStringÊÇÓòÃû£¬±ÈÈç£ºname
-	 *                    µÚ¶ş¸öStringÊÇ¹ØÏµ£¬Ğ´·¨£º»òÕß£ºOR Óë£ºAND
+	 * æŒ‡å®šæœç´¢åŸŸä¸æœç´¢åŸŸä¹‹é—´çš„å…³ç³»
+	 * Map<String,String> ç¬¬ä¸€ä¸ªStringæ˜¯åŸŸåï¼Œæ¯”å¦‚ï¼šname
+	 *                    ç¬¬äºŒä¸ªStringæ˜¯å…³ç³»ï¼Œå†™æ³•ï¼šæˆ–è€…ï¼šOR ä¸ï¼šAND
 	 */
 	private List<Map<String,String>> assignFields = new ArrayList<Map<String,String>>();
 
-	//ÏÔÊ¾Óò
+	//æ˜¾ç¤ºåŸŸ
 	private String[] viewFields;
 
-	//ÊÇ·ñ¸ßÁÁ
+	//æ˜¯å¦é«˜äº®
 	private Boolean isHighlight = true;
 
-	//¸ßÁÁÓò
+	//é«˜äº®åŸŸ
 	private String[] highlightFields;
 
-	//¸ßÁÁÇ°×º
+	//é«˜äº®å‰ç¼€
 	private String preHighlight = "<em class=\"highlight\">";
 
-	//¸ßÁÁºó×º
+	//é«˜äº®åç¼€
 	private String postHighlight = "</em>";
 
-	//ÅÅĞòÓò String:ĞèÒªÅÅĞòµÄÓòÃû£¬Boolean£ºtrue ÉıĞò false ½µĞò
+	//æ’åºåŸŸ String:éœ€è¦æ’åºçš„åŸŸåï¼ŒBooleanï¼štrue å‡åº false é™åº
 	private Map<String,Boolean> sortField = new HashMap<String,Boolean>();
 
-	//¹ıÂËÓò
+	//è¿‡æ»¤åŸŸ
 	private Map<String,String> filterField = new HashMap<String,String>();
 
-	//¿ªÊ¼ĞĞ
+	//å¼€å§‹è¡Œ
 	private int startNums = 0;
 
-	//Ò»Ò³ÏÔÊ¾¶àÉÙĞĞ
+	//ä¸€é¡µæ˜¾ç¤ºå¤šå°‘è¡Œ
 	private int pageCount = 15;
 
-	//ÊÇ·ñÍ³¼Æ
+	//æ˜¯å¦ç»Ÿè®¡
 	private Boolean isFacet = false;
 
-	//Í³¼ÆÓò
+	//ç»Ÿè®¡åŸŸ
 	private String[] facetFields;
 
-	//·µ»ØµÄ½á¹ûÊı
+	//è¿”å›çš„ç»“æœæ•°
 	private long numFound;
 
-	//ÏÔÊ¾½á¹ûµÄ×ÖÊı
+	//æ˜¾ç¤ºç»“æœçš„å­—æ•°
 	private int viewNums = 200;
 
-	//Ö¸¶¨ËÑË÷È¨ÖØ
+	//æŒ‡å®šæœç´¢æƒé‡
 	private Map<String,Float> boost = new HashMap<String,Float>();
 
-	//Ö¸¶¨luceneÖĞ·µ»ØµÄ½á¹ûÊı
+	//æŒ‡å®šluceneä¸­è¿”å›çš„ç»“æœæ•°
 	private int returnNums = 15;
 
 	public String getQueryWord() {

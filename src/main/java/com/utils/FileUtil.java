@@ -2,20 +2,13 @@ package com.utils;
 
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.Image;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.rtf.RtfWriter2;
-import com.pojo.TestPagemodel;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.struts2.ServletActionContext;
+import com.lucene.ConstantParams;
 import org.junit.Test;
 
-import javax.xml.ws.spi.http.HttpContext;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,13 +57,30 @@ public class FileUtil {
 
     public static String EnterContent2Word(String title, String intro, String content) {
         String finalUrl = "";
-
-
-
         return finalUrl;
-
-
     }
+
+
+    @Test
+    public void test() {
+        deleteDir(new File("E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\index"));
+    }
+    public static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            //递归删除目录中的子目录下
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        // 目录此时为空，可以删除
+        return dir.delete();
+    }
+
+
 
     public static void exportDoc(String myTitle,String myIntro,String myContent,String path) throws DocumentException, IOException {
 

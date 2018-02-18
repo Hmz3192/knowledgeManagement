@@ -167,7 +167,11 @@ public class StringUtil {
 
     public static String html2Text(String s1) {
         String reg = "<[^>]+>";
-        return s1.replaceAll(reg, "");
+        String s2 = s1.replaceAll(reg, "");
+        String reg2 = "\r|\n|\t";
+        String s3 = s2.replaceAll(reg2, "");
+
+        return s3.replaceAll(" ", "");
     }
 
     @Test

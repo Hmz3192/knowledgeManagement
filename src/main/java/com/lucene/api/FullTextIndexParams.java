@@ -6,13 +6,13 @@ import java.util.Map;
 
 public class FullTextIndexParams {
 
-	//ĞèÒªË÷ÒıµÄÊı¾İ
+	//éœ€è¦ç´¢å¼•çš„æ•°æ®
 	private List<Map<String,Object>> indexData = new ArrayList<Map<String,Object>>();
 
-	//lucene µÄË÷ÒıÂ·¾¶
+	//lucene çš„ç´¢å¼•è·¯å¾„
 	private String indexPath = "";
 
-	//É¾³ıË÷ÒıÊ±£¬´«Èëid
+	//åˆ é™¤ç´¢å¼•æ—¶ï¼Œä¼ å…¥id
 	private List<String> ids = new ArrayList<String>();
 	private String id;
 

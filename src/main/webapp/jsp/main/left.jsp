@@ -72,7 +72,7 @@
                 </a>
                 <ul class="dropdown-content dropdown-menu">
                     <li>
-                        <a href="#">查看知识树</a>
+                        <a href="${path}/Page_totree.action">查看知识树</a>
                     </li>
                     <li>
                         <a href="#">修改知识树</a>

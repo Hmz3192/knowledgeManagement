@@ -66,7 +66,7 @@ public class SolrService extends FullTextServiceImpl {
 		System.out.println("Your preDeleteIndex spent on "+(preEnd-preStart)+" ms.");
 		try {
 			if(StringUtil.isNotEmpty(fullTextIndexParams.getId())){
-				//Ê×ÏÈÈ¥É¾³ıÒ»¸öidµÄÇé¿ö
+				//é¦–å…ˆå»åˆ é™¤ä¸€ä¸ªidçš„æƒ…å†µ
 				this.solrServerMap.get(this.serverName).deleteById(fullTextIndexParams.getId());
 			}else{
 				this.solrServerMap.get(this.serverName).deleteById(fullTextIndexParams.getIds());
@@ -211,11 +211,11 @@ public class SolrService extends FullTextServiceImpl {
 			System.out.println("queryString:"+queryString);
 			SolrQuery params = new SolrQuery(queryString);
 			
-			//ÉèÖÃÏÔÊ¾Óò
+			//è®¾ç½®æ˜¾ç¤ºåŸŸ
 			String[] viewFields = fullTextSearchParams.getViewFields();
 			params.setFields(viewFields);
 			
-			//¸ßÁÁ²ÎÊı
+			//é«˜äº®å‚æ•°
 			boolean isHighlight = fullTextSearchParams.getIsHighlight();
 			String[] highlightFields = fullTextSearchParams.getHighlightFields();
 			if(isHighlight && highlightFields != null && highlightFields.length > 0){
@@ -225,7 +225,7 @@ public class SolrService extends FullTextServiceImpl {
 				params.setHighlightFragsize(fullTextSearchParams.getViewNums());
 			}
 			
-			//ÅÅĞòÓò String:ĞèÒªÅÅĞòµÄÓòÃû£¬Boolean£ºtrue ÉıĞò false ½µĞò
+			//æ’åºåŸŸ String:éœ€è¦æ’åºçš„åŸŸåï¼ŒBooleanï¼štrue å‡åº false é™åº
 			Map<String,Boolean> sortField = fullTextSearchParams.getSortField();
 			if(sortField != null){
 				Set<String> set = sortField.keySet();
@@ -242,7 +242,7 @@ public class SolrService extends FullTextServiceImpl {
 				}
 			}
 			
-			//¹ıÂËÓò
+			//è¿‡æ»¤åŸŸ
 			Map<String,String> filterField = fullTextSearchParams.getFilterField();
 			if(filterField != null && filterField.size() > 0){
 				StringBuilder str = new StringBuilder();
@@ -258,12 +258,12 @@ public class SolrService extends FullTextServiceImpl {
 				params.addFilterQuery(fieldFields);
 			}
 			
-			//¿ªÊ¼ĞĞ
+			//å¼€å§‹è¡Œ
 			params.setStart(fullTextSearchParams.getStartNums());
-			//Ò»Ò³ÏÔÊ¾¶àÉÙĞĞ
+			//ä¸€é¡µæ˜¾ç¤ºå¤šå°‘è¡Œ
 			params.setRows(fullTextSearchParams.getPageCount());
 			
-			//Í³¼ÆÓò
+			//ç»Ÿè®¡åŸŸ
 			boolean isFacet = fullTextSearchParams.getIsFacet();
 			String[] facetFields = fullTextSearchParams.getFacetFields();
 			if(isFacet && facetFields != null && facetFields.length>0){
@@ -277,7 +277,7 @@ public class SolrService extends FullTextServiceImpl {
 			SolrDocument document = new SolrDocument();
 			SolrDocumentList hlList = new SolrDocumentList();
 			
-			//¸ßÁÁ½á¹û
+			//é«˜äº®ç»“æœ
 			if(isHighlight && highlightFields != null && highlightFields.length > 0){
 				Map<String,Map<String,List<String>>> map = response.getHighlighting();
 				for(int i=0;i<list.size();i++){
@@ -296,7 +296,7 @@ public class SolrService extends FullTextServiceImpl {
 				result.setResultList(list);
 			}
 			
-			//Í³¼Æ½á¹û
+			//ç»Ÿè®¡ç»“æœ
 			if(isFacet && facetFields != null && facetFields.length>0){
 				List<FacetField> listField = response.getFacetFields();
 				result.setFacetList(listField);
