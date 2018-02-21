@@ -35,6 +35,10 @@ public class PageAction extends SuperAction implements ModelDriven<User> {
     public String totree() {
         return "totree";
     }
+    //toklPage
+    public String toklPage() {
+        return "toklPage";
+    }
 
     //tree
     public String totreepage() {

@@ -53,130 +53,147 @@
     </style>
 </head>
 <body>
+<%--<%=htmlData%>--%>
+<jsp:include page="${path}/jsp/main/top.jsp"/>
+<div class="block">
+    <div class="box row">
 
-<!-- content -->
-<div class="row" style="background: #e2e2e2">
+        <jsp:include page="${path}/jsp/main/left.jsp"/>
+        <div class="col-sm-10" style="padding: 0px">
+            <div class="home">
+                <div style="width: 95%;margin: 0px auto">
+                    <div style="float:left;width: 75%!important; margin: 1% auto;border-radius:10px;">
+                        <!-- content -->
+                        <div class="row" style="background: #e2e2e2">
 
 
-    <!-- main col right -->
-    <div class="col-sm-7" style="float: none;margin: 2% auto">
+                            <!-- main col right -->
+                            <div class="col-sm-10" style="float: none;margin: 2% auto">
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h1 class="t-h1">闪送、小罐茶：将单一元素推向极致的创业给我们什么启发？</h1>
-                <br>
-                <div class="column-link-box">
-                    <span class="article-time pull-left">2017-05-30 16:30</span>
-                    <span class="article-share pull-left">&nbsp;收藏87</span>
-                    <span class="article-pl pull-left">&nbsp;&nbsp;评论16</span>
-                    <a href="#" class="column-link" target="_blank">创业维艰</a> <i></i>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div id="danmup"></div>
-            </div>
-        </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h1 class="t-h1">闪送、小罐茶：将单一元素推向极致的创业给我们什么启发？</h1>
+                                        <br>
+                                        <div class="column-link-box">
+                                            <span class="article-time pull-left">2017-05-30 16:30</span>
+                                            <span class="article-share pull-left">&nbsp;收藏87</span>
+                                            <span class="article-pl pull-left">&nbsp;&nbsp;评论16</span>
+                                            <a href="#" class="column-link" target="_blank">创业维艰</a> <i></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div id="danmup"></div>
+                                    </div>
+                                </div>
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="panel-heading"><p style="font-size:20px;">
-                    有些人和企业的厉害之处，在于从一个看似成熟、红海的领域，硬生生拓展出一片蓝海市场来，而且生意做到风生水起。</p></div>
-                <div class="clearfix"></div>
-                <hr>
-                <div id="article_content" class="article-content-wrap">
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        有些人和企业的厉害之处，在于从一个看似成熟、红海的领域，硬生生拓展出一片蓝海市场来，而且生意做到风生水起。</p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        而这种闯出一片新天地的方法，最常见的一种，就是将原有的产品或服务模式中的某个元素，推向极致，拓展出新的用户场景和产品价值，自然就拓展出了新的市场。</p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        今天来分析三个例子，来看看这种"单一元素推向极致"的手段有多厉害。</p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <span style="font-weight:700;">第一个例子，是前段时间非常火爆的电话亭式KTV。</span></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        我不知道现在还有多少人经常去KTV唱歌。我能看到的是，在一线城市，传统的量贩式KTV市场一再萎缩，以钱柜、麦乐迪为代表的老企业日渐衰败，新的主打小户型的唱吧麦颂半死不活。长盛不衰此起彼伏的KTV也有，但那是俗称商K的夜总会式KTV，你懂的。</p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        究其原因，现在娱乐的个性化和小群体化趋势日益明显，以前那种成群结队去唱歌，还要忍受别人五音不全的唱腔的娱乐形式，显得不够与时俱进。</p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        但是，朋友情侣三两出行，还是有唱歌娱乐的需求的。电话亭式KTV应运而生。</p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        <br/></p>
-                    <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
-                        电话亭式KTV，把时间和空间两个元素推向极致。仅容纳两到三个人的私密空间，少至一首歌或者一刻钟的欢唱时间，充分利用碎片化时间和空间，让唱歌这件事不那么仪式感和处心积虑，随时兴起就可以来一发，多么愉快。何况，曲库、音响效果并不亚于传统的KTV，甚至还有所超越。</p>
-                </div>
-            </div>
-        </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="panel-heading"><p style="font-size:20px;">
+                                            有些人和企业的厉害之处，在于从一个看似成熟、红海的领域，硬生生拓展出一片蓝海市场来，而且生意做到风生水起。</p></div>
+                                        <div class="clearfix"></div>
+                                        <hr>
+                                        <div id="article_content" class="article-content-wrap">
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                有些人和企业的厉害之处，在于从一个看似成熟、红海的领域，硬生生拓展出一片蓝海市场来，而且生意做到风生水起。</p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                而这种闯出一片新天地的方法，最常见的一种，就是将原有的产品或服务模式中的某个元素，推向极致，拓展出新的用户场景和产品价值，自然就拓展出了新的市场。</p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                今天来分析三个例子，来看看这种"单一元素推向极致"的手段有多厉害。</p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <span style="font-weight:700;">第一个例子，是前段时间非常火爆的电话亭式KTV。</span></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                我不知道现在还有多少人经常去KTV唱歌。我能看到的是，在一线城市，传统的量贩式KTV市场一再萎缩，以钱柜、麦乐迪为代表的老企业日渐衰败，新的主打小户型的唱吧麦颂半死不活。长盛不衰此起彼伏的KTV也有，但那是俗称商K的夜总会式KTV，你懂的。</p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                究其原因，现在娱乐的个性化和小群体化趋势日益明显，以前那种成群结队去唱歌，还要忍受别人五音不全的唱腔的娱乐形式，显得不够与时俱进。</p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                但是，朋友情侣三两出行，还是有唱歌娱乐的需求的。电话亭式KTV应运而生。</p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                <br/></p>
+                                            <p style="color:#333333;font-family:Arial, 微软雅黑, &quot;font-size:16px;background-color:#FFFFFF;">
+                                                电话亭式KTV，把时间和空间两个元素推向极致。仅容纳两到三个人的私密空间，少至一首歌或者一刻钟的欢唱时间，充分利用碎片化时间和空间，让唱歌这件事不那么仪式感和处心积虑，随时兴起就可以来一发，多么愉快。何况，曲库、音响效果并不亚于传统的KTV，甚至还有所超越。</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-        <%--/attached/multFile/20180208\浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx--%>
-        <div class="panel panel-default">
-            <div class="panel-heading"><h4 style="color: #4e4845">附件预览</h4></div>
-            <div class="panel-body">
-                <div class="list-group">
-                    <a href="${path}/BlogEdit_toReadOnline.action" class="list-group-item" target="_blank">浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx</a>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="commentAll">
-                <!--评论区域 begin-->
-                <div class="reviewArea clearfix">
+                                <%--/attached/multFile/20180208\浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx--%>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><h4 style="color: #4e4845">附件预览</h4></div>
+                                    <div class="panel-body">
+                                        <div class="list-group">
+                                            <a href="${path}/BlogEdit_toReadOnline.action" class="list-group-item"
+                                               target="_blank">浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="commentAll">
+                                        <!--评论区域 begin-->
+                                        <div class="reviewArea clearfix">
                     <textarea class="content comment-input" placeholder="Please enter a comment&hellip;"
                               onkeyup="keyUP(this)"></textarea>
-                    <a href="javascript:;" class="plBtn">评论</a>
-                </div>
-                <!--评论区域 end-->
-                <!--回复区域 begin-->
-                <div class="comment-show">
-                    <div class="comment-show-con clearfix">
-                        <div class="comment-show-con-img pull-left"><img
-                                src="${path}/Resource/comment/images/header-img-comment_03.png" alt=""></div>
-                        <div class="comment-show-con-list pull-left clearfix">
-                            <div class="pl-text clearfix">
-                                <a href="#" class="comment-size-name">张三 : </a>
-                                <span class="my-pl-con">&nbsp;来啊 造作啊!</span>
-                            </div>
-                            <div class="date-dz">
-                                <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>
-                                <div class="date-dz-right pull-right comment-pl-block">
-                                    <a href="javascript:;" class="removeBlock">删除</a>
-                                    <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>
-                                    <span class="pull-left date-dz-line">|</span>
-                                    <a href="javascript:;" class="date-dz-z pull-left"><i
-                                            class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
+                                            <a href="javascript:;" class="plBtn">评论</a>
+                                        </div>
+                                        <!--评论区域 end-->
+                                        <!--回复区域 begin-->
+                                        <div class="comment-show">
+                                            <div class="comment-show-con clearfix">
+                                                <div class="comment-show-con-img pull-left"><img
+                                                        src="${path}/Resource/comment/images/header-img-comment_03.png"
+                                                        alt=""></div>
+                                                <div class="comment-show-con-list pull-left clearfix">
+                                                    <div class="pl-text clearfix">
+                                                        <a href="#" class="comment-size-name">张三 : </a>
+                                                        <span class="my-pl-con">&nbsp;来啊 造作啊!</span>
+                                                    </div>
+                                                    <div class="date-dz">
+                                                        <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>
+                                                        <div class="date-dz-right pull-right comment-pl-block">
+                                                            <a href="javascript:;" class="removeBlock">删除</a>
+                                                            <a href="javascript:;"
+                                                               class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>
+                                                            <span class="pull-left date-dz-line">|</span>
+                                                            <a href="javascript:;" class="date-dz-z pull-left"><i
+                                                                    class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hf-list-con"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--回复区域 end-->
+                                    </div>
                                 </div>
+
+                                <div class="panel panel-default">
+                                    <p>推荐列表</p>
+                                    <br>
+                                    <br>
+                                    <br>
+
+                                </div>
+
                             </div>
-                            <div class="hf-list-con"></div>
-                        </div>
+                        </div><!--/row-->
                     </div>
                 </div>
-                <!--回复区域 end-->
             </div>
         </div>
-
-        <div class="panel panel-default">
-            <p>推荐列表</p>
-            <br>
-            <br>
-            <br>
-
-        </div>
-
     </div>
-</div><!--/row-->
-
+</div>
 <script type="text/javascript" src="${path}/Resource/common/js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="${path}/Resource/comment/js/jquery.flexText.js"></script>
 <script src="${path}/Resource/DanmuPlayer/danmuplayer.js"></script>
@@ -185,7 +202,7 @@
     $(function () {
         $("#danmup").danmuplayer({
             src: "${path}/attached/vedio/vedioFile/b6c53c15cae215559d6d8551bbdb2cb4.mp4",       //视频源
-            width: 840,            //视频宽度
+            width: 729,            //视频宽度
             height: 445            //视频高度
         });
     });

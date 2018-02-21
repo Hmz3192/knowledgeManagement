@@ -58,6 +58,7 @@
             <result name="totree">/jsp/main/klTree.jsp</result>
             <result name="toroot">/jsp/root.jsp</result>
             <result name="totreepage">/tree.jsp</result>
+            <result name="toklPage">/jsp/createKnowledgePage/KlPage.jsp</result>
 
 
 
