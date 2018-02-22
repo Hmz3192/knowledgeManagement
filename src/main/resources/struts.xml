@@ -51,7 +51,6 @@
             <result name="toIndex">/jsp/main/index.jsp</result>
             <result name="success">/jsp/success.jsp</result>
             <result name="forwardToUpload">/jsp/exampleList.jsp</result>
-            <result name="forwardToLook">/jsp/readFile.jsp</result>
             <result name="page">/jsp/page.jsp</result>
             <result name="toLoad">/jsp/load.jsp</result>
             <result name="klDetail">/jsp/createKnowledgePage/KlPage.jsp</result>
@@ -59,7 +58,7 @@
             <result name="toroot">/jsp/root.jsp</result>
             <result name="totreepage">/tree.jsp</result>
             <result name="toklPage">/jsp/createKnowledgePage/KlPage.jsp</result>
-
+            <result name="forwardToLook">/jsp/readFile.jsp</result>
 
 
         </action>

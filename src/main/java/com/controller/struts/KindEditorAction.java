@@ -94,8 +94,8 @@ public class KindEditorAction extends SuperAction {
         }
 
         //创建文件夹
-        savePath += dirName + "\\";
-        saveUrl += dirName + "\\";
+        savePath += dirName + "/";
+        saveUrl += dirName + "/";
         File saveDirFile = new File(savePath);
         if (!saveDirFile.exists()) {
             saveDirFile.mkdirs();
@@ -103,8 +103,8 @@ public class KindEditorAction extends SuperAction {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String ymd = sdf.format(new Date());
-        savePath += ymd + "\\";
-        saveUrl += ymd + "\\";
+        savePath += ymd + "/";
+        saveUrl += ymd + "/";
         File dirFile = new File(savePath);
         if (!dirFile.exists()) {
             dirFile.mkdirs();

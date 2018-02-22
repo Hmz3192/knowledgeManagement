@@ -4,13 +4,11 @@ import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.rtf.RtfWriter2;
-import com.lucene.ConstantParams;
 import org.junit.Test;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FileUtil {
 
@@ -32,6 +30,7 @@ public class FileUtil {
 
         }
     }
+
 
     //获取下载文件夹下所有文件
     public static List<String> getCurrenFileNames(String inputPath) {
@@ -79,6 +78,7 @@ public class FileUtil {
         // 目录此时为空，可以删除
         return dir.delete();
     }
+
 
 
 

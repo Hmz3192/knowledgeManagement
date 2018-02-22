@@ -138,7 +138,7 @@ public class SolrService extends FullTextServiceImpl {
 	@Override
 	public void doIndex(FullTextIndexParams fullTextIndexParams) {
 		long preStart = System.currentTimeMillis();
-		preIndexMethod();
+//		preIndexMethod();
 		long preEnd = System.currentTimeMillis();
 		System.out.println("Your preIndex spent on "+(preEnd-preStart)+" ms.");
 		try {
@@ -168,7 +168,7 @@ public class SolrService extends FullTextServiceImpl {
 			e.printStackTrace();
 		}
 		long afterStart = System.currentTimeMillis();
-		afterIndexMethod();
+//		afterIndexMethod();
 		long afterEnd = System.currentTimeMillis();
 		System.out.println("Your afterIndex spent on "+(afterEnd-afterStart)+" ms again.");
 	}
@@ -283,10 +283,14 @@ public class SolrService extends FullTextServiceImpl {
 				for(int i=0;i<list.size();i++){
 					for(int j=0;j<highlightFields.length;j++){
 						document = list.get(i);
-						if(map != null && map.get(document.getFieldValue("docfullid")) != null && map.get(document.getFieldValue("docfullid")).get(highlightFields[j]) != null){
-							document.setField(highlightFields[j], map.get(document.getFieldValue("docfullid")).get(highlightFields[j]).get(0));
+						if(map != null && map.get(document.getFieldValue("id")) != null && map.get(document.getFieldValue("id")).get(highlightFields[j]) != null){
+							document.setField(highlightFields[j], map.get(document.getFieldValue("id")).get(highlightFields[j]).get(0));
 						}else{
-							document.setField(highlightFields[j], document.getFieldValue(highlightFields[j]));
+							if(String.valueOf(document.getFieldValue(highlightFields[j])).length() > fullTextSearchParams.getViewNums())
+								document.setField(highlightFields[j], String.valueOf(document.getFieldValue(highlightFields[j])).substring(0,fullTextSearchParams.getViewNums()));
+							else
+								document.setField(highlightFields[j], document.getFieldValue(highlightFields[j]));
+
 						}
 					}
 					hlList.add(document);

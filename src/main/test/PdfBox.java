@@ -1,12 +1,10 @@
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFTextStripper;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.junit.Test;
+
+import java.io.*;
 
 /**
  * @Author Hu mingzhi
@@ -14,6 +12,7 @@ import java.net.URL;
  */
 public class PdfBox {
 
+/*
     public PdfBox() {
 // TODO Auto-generated constructor stub
 
@@ -101,9 +100,10 @@ public class PdfBox {
 
 
     }
+*/
 
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
 // TODO Auto-generated method stub
         PdfBox test = new PdfBox();
         try {
@@ -115,6 +115,69 @@ public class PdfBox {
         }
 
 
+    }*/
+
+    public static String GetTextFromPdf(String filename) throws Exception {
+        PDDocument document = null;
+        String content = "";
+        File pdfFile = new File(filename);
+        try {
+            document = PDDocument.load(pdfFile);
+
+            // 获取页码
+            int pages = document.getNumberOfPages();
+
+            // 读文本内容
+            PDFTextStripper stripper = new PDFTextStripper();
+            // 设置按顺序输出
+            stripper.setSortByPosition(true);
+            stripper.setStartPage(1);
+            stripper.setEndPage(pages);
+            content = stripper.getText(document);
+            System.out.println(content);
+            document.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return content;
     }
 
+    @Test
+    public void readAndWriterTest3() throws IOException {
+//        File file = new File("C:\\Users\\tuzongxun123\\Desktop\\aa.doc");
+        File file = new File("E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\attached\\multFile\\20180208\\test.txt");
+        String str = "";
+        try {
+            InputStream is = new FileInputStream(file);
+            WordExtractor ex = new WordExtractor(is);
+            String text = ex.getText();
+            System.out.println(text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String args[]) throws Exception {
+//        System.out.println(StringUtil.deleteRNB(GetTextFromPdf("E:/LearnIngFile/过程分析/第二组-团队作业以及学期总结/201532120120-胡明志-过程分析每周任务/第二周/work.pdf")));
+//        String content = StringUtil.getContent("E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\attached\\multFile\\20180208\\浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx");
+        String fileContent = "";
+        try {
+            File f = new File("E:\\WorkSpace\\Idea\\knowledgeManagement\\src\\main\\webapp\\attached\\multFile\\20180208\\浙江网新恒天软件有限公司_针对资讯的用户建模和个性推荐系统.docx");
+            if (f.isFile() && f.exists()) {
+                InputStreamReader read = new InputStreamReader(new FileInputStream(f), "UTF-8");
+                BufferedReader reader = new BufferedReader(read);
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    fileContent += line;
+                }
+                read.close();
+            }
+        } catch (Exception e) {
+            System.out.println("读取文件内容操作出错");
+            e.printStackTrace();
+        }
+        System.out.println(fileContent);
+
+
+    }
 }

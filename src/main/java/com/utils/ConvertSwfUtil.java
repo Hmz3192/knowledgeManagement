@@ -25,7 +25,7 @@ public class ConvertSwfUtil {
     public String port_Str = rb.getString("OO_port");
 //    public String SWF_tool = rb.getString("SWF_tool");
 
-        public String SWF_tool = System.getProperty("ft.webapp") + File.separator + "Resource";
+        public String SWF_tool = System.getProperty("webapp.root") + "/" + "Resource";
 
     /**
      * 入口方法-通过此方法转换文件至swf格式
@@ -54,7 +54,9 @@ public class ConvertSwfUtil {
             fileExt = fileName.substring(index).toLowerCase();//文件后缀
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-            newFileName = sdf.format(new Date()) + fileExt;//源文件名称  =日期+后缀
+//            newFileName = sdf.format(new Date()) + fileExt;//源文件名称  =日期+后缀
+            newFileName = sdf.format(new Date());//源文件名称  =日期
+
         }
         String inputFile = filePath;//上传文件的全路径
         String outputFile = "";
@@ -75,7 +77,7 @@ public class ConvertSwfUtil {
         }
 
         if (fileExt.equals(PDF)) {
-            String toolFile = SWF_tool + File.separator+ TOOL;//转化工具
+            String toolFile = SWF_tool + "/" + TOOL;//转化工具
             outputFile = outPutPath + outFile + "/" + newFileName + SWF;
             convertPdf2Swf(inputFile, outputFile, toolFile);
             outFile = outputFile;

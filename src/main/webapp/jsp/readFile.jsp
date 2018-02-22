@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-		要加载的文件：<%=(String)(session.getAttribute("swfPath"))%>
+		要加载的文件：${requestScope.swfPath}
 		<div style="position:absolute;left:200px;top:10px;">
 		<center><a id="viewerPlaceHolder"style="margin-top:100px;width:1500px;height:800px;display:block">努力加载中............</a></center>
 		<script type="text/javascript">
@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var fp = new FlexPaperViewer(
 						'<%=ConstantPara.ServerPath%>/flexpaper/FlexPaperViewer',
 						'viewerPlaceHolder', { config : {
-						 SwfFile : escape('<%=ConstantPara.ServerPath%>/uploadFile/outSWFFile/<%=(String)(session.getAttribute("swfPath"))%>'),
+						 SwfFile : escape('<%=ConstantPara.ServerPath%>/attached/outSWFFile/${requestScope.swfPath}'),
 						 Scale : 1, //缩放比例
 						 ZoomTransition : 'easeOut',
 						 ZoomTime : 0.5,

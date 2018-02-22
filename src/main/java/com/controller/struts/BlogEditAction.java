@@ -29,7 +29,6 @@ public class BlogEditAction extends SuperAction{
     @Resource
     private KLKnowledgeService klKnowledgeService;
 
-
     /*在线浏览*/
     public String toReadOnline() {
         String path = request.getServletContext().getRealPath("");
@@ -45,6 +44,7 @@ public class BlogEditAction extends SuperAction{
         session.setAttribute("swfPath", swfFile.getName());
         return "forwardToLook";
     }
+
     /*知识1提交*/
     public String klSubmit() {
         KlKnowledge klKnowledge1 = klKnowledge;
