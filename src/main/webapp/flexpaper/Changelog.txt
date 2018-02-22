@@ -1,4 +1,50 @@
-XX Jun 2011 (Version 1.4.5)
+  Feb 2012 (Version 1.5.1)
+» Rotation function added 
+» Tabindex on some buttons corrected
+» Change to include script applied to work in IE64 bits
+
+
+  Dec 2011 (Version 1.5.0)
+» Printing in split mode improved by precaching pages which are to be printed
+» New PHP setting : allowcache deciding whether or not files should be allowed to be cached by the browser
+» Fix applied for printing split pages where the pages are images rather than swf files.
+» Fix applied for Internet Explorer using the FullScreenAsMaxWindow and not passing parameters properly.
+» Fix applied for showing incorrect page number until page 2 is navigated to
+» Fix applied for selecting text in two-page mode
+» French language translation updated
+» Added missing parameters to the FullScreenAsMaxWindow
+» Corrected bug related to printing annotations and other plugins
+» Issue with printing multiple times in split mode corrected
+» Increased script timeout to 120 to allow larger documents which take longer to print to finish
+» Split file publishing improved by forking off the PHP process which improves initial viewing time significantly.
+» New viewing mode: SinglePage added
+
+
+  Dec 2011 (Version 1.4.8)
+» Printing in split mode improved by precaching pages which are to be printed 
+» New PHP setting : allowcache deciding whether or not files should be allowed to be cached by the browser
+» Fix applied for printing split pages where the pages are images rather than swf files.
+» Fix applied for Internet Explorer using the FullScreenAsMaxWindow and not passing parameters properly.
+» Fix applied for showing incorrect page number until page 2 is navigated to
+» Fix applied for selecting text in two-page mode
+» French language translation updated
+» Added missing parameters to the FullScreenAsMaxWindow
+» Corrected bug related to printing annotations and other plugins
+» Issue with printing multiple times in split mode corrected
+» Increased script timeout to 120 to allow larger documents which take longer to print to finish
+» Split file publishing improved by forking off the PHP process which improves initial viewing time significantly.
+» New viewing mode: SinglePage added
+
+
+11 Nov 2011 (Version 1.4.7)
+» New printing setting: AutoAdjustPrintSize decides whether the print should be default to fit to page or not. 
+» New printing setting: PrintPaperAsBitmap set to true to preserve any transparent objects overlaying the document
+» Bug causingn text-selection not to work in two-page mode corrected
+» Bug causing different sized pages not to auto adjust properly when printing fixed.
+» Various minor issues from the issues log corrected
+
+
+21 Jun 2011 (Version 1.4.5)
 » A number of bugs corrected for split file loader
 » Documents with different size pages should now be calculated and show properly
 
@@ -7,14 +53,14 @@ XX Jun 2011 (Version 1.4.5)
 » Split file loader implemented for large documents 
 » A number of bugs corrected for two-page viewing mode 
 » New language added: hebrew 
-» Two new API methods added: prevSearchMatch() and nextSearchMatch() to be used together with SearchMatchAll? to be able to iterate through search matches 
+» Two new API methods added: prevSearchMatch() and nextSearchMatch() to be used together with SearchMatchAll to be able to iterate through search matches 
 » New PHP sample added for converting and displaying documents on the fly 
 » Support for images added (through the split file loader method)
 
 
 12 Apr 2011 (Version 1.4.2) 
 » New method for highlighting text following Adobe's highlighting XML specification 
-» New parameter: SearchMatchAll? matches and highlights all hits in a document 
+» New parameter: SearchMatchAll matches and highlights all hits in a document 
 » Improved ability for Google to find documents for indexing 
 » New method for taking a snapshot of the viewer and posting this snapshot to a given url (useful for creating thumbnails) 
 » Improved two-page mode allowing zooming in and out with a click 
@@ -26,7 +72,7 @@ XX Jun 2011 (Version 1.4.5)
 » Various mouse wheel scrolling issues corrected for OS X 
 » New event added per request: onDocumentPrinted 
 » Issue related to print range corrected 
-» A number of parameters related to hiding and showing buttons removed and instead replaced with a ReadOnly? property for viewing documents in readonly mode 
+» A number of parameters related to hiding and showing buttons removed and instead replaced with a ReadOnly property for viewing documents in readonly mode 
 » Issue related to mouse wheel scrolling corrected when using opaque mode 
 » Issue related to caps lock searching corrected 
 » Issue related to showing the max number of pages being cut off 
@@ -61,7 +107,7 @@ XX Jun 2011 (Version 1.4.5)
 
 
 21 Jun 2010 (Version 1.3 final & 1.3.1) 
-» New method added for loading new documents (LoadSwf?) without having to reload FlexPaper?. See the API page for more details 
+» New method added for loading new documents (LoadSwf) without having to reload FlexPaper?. See the API page for more details 
 » Memory issues corrected related to changing document 
 » Current Page indicator bug corrected 
 » 1.3 contained bug related to unloading previous document which was affecting some scenarios of loading documents. Should be corrected in 1.3.1 
@@ -150,3 +196,5 @@ XX Jun 2011 (Version 1.4.5)
 » Added page number input box & indicator 
 » Optimized the way pages are loaded to be able to handle large documents (many pages) 
 » Corrected a problem where the pages did not load due to too many simultaneous pages loading at once (now loading in a sequence)
+
+DownLoad By http://www.veryhuo.com

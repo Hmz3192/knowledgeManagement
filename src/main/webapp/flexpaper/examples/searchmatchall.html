@@ -13,7 +13,7 @@
     </head> 
     <body> 
     	<div style="position:absolute;left:10px;top:10px;">
-	        <a id="viewerPlaceHolder" style="width:660px;height:480px;display:block"></a>
+	        <a id="viewerPlaceHolder" style="width:680px;height:480px;display:block"></a>
 	        
 	        <script type="text/javascript"> 
 				var fp = new FlexPaperViewer(	
@@ -26,7 +26,6 @@
 						 ZoomInterval : 0.2,
 						 FitPageOnLoad : true,
 						 FitWidthOnLoad : false,
-						 PrintEnabled : true,
 						 FullScreenAsMaxWindow : false,
 						 ProgressiveLoading : false,
 						 MinZoomSize : 0.2,
@@ -45,7 +44,7 @@
 						 
 						 
 						 function onDocumentLoaded(totalPages){
-						 	getDocViewer().searchText('UK');
+						 	$FlexPaper().searchText('UK');
 						 }
 	        </script>
 	        
@@ -54,7 +53,7 @@
         
         
 		<!-- THE FOLLOWING CODE BLOCK CAN SAFELY BE REMOVED, IT IS ONLY PLACED HERE TO HELP YOU GET STARTED. -->
-        <div style="position:absolute;left:680px;height:480px;top:10px;font-family:Verdana;font-size:9pt;background-color:#CACACA;width:300px">
+        <div style="position:absolute;left:700px;height:480px;top:10px;font-family:Verdana;font-size:9pt;background-color:#CACACA;width:300px">
 			<div style="padding: 5px 5px 5px 5px;font-size:15px;font-weight:bold;text-align:center;margin-top:10px;">FlexPaper Matching All</div>
 
 			<div style="padding: 5px 5px 5px 5px;font-size:11px;text-align:left;margin-bottom:10px;">This example shows how FlexPaper can be used to highlight all matches in a document (this example highlights all matches of 'UK').</div>
@@ -63,6 +62,7 @@
 				<div style="padding: 5px 5px 5px 5px;font-size:15px;font-weight:bold;text-align:center;margin-top:50px;">More Examples</div>
 				<div style="padding: 5px 5px 5px 5px;font-size:11px;text-align:left;margin-bottom:10px;line-height:150%">
 						» <a href="two_page.html">FlexPaper starting up in Two-Page mode</a><br/>
+						» <a href="singlepage.html">FlexPaper using SinglePage mode</a><br/>
 						» <a href="interactive_API.html">Interactive API html page</a><br/>
 						» <a href="searchmatchall.html">Search and highlight all matches</a><br/>
 						</div>

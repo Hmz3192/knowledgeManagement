@@ -531,6 +531,7 @@
                     <path>/</path>
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>
+<!--
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -539,6 +540,7 @@
                         </goals>
                     </execution>
                 </executions>
+-->
             </plugin>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>

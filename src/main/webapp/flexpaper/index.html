@@ -13,26 +13,26 @@
     </head> 
     <body> 
     	<div style="position:absolute;left:10px;top:10px;">
-	        <a id="viewerPlaceHolder" style="width:660px;height:480px;display:block"></a>
+	        <a id="viewerPlaceHolder" style="width:680px;height:480px;display:block"></a>
 	        
 	        <script type="text/javascript"> 
 				var fp = new FlexPaperViewer(	
 						 'FlexPaperViewer',
 						 'viewerPlaceHolder', { config : {
-						 SwfFile : escape('Paper.swf'),
+						 SwfFile : escape('http://localhost:8111/attached/outSWFFile/20180222180629998.swf'),
 						 Scale : 0.6, 
 						 ZoomTransition : 'easeOut',
 						 ZoomTime : 0.5,
 						 ZoomInterval : 0.2,
 						 FitPageOnLoad : true,
 						 FitWidthOnLoad : false,
-						 PrintEnabled : true,
 						 FullScreenAsMaxWindow : false,
 						 ProgressiveLoading : false,
 						 MinZoomSize : 0.2,
 						 MaxZoomSize : 5,
 						 SearchMatchAll : false,
 						 InitViewMode : 'Portrait',
+						 PrintPaperAsBitmap : false,
 						 
 						 ViewModeToolsVisible : true,
 						 ZoomToolsVisible : true,
@@ -46,7 +46,7 @@
         </div>
         
 		<!-- THE FOLLOWING CODE BLOCK CAN SAFELY BE REMOVED, IT IS ONLY PLACED HERE TO HELP YOU GET STARTED. -->
-        <div style="position:absolute;left:680px;height:540px;top:10px;font-family:Verdana;font-size:9pt;background-color:#CACACA;width:300px">
+        <div style="position:absolute;left:700px;height:540px;top:10px;font-family:Verdana;font-size:9pt;background-color:#CACACA;width:300px">
 			<div style="padding: 5px 5px 5px 5px;font-size:15px;font-weight:bold;text-align:center;margin-top:10px;">FlexPaper Sample Document</div>
 			<div style="padding: 5px 5px 5px 5px;font-size:11px;text-align:left;margin-bottom:10px;">Can't see the document and running FlexPaper from your local directory?<br/><br/> Upload the contents of the zip file to a web server or make FlexPaper trusted to run locally. You can manage your trusted flash applications at <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04a.html#119065">Adobe's website</a>.</div>
 			
@@ -54,6 +54,7 @@
 				<div style="padding: 5px 5px 5px 5px;font-size:15px;font-weight:bold;text-align:center;margin-top:50px;">More Examples</div>
 				<div style="padding: 5px 5px 5px 5px;font-size:11px;text-align:left;margin-bottom:10px;line-height:150%">
 						» <a href="examples/two_page.html">FlexPaper starting up in Two-Page mode</a><br/>
+						» <a href="examples/singlepage.html">FlexPaper using SinglePage mode</a><br/>
 						» <a href="examples/interactive_API.html">Interactive API html page</a><br/>
 						» <a href="examples/searchmatchall.html">Search and highlight all matches</a><br/>
 						</div>

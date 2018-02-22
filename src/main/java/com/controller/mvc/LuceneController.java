@@ -39,7 +39,10 @@ public class LuceneController {
     private FullTextService searchService = null;
     public static FullTextService solrService = null;
 
-
+    @RequestMapping("/readFile")
+    public String readFile() {
+        return "readFile";
+    }
 
     @RequestMapping("/checkIndex")
     public String checkIndex(Model model) {

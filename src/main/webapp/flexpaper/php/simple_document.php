@@ -14,8 +14,8 @@ $configManager = new Config();
 			#flashContent { display:none; }
         </style> 
 		
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/flexpaper_flash.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/flexpaper_flash.js"></script>
     </head> 
     <body> 
 	    <?php 
@@ -24,7 +24,7 @@ $configManager = new Config();
 			$doc = "Paper.pdf";
 			if(isset($_GET["doc"]))
 			$doc = $_GET["doc"];
-			
+			//更多资源来自 最 火 下 载 站 v e r y h u o . c o m
 			$pdfFilePath = $configManager->getConfig('path.pdf') . $doc;
 			$swfFilePath = $configManager->getConfig('path.swf');
 		?> 
@@ -45,7 +45,6 @@ $configManager = new Config();
 						 ZoomInterval : 0.2,
 						 FitPageOnLoad : true,
 						 FitWidthOnLoad : false,
-						 PrintEnabled : true,
 						 FullScreenAsMaxWindow : false,
 						 ProgressiveLoading : false,
 						 MinZoomSize : 0.2,
@@ -68,7 +67,7 @@ $configManager = new Config();
 	        </script> 
 		<?php }else{ ?>
 			<script type="text/javascript">
-				$('#viewerPlaceHolder').html('Cannot read pdf file path, please check your configuration');
+				$('#viewerPlaceHolder').html('Cannot read pdf file path, please check your configuration (in php/lib/config/)');
 			</script>
 		<?php } ?>
         </div>

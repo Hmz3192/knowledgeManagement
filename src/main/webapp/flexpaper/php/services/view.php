@@ -14,7 +14,7 @@
 * from the user interface. 
 *  
 * Commercial licenses are available. The commercial player version
-* does not require any Flowplayer notices or texts and also provides
+* does not require any FlexPaper notices or texts and also provides
 * some additional features.
 * When purchasing a commercial license, its terms substitute this license.
 * Please see http://flexpaper.devaldi.com/ for further details.
@@ -40,17 +40,18 @@ require_once("../lib/pdf2swf_php5.php");
 		$pdfconv=new pdf2swf();
 		$output=$pdfconv->convert($doc,$page);
 		if(rtrim($output) === "[Converted]"){
-			header('Content-type: application/x-shockwave-flash');
-			header('Accept-Ranges: bytes');
-			header('Content-Length: ' . filesize($swfFilePath));
-			//header('Content-Disposition: attachment; filename=' . $doc . $page . '.swf');
 			
-			// uncomment  the following three lines if you wish to avoid browser cache.
-			// header('Expires: Thu, 01 Jan 1970 00:00:00 GMT, -1'); 
-			// header('Cache-Control: no-cache, no-store, must-revalidate');
-			// header('Pragma: no-cache');
+			if($configManager->getConfig('allowcache')){
+				setCacheHeaders();
+			}
+			// www。veryhuo。com
+			if(!$configManager->getConfig('allowcache') || ($configManager->getConfig('allowcache') && endOrRespond())){
+				header('Content-type: application/x-shockwave-flash');
+				header('Accept-Ranges: bytes');
+				header('Content-Length: ' . filesize($swfFilePath));
 			
-			echo file_get_contents($swfFilePath);
+				echo file_get_contents($swfFilePath);
+			}
 		}else
 			echo $output; //error messages etc
 	}

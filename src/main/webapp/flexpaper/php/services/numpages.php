@@ -14,7 +14,7 @@
 * from the user interface. 
 *  
 * Commercial licenses are available. The commercial player version
-* does not require any Flowplayer notices or texts and also provides
+* does not require any FlexPaper notices or texts and also provides
 * some additional features.
 * When purchasing a commercial license, its terms substitute this license.
 * Please see http://flexpaper.devaldi.com/ for further details.
@@ -51,4 +51,6 @@ if($pagecount!=0)
 	echo $pagecount;
 else
 	echo $output;
+
+// 更多资源来自 最 火 下 载 站 v e r y h u o . c o m
 ?>

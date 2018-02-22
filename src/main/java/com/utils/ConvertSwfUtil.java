@@ -25,7 +25,7 @@ public class ConvertSwfUtil {
     public String port_Str = rb.getString("OO_port");
 //    public String SWF_tool = rb.getString("SWF_tool");
 
-        public String SWF_tool = System.getProperty("webapp.root") + "/" + "Resource";
+        public String SWF_tool = System.getProperty("webapp.root") + "Resource";
 
     /**
      * 入口方法-通过此方法转换文件至swf格式
@@ -99,8 +99,7 @@ public class ConvertSwfUtil {
     private void convertPdf2Swf(String sourceFile, String outFile,
                                 String toolFile) {
         //String command="C:/Program Files (x86)/SWFTools/pdf2swf.exe "+" -o "+swfFile.getPath()+ " -s flashversion=9 "+pdfFile.getPath()+"";
-        String command = toolFile + " \"" + sourceFile + "\" -o  \"" + outFile
-                + "\" -s flashversion=9 ";
+        String command = toolFile + " -t \"" + sourceFile + "\" -s flashversion=9  -o \"" + outFile +"\"";
         try {
             Process process = Runtime.getRuntime().exec(command);
             //process.waitFor();//导致当前线程等待，如有必要，一直要等到由该 Process 对象表示的进程已经终止。

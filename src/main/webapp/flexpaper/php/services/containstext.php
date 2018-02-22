@@ -13,7 +13,7 @@
 * from the user interface. 
 *  
 * Commercial licenses are available. The commercial player version
-* does not require any Flowplayer notices or texts and also provides
+* does not require any FlexPaper notices or texts and also provides
 * some additional features.
 * When purchasing a commercial license, its terms substitute this license.
 * Please see http://flexpaper.devaldi.com/ for further details.

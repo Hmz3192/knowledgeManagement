@@ -10,7 +10,7 @@
 * from the user interface. 
 *  
 * Commercial licenses are available. The commercial player version
-* does not require any Flowplayer notices or texts and also provides
+* does not require any FlexPaper notices or texts and also provides
 * some additional features.
 * When purchasing a commercial license, its terms substitute this license.
 * Please see http://flexpaper.devaldi.com/ for further details.
@@ -48,12 +48,6 @@ class pdf2swf
 		$pdfFilePath = $this->configManager->getConfig('path.pdf') . $doc;
 		$swfFilePath = $this->configManager->getConfig('path.swf') . $doc  . $page. ".swf";
 		
-		// traversal and file name check
-		if(	!validPdfParams($pdfFilePath,$doc,$page) ) {
-			$s="Incorrect document file specified, file may not exist or insufficient permissions to read file" . $configManager->getDocUrl();
-			return $s;
-		}
-		
 		if(strlen($page)>0)
 			$command = $this->configManager->getConfig('cmd.conversion.splitpages');
 		else
@@ -74,11 +68,20 @@ class pdf2swf
 		}
 
 		$return_var=0;
-		exec($command,$output,$return_var);
+		
+		if(strlen($page)>0){
+			$pagecmd = str_replace("%",$page,$command);
+			$pagecmd = $pagecmd . " -p " . $page;
+
+			exec($pagecmd,$output,$return_var);
+			exec(getForkCommandStart() . $command . getForkCommandEnd());
+		}else
+			exec($command,$output,$return_var);
+			
 		if($return_var==0){
 			$s="[Converted]";
 		}else{
-			$s="Error converting document, make sure the conversion tool is installed and that correct user permissions are applied to the SWF Path directory" . $configManager->getDocUrl();
+			$s="Error converting document, make sure the conversion tool is installed and that correct user permissions are applied to the SWF Path directory" . $this->configManager->getDocUrl();
 		}
 		return $s;
 	}

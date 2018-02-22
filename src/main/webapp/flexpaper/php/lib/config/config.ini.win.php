@@ -1,5 +1,6 @@
 ; <?php exit; ?> DO NOT REMOVE THIS LINE
 [general]
+ allowcache = true
  path.pdf = "C:\inetpub\wwwroot\flexpaper\php\pdf\"
  path.swf = "C:\inetpub\wwwroot\flexpaper\php\docs\"
  

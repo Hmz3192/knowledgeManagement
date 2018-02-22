@@ -10,7 +10,7 @@
 * from the user interface. 
 *  
 * Commercial licenses are available. The commercial player version
-* does not require any Flowplayer notices or texts and also provides
+* does not require any FlexPaper notices or texts and also provides
 * some additional features.
 * When purchasing a commercial license, its terms substitute this license.
 * Please see http://flexpaper.devaldi.com/ for further details.
@@ -62,9 +62,56 @@
 	
 	function validPdfParams($path,$doc,$page){
 		return !(	basename(realpath($path)) != $doc ||
-				 	substr_compare($doc, 'pdf', -3, 3) === -1 ||
 				 	strlen($doc) > 255 ||
 				 	strlen($page) > 255
 				);	
+	}
+	
+	function setCacheHeaders(){
+		header("Cache-Control: private, max-age=10800, pre-check=10800");
+		header("Pragma: private");
+		header("Expires: " . date(DATE_RFC822,strtotime(" 2 day")));	
+	}
+	
+	function endOrRespond(){
+		if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])){
+		  header('Last-Modified: '.$_SERVER['HTTP_IF_MODIFIED_SINCE'],true,304);
+		  return false;
+		}else{
+			return true;
+		}
+	}
+	
+	function getForkCommandStart(){
+		if(	PHP_OS == "WIN32" || PHP_OS == "WINNT"	)
+			return "START ";
+		else
+			return "";
+	}
+	
+	function getForkCommandEnd(){
+		if(	PHP_OS == "WIN32" || PHP_OS == "WINNT"	)
+			return "";
+		else
+			return " >/dev/null 2>&1 &";
+	}
+	
+	function getTotalPages($PDFPath) {
+		$stream = @fopen($PDFPath, "r");
+		$PDFContent = @fread ($stream, filesize($PDFPath));
+		if(!$stream || !$PDFContent)
+		    return false;
+		    
+		$firstValue = 0;
+		$secondValue = 0;
+		if(preg_match("/\/N\s+([0-9]+)/", $PDFContent, $matches)) {
+		    $firstValue = $matches[1];
+		}
+		 
+		if(preg_match_all("/\/Count\s+([0-9]+)/s", $PDFContent, $matches))
+		{
+		    $secondValue = max($matches[1]);
+		}
+		return (($secondValue != 0) ? $secondValue : max($firstValue, $secondValue));
 	}
 ?>

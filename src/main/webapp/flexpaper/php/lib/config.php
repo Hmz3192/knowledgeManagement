@@ -5,9 +5,9 @@ class Config{
     public function __construct()
     {
 		if(	PHP_OS == "WIN32" || PHP_OS == "WINNT"	)
-      		$this->config = parse_ini_file('config.ini.win.php');
+      		$this->config = parse_ini_file('config/config.ini.win.php');
 		else
-			$this->config = parse_ini_file('config.ini.nix.php');
+			$this->config = parse_ini_file('config/config.ini.nix.php');
     }
  
     public function getConfig($key = null)

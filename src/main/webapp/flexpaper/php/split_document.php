@@ -14,8 +14,8 @@ $configManager = new Config();
 			#flashContent { display:none; }
         </style> 
 		
-		<script type="text/javascript" src="js/flexpaper_flash.js"></script>
-		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="../js/flexpaper_flash.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
     </head> 
     <body>
     	<?php 
@@ -32,59 +32,42 @@ $configManager = new Config();
 		<p id="viewerPlaceHolder" style="width:660px;height:553px;display:block">Document loading..</p>
 	        <?php if(is_dir($pdfFilePath) && is_dir($swfFilePath) ){ ?>
 		        <script type="text/javascript"> 
-		        	var doc = '<?php print $doc; ?>';
-		
-			        $.ajax({
-					  url: 'services/numpages.php?doc=' + doc,
-					  success: viewDocument,
-					  error: function(){
-					  		$("#viewerPlaceHolder").html('Error loading document');
-							}
-					});
-					
-					function viewDocument(retval){
-						if(isNaN(retval)||(!isNaN(retval)&&retval<1)){
-							$("#viewerPlaceHolder").html(retval);
-							return;
-						}
-						
-						var numPages 			= retval;
-						var swfFileUrl 			= escape('{services/view.php?doc='+doc+'&page=[*,0],'+numPages+'}');
-		        		var searchServiceUrl	= escape('services/containstext.php?doc='+doc+'&page=[page]&searchterm=[searchterm]');
-		        	
-						var fp = new FlexPaperViewer(	
-								 'FlexPaperViewer',
-								 'viewerPlaceHolder', { config : {
-								 SwfFile : swfFileUrl, 
-								 Scale : 0.6, 
-								 ZoomTransition : 'easeOut',
-								 ZoomTime : 0.5,
-								 ZoomInterval : 0.2,
-								 FitPageOnLoad : false,
-								 FitWidthOnLoad : false,
-								 PrintEnabled : true,
-								 FullScreenAsMaxWindow : false,
-								 ProgressiveLoading : false,
-								 MinZoomSize : 0.2,
-								 MaxZoomSize : 5,
-								 SearchMatchAll : true,
-								 SearchServiceUrl : searchServiceUrl,
-								 InitViewMode : 'Portrait',
-								 BitmapBasedRendering : false,
-								 
-								 ViewModeToolsVisible : true,
-								 ZoomToolsVisible : true,
-								 NavToolsVisible : true,
-								 CursorToolsVisible : true,
-								 SearchToolsVisible : true,
-		  						
-		  						 localeChain: 'en_US'
-								 }});			
-					}
+		        	var doc 				= '<?php print $doc; ?>';
+					var numPages 			= <?php echo getTotalPages($pdfFilePath . $doc) ?>;
+					var swfFileUrl 			= escape('{services/view.php?doc='+doc+'&page=[*,0],'+numPages+'}');
+	        		var searchServiceUrl	= escape('services/containstext.php?doc='+doc+'&page=[page]&searchterm=[searchterm]');
+	        	
+					var fp = new FlexPaperViewer(	
+							 'FlexPaperViewer',
+							 'viewerPlaceHolder', { config : {
+							 SwfFile : swfFileUrl, 
+							 Scale : 0.6, 
+							 ZoomTransition : 'easeOut',
+							 ZoomTime : 0.5,
+							 ZoomInterval : 0.2,
+							 FitPageOnLoad : false,
+							 FitWidthOnLoad : false,
+							 FullScreenAsMaxWindow : false,
+							 ProgressiveLoading : false,
+							 MinZoomSize : 0.2,
+							 MaxZoomSize : 5,
+							 SearchMatchAll : true,
+							 SearchServiceUrl : searchServiceUrl,
+							 InitViewMode : 'Portrait',
+							 BitmapBasedRendering : false,
+							 
+							 ViewModeToolsVisible : true,
+							 ZoomToolsVisible : true,
+							 NavToolsVisible : true,
+							 CursorToolsVisible : true,
+							 SearchToolsVisible : true,
+	  						
+	  						 localeChain: 'en_US'
+							 }});			
 		        </script>
 		<?php }else{ ?>
 			<script type="text/javascript">
-				$('#viewerPlaceHolder').html('Cannot read pdf & swf file path, please check your configuration');
+				$('#viewerPlaceHolder').html('Cannot read pdf & swf file path, please check your configuration (in php/lib/config/)');
 			</script>
 		<?php } ?>
         </div>

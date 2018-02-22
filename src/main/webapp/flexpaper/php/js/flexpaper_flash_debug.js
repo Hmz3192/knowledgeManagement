@@ -1,13 +1,11 @@
-var docViewer;
-
-function getDocViewer(){
-    if(docViewer)
-    	return docViewer;
-    else
-    	docViewer = window.FlexPaperViewer_Instance.getApi();
-    	
-    return docViewer;
-}
+window.$FlexPaper = window["$FlexPaper"] = function(){
+	if (window['flexpaper']) 
+		return window['flexpaper'];
+	else 
+		window['flexpaper'] = window.FlexPaperViewer_Instance.getApi();
+	
+	return window['flexpaper'];
+};
 
 /**
 *
@@ -22,7 +20,7 @@ window.FlexPaperViewer = window.$f = function() {
 			src: arguments[0]+".swf",
 			version: [10, 0],
 			expressInstall: "js/expressinstall.swf"
-			}, {
+		},{
 			SwfFile : config.SwfFile,
 			Scale : config.Scale, 
 			ZoomTransition : config.ZoomTransition,
@@ -30,23 +28,25 @@ window.FlexPaperViewer = window.$f = function() {
 			ZoomInterval : config.ZoomInterval,
 			FitPageOnLoad : config.FitPageOnLoad,
 			FitWidthOnLoad : config.FitWidthOnLoad,
-			PrintEnabled : config.PrintEnabled,
 			FullScreenAsMaxWindow : config.FullScreenAsMaxWindow,
 			ProgressiveLoading : config.ProgressiveLoading,
 			MinZoomSize : config.MinZoomSize,
 			MaxZoomSize : config.MaxZoomSize,
 			SearchMatchAll : config.SearchMatchAll,
 			SearchServiceUrl : config.SearchServiceUrl,
-			StartAtPage : config.StartAtPage,
-			
 			InitViewMode : config.InitViewMode,
 			BitmapBasedRendering : config.BitmapBasedRendering,
-			  
+			StartAtPage : config.StartAtPage,
+			PrintPaperAsBitmap : config.PrintPaperAsBitmap,
+			AutoAdjustPrintSize : config.AutoAdjustPrintSize,
+			
 			ViewModeToolsVisible : config.ViewModeToolsVisible,
 			ZoomToolsVisible : config.ZoomToolsVisible,
 			NavToolsVisible : config.NavToolsVisible,
 			CursorToolsVisible : config.CursorToolsVisible,
 			SearchToolsVisible : config.SearchToolsVisible,
+			  
+			RenderingOrder : config.RenderingOrder,
 			  
 			localeChain : config.localeChain,
 			key : config.key
@@ -190,6 +190,8 @@ function onDocumentPrinted(){
 			w3c: false,
 			cachebusting: false  		 		 
 	};
+	
+	if(IE){GLOBAL_OPTS.cachebusting=true;}
 	
 	// version 9 bugfix: (http://blog.deconcept.com/2006/07/28/swfobject-143-released/)
 	if (window.attachEvent) {
