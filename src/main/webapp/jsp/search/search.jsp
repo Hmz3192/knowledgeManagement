@@ -17,6 +17,8 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${path}/Resource/DanmuPlayer/css/danmuplayer.css">
+
 </head>
 <body>
 
@@ -87,13 +89,15 @@ To change this template use File | Settings | File Templates.
                                     <button id="fulltext"
                                             onclick="select(this)">查看正文
                                     </button>
+                                    <c:if test="${kl.klAppendixNumber > 0}">
                                     <button id="appendixList"
                                             onclick="appendixList(this)">查看附件
                                     </button>
-                                    <c:if test="${kl.klKind == 2 || kl.klKind == 3}">
-                                        <button>查看视屏</button>
                                     </c:if>
-                                    <button>敏感词检测</button>
+                                    <c:if test="${kl.klVideoNumber > 0}">
+                                        <button id="vedio" onclick="showVedio(this)">查看视屏</button>
+                                    </c:if>
+                                    <button id="minGanCi" onclick="minGanCiTest(this)">敏感词检测</button>
                                     <c:if test="${kl.klCheckState == 0}">
                                         <button><a href="${path}/addIndex/${kl.klId}.mvc">审核通过</a></button>
                                     </c:if>
@@ -212,8 +216,56 @@ To change this template use File | Settings | File Templates.
         </div>
     </div>
 </div>
-<script type="text/javascript">
+<!--vedio-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true" id="pop-vedio"
+     style="display:none;">
+    <div class="modal-dialog" style="width: 759px;height: 445px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="vedioTitle">
+                    视屏预览
+                </h4>
+            </div>
+            <div class="modal-body" id="vedioIntro">
+                <h4 class="modal-title" id="myModalLabel3"></h4>
+                <div id="danmup"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--检测结果-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true" id="pop-result"
+     style="display:none;">
+    <div class="modal-dialog" style="width: 759px;height: 445px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="resultTitle">
+                    检测结果
+                </h4>
+            </div>
+            <div class="modal-body" id="resultIntro">
+                <h4 class="modal-title" id="myModalLabel4"></h4>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${path}/Resource/DanmuPlayer/danmuplayer.js"></script>
+<script type="text/javascript">
     function select(elementId) {
         var buttonId = $(elementId).parent().parent().find("td:eq(0)").text(),
             url = "${path}/getByklId/" + buttonId + ".mvc";
@@ -266,9 +318,57 @@ To change this template use File | Settings | File Templates.
                 alert('请求失败，原因：' + e3);
             }
         });
-
-
     }
+
+    function showVedio(elementId) {
+        var buttonId = $(elementId).parent().parent().find("td:eq(0)").text(),
+            url = "${path}/getByklId/" + buttonId + ".mvc";
+        $.ajax({
+            url: url,
+            //请求方式
+            type: 'GET',
+            //成功回调
+            success: function (data) {
+                var vedioSrc = data.klVideo.split(",");
+                $("#danmup").danmuplayer({
+                    src: vedioSrc[0],       //视频源
+                    width: 729,            //视频宽度
+                    height: 445            //视频高度
+                });
+                $("#pop-vedio").modal('show');
+            },
+            //失败回调
+            error: function (e, e2, e3) {
+                alert('请求失败，原因：' + e3);
+            }
+        });
+    }
+
+    function minGanCiTest(elementId) {
+        var buttonId = $(elementId).parent().parent().find("td:eq(0)").text(),
+            url = "${path}/wordTest/" + buttonId + ".mvc";
+        $.ajax({
+            url: url,
+            //请求方式
+            type: 'GET',
+            //成功回调
+            success: function (data) {
+                var html = "";
+                html += '<h2>检测到的敏感词数量:  '+ data.wordSize +'</h2><br>' +
+                    '<h3>检测到的敏感词如下：  <p style="color: red">'+ data.words + '</p></h3><br>' +
+                    '<h3>检测用时：  '+ data.excuteTime + '</h3><br>' +
+                    '<h3>敏感词占比： '+ data.passProb + '</h3><br>';
+                $("#resultIntro").append(html);
+                $("#pop-result").modal('show');
+            },
+            //失败回调
+            error: function (e, e2, e3) {
+                alert('请求失败，原因：' + e3);
+            }
+        });
+    }
+
+
     $(function () {
         $('#pop-full').on('hidden.bs.modal',
             function () {
@@ -281,6 +381,18 @@ To change this template use File | Settings | File Templates.
                 $("#appendixListTitle").empty(),
                     $("#appendixListIntro").empty();
             });
+        $('#pop-vedio').on('hidden.bs.modal',
+            function () {
+                $("#vedioTitle").empty(),
+                    $("#vedioIntro").empty();
+            });
+        $('#pop-result').on('hidden.bs.modal',
+            function () {
+                $("#resultIntro").empty();
+            });
+
+
+
     })
 </script>
 </body>

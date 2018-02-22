@@ -9,6 +9,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.junit.Test;
 
 import java.io.*;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -138,7 +139,15 @@ public class StringUtil {
     }
 
 
-
+    public static String calPercentage(int diliverNum, int queryMailNum) {
+        // 创建一个数值格式化对象
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        // 设置精确到小数点后2位
+        numberFormat.setMaximumFractionDigits(2);
+        String result = numberFormat.format((float)diliverNum/(float)queryMailNum*100);
+        System.out.println("diliverNum和queryMailNum的百分比为:" + result + "%");
+        return result + "";
+    }
 
     /*public static String readDoc(String path) {
         File file = new File(path);
