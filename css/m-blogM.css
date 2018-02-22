@@ -1,0 +1,15 @@
+.col-sm-10{
+    padding: 0px;
+    width: 1600px;
+}
+
+.home{
+    border-radius: 6px;
+    border: 5px solid #dddddd;
+    width: 1580px;
+    height: 800px;
+}
+
+.home h1{
+    padding: 0px 0px 0px 20px;
+}
