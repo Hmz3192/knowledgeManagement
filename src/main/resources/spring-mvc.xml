@@ -46,7 +46,10 @@
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
 
-
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"></property>
+    </bean>
 
 </beans>
 
