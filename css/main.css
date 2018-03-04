@@ -70,11 +70,11 @@
 
 .dropdown-content {
     display: none;
-    position: relative;
+    position: absolute;
     background-color: #f7f7f7;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    top: -40px;
-    left: 302px;
+    top: 0px;
+    left: 100%;
 }
 
 
