@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/userManger")
-public class UserManagerController {
+public class KlUserManagerController {
 
     //注入Service
     @Autowired
