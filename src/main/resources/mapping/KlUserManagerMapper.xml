@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper总结：namespace是该xml对应的接口全名，insert和select中的id对应方法名，resultType是返回值类型，
+    parameterType是参数类型（这个其实可选），最后#{...}中填写的是方法的参数-->
+<mapper namespace="com.dao.KlUserManagerMapper">
+
+    <resultMap id="user" type="com.model.KlUser">
+        <id property="userId" column="user_id" />
+        <result property="userName" column="user_name" />
+        <result property="userPassword" column="user_password" />
+        <result property="userAvatar" column="user_avatar" />
+        <result property="userPhone" column="user_phone" />
+        <result property="userEmail" column="user_email" />
+        <result property="userVip" column="user_vip" />
+        <result property="userPoint" column="user_point" />
+    </resultMap>
+
+    <resultMap id="userManager" type="com.model.KlManager">
+        <id property="id" column="id" />
+        <result property="name" column="m_name" />
+        <result property="password" column="m_password" />
+    </resultMap>
+    <!-- 注意这里的参数类型是parameterType而不是parameterMap，因为返回的单个类型 -->
+    <select id="findUserByNameAndPwd"  parameterType="map" resultMap="userManager">
+        SELECT * FROM manager WHERE m_name = #{m_name} AND password = #{password}
+    </select>
+
+    <select id="selectUser" parameterType="map" resultMap="user">
+        SELECT * FROM kl_user WHERE user_name = #{u_name}
+    </select>
+
+    <select id="selectAll" resultMap="user">
+        SELECT * FROM kl_user
+    </select>
+
+    <insert id="addUser" parameterType="com.model.KlUser" >
+        INSERT INTO kl_user WHERE(user_name,user_password,user_avatar,user_phone,user_email,user_vip,user_point) VALUES (#{userName},#{userPassword},#{userAvatar},#{userPhone},#{userEmail},#{userVip},#{userPoint})
+    </insert>
+    
+    <delete id="delUser" parameterType="int" >
+        DELETE FROM kl_user WHERE user_id = #{u_id}
+    </delete>
+    
+    <update id="updateUser" parameterType="com.model.KlUser">
+        UPDATE kl_user SET user_name = #{userName},user_password = #{userPassword},user_avatar = #{userAvatar},user_phone = #{userPhone},
+        user_email = #{userEmail},user_vip = #{userVip},user_point = #{userPoint} WHERE user_id = #{userId}
+    </update>
+</mapper>
