@@ -1,6 +1,6 @@
 package com.controller.mvc;
 
-import com.model.KlManager;
+import com.model.Manager;
 import com.model.KlUser;
 import com.service.KlUserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,23 @@ public class KlUserManagerController {
     @Autowired
     private KlUserManagerService klUserManagerService;
 
-    @RequestMapping(value = "/mLogin.mvc",method = RequestMethod.POST)
-    @ResponseBody
-    public KlManager login(@RequestBody KlUser requestUser) {
-        String m_name = requestUser.getUserName();
-        String password = requestUser.getUserPassword();
-        System.out.println("m_name" + m_name);
-        KlManager klManager = klUserManagerService.managerLogin(m_name,password);
-        return klManager;
-    }
+//    @RequestMapping(value = "/mLogin.mvc",method = RequestMethod.POST)
+//    @ResponseBody
+//    public Manager login(@RequestBody KlUser requestUser) {
+//        String m_name = requestUser.getUserName();
+//        String password = requestUser.getUserPassword();
+//        System.out.println("m_name" + m_name);
+//        Manager klManager = klUserManagerService.managerLogin(m_name,password);
+//        return klManager;
+//    }
 
     //根据用户名查找用户
     @RequestMapping(value = "/findUserByName.mvc", method = RequestMethod.POST)
     @ResponseBody
     public KlUser findUserByName(@RequestBody KlUser klUser) {
-        String userName = klUser.getUserName();
-        System.out.println("u_name------------>" + userName);
-        KlUser resultUser = klUserManagerService.findUserByName(userName);
+        Integer userId = klUser.getUserId();
+
+        KlUser resultUser = klUserManagerService.selectByPrimaryKey(userId);
         return resultUser;
     }
 
