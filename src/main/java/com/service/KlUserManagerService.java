@@ -1,6 +1,6 @@
 package com.service;
 
-import com.model.KlManager;
+import com.model.Manager;
 import com.model.KlUser;
 
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface KlUserManagerService {
 
-    public KlManager managerLogin(String m_name, String password);
-    public KlUser findUserByName(String userName);
+    //public Manager managerLogin(String m_name, String password);
+    public KlUser selectByPrimaryKey(Integer userId);
     public List<KlUser> findAll();
     public int addUser(KlUser klUser);
     public int delUser(int userId);
