@@ -2,13 +2,16 @@ package com.utils;
 
 import com.model.KlKnowledge;
 import com.model.KlRatingComment;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.service.KLKnowledgeService;
 import com.service.KlRatingCommentService;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.model.JDBCDataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
@@ -98,46 +101,104 @@ public class RecommendUtil {
      *
      * @throws TasteException
      */
-    public List<KlKnowledge> recommendByUser(Integer userId, int n) throws TasteException {
-        List<KlKnowledge> klKnowledgeList = null;
-        List<KlRatingComment> klRatingCommentList;
-        klRatingCommentList = klRatingCommentService.selectByRecommend();
+//    public List<KlKnowledge> recommendByUser(Integer userId, int n) throws TasteException {
+//        List<KlKnowledge> klKnowledgeList = null;
+//        List<KlRatingComment> klRatingCommentList;
+//        klRatingCommentList = klRatingCommentService.selectByRecommend();
+//        //获取模型
+//        DataModel model = (DataModel) klRatingCommentList;
+//        //计算相似度
+//        UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
+//        //计算阈值,选择邻近的2个用户
+//        UserNeighborhood neighborhood = new NearestNUserNeighborhood(2 ,similarity,model);
+//        //推荐集合
+//        Recommender recommender = new GenericUserBasedRecommender(model,neighborhood,similarity);
+//        //推荐数量 为n的一个合集,这里数量可以修改
+//        List<RecommendedItem> recommendedItems = recommender.recommend(userId,n);
+//        int kl_idArray[] = new int[recommendedItems.size()];
+//        for (int i=0;i<recommendedItems.size();i++){
+//            kl_idArray[i] = (int) recommendedItems.get(i).getItemID();
+//        }
+//        KlKnowledge klKnowledge;
+//        for (int i=0;i<recommendedItems.size();i++){
+//            klKnowledge = klKnowledgeService.selectByPrimaryKey(kl_idArray[i]);
+//            klKnowledgeList.add(klKnowledge);
+//        }
+//        return klKnowledgeList;
+//    }
+
+    /**
+     *
+     * @param userId  用户id
+     * @param n   返回推荐条数
+     * @return  数组，kl_id
+     * @throws TasteException
+     * @throws ClassNotFoundException
+     */
+    public int[] recommendByUser(Integer userId, int n) throws TasteException, ClassNotFoundException {
+
+        Class.forName("com.mysql.jdbc.Driver");
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setServerName("101.201.234.133");
+        dataSource.setUser("root");
+        dataSource.setPassword("Humingzhi3192");
+        dataSource.setDatabaseName("knowledgeManagement");
+        /*
+        preferenceTable:表名
+        userIDColumn:userId的字段名
+        itemIDColumn:itemId的字段名
+        preferenceColumn：偏好值字段名
+         */
+        JDBCDataModel dataModel = new MySQLJDBCDataModel(dataSource , "kl_rating_comment" , "user_id" , "kl_id","kl_rating","kl_comment_time");
+
+//        klRatingCommentList = klRatingCommentService.selectByRecommend();
         //获取模型
-        DataModel model = (DataModel) klRatingCommentList;
+        DataModel model = dataModel;
         //计算相似度
         UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
         //计算阈值,选择邻近的2个用户
         UserNeighborhood neighborhood = new NearestNUserNeighborhood(2 ,similarity,model);
         //推荐集合
         Recommender recommender = new GenericUserBasedRecommender(model,neighborhood,similarity);
-        //推荐数量 为3的一个合集,这里数量可以修改
+        //推荐数量 为n的一个合集,这里数量可以修改
         List<RecommendedItem> recommendedItems = recommender.recommend(userId,n);
         int kl_idArray[] = new int[recommendedItems.size()];
         for (int i=0;i<recommendedItems.size();i++){
             kl_idArray[i] = (int) recommendedItems.get(i).getItemID();
         }
-        KlKnowledge klKnowledge;
-        for (int i=0;i<recommendedItems.size();i++){
-            klKnowledge = klKnowledgeService.selectByPrimaryKey(kl_idArray[i]);
-            klKnowledgeList.add(klKnowledge);
+
+        for (RecommendedItem recommendation : recommendedItems) {
+            System.out.println(recommendation);
         }
-        return klKnowledgeList;
+        System.out.println("-------------");
+
+        for (int i= 0;i<kl_idArray.length;i++){
+            System.out.println(kl_idArray[i]);
+        }
+        return kl_idArray;
+
     }
 
 
 
-
     @Test
-    public void main() {
-        String str = "1,2,3,4,5,6";
-        String[] args=str.trim().split(",");
-        int[] ids = new int[args.length];
-        for (int i = 0;i<args.length;i++){
-            ids[i] = Integer.parseInt(args[i]);
-        }
-        for (int i = 0;i<ids.length;i++){
-            System.out.println(ids[i]);
-        }
+    public void main() throws TasteException {
+//        List<KlKnowledge> klKnowledgeList;
+//        klKnowledgeList =recommendByUser(3,2);
+//        for (int i=0;i<klKnowledgeList.size();i++){
+//            System.out.println(klKnowledgeList.get(i).getKlId());
+//        }
+
+
+//        String str = "1,2,3,4,5,6";
+//        String[] args=str.trim().split(",");
+//        int[] ids = new int[args.length];
+//        for (int i = 0;i<args.length;i++){
+//            ids[i] = Integer.parseInt(args[i]);
+//        }
+//        for (int i = 0;i<ids.length;i++){
+//            System.out.println(ids[i]);
+//        }
     }
 
 }
