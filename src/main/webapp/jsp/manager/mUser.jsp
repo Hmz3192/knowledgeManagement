@@ -139,7 +139,7 @@
         var s = "";
         for (var i = 0; i < result.length; i++) {
             s +=
-            "<tr>"+
+                "<tr>"+
                 "<td>" + result[i].userId +
                 "<td>" + result[i].userName +
                 "<td>" + result[i].userPassword +
@@ -148,7 +148,7 @@
                 "<td>" + result[i].userEmail +
                 "<td>" + result[i].userVip +
                 "<td>" + result[i].userPoint +
-            "</tr>"
+                "</tr>"
             $("jsonData").append(s);
         }
     }
