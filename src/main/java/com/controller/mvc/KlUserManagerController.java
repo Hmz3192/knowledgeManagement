@@ -33,7 +33,7 @@ public class KlUserManagerController {
 //    }
 
     //根据用户名查找用户
-    @RequestMapping(value = "/findUserByName.mvc", method = RequestMethod.POST)
+    @RequestMapping(value = "/findUserByName", method = RequestMethod.POST)
     @ResponseBody
     public KlUser findUserByName(@RequestBody KlUser klUser) {
         Integer userId = klUser.getUserId();
@@ -43,22 +43,22 @@ public class KlUserManagerController {
     }
 
     //列出所有用户
-    @RequestMapping(value = "/findAll.mvc", method = RequestMethod.POST)
+    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
     public String findAll(Model model) {
         List klUserList = klUserManagerService.findAll();
         model.addAttribute("users",klUserList);
-        return "mUser";
+        return "manager/mUser";
     }
 
     //增加新用户
-    @RequestMapping(value = "/addUser.mvc", method = RequestMethod.POST)
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
     public int addUser(@RequestBody KlUser klUser) {
         int newUserId = klUserManagerService.addUser(klUser);
         return newUserId;
     }
 
-    @RequestMapping(value = "/delUser.mvc", method = RequestMethod.POST)
+    @RequestMapping(value = "/delUser", method = RequestMethod.POST)
     @ResponseBody
     public int delUser(@RequestBody KlUser klUser) {
         int userId = klUser.getUserId();
@@ -69,7 +69,7 @@ public class KlUserManagerController {
         return -100;
     }
 
-    @RequestMapping(value = "/updateUser.mvc", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
     @ResponseBody
     public int updateUser(@RequestBody KlUser klUser) {
         int result = klUserManagerService.updateUser(klUser);
