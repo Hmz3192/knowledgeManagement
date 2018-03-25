@@ -7,6 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + path + "/jsp/manager";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,25 +25,25 @@
         try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:1419364062,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok2v=1613a3a185/"},atok:"1fca8a26fb9678bbb4b5c54c34e227b9",petok:"edc3bb660c960db01c6473543c337c05ff828e55-1420553994-1800",zone:"adbee.technology",rocket:"0",apps:{"ga_key":{"ua":"UA-49262924-2","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok2v=919620257c/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
         //]]>
     </script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/bootstrap/bootstrap.min.css"/>
 
-    <script src="js/demo-rtl.js"></script>
+    <script src="<%=basePath%>/js/demo-rtl.js"></script>
 
 
-    <link rel="stylesheet" type="text/css" href="css/libs/font-awesome.css"/>
-    <link rel="stylesheet" type="text/css" href="css/libs/nanoscroller.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/nanoscroller.css"/>
 
-    <link rel="stylesheet" type="text/css" href="css/compiled/theme_styles.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/compiled/theme_styles.css"/>
 
-    <link rel="stylesheet" type="text/css" href="css/libs/dataTables.fixedHeader.css">
-    <link rel="stylesheet" type="text/css" href="css/libs/dataTables.tableTools.css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/dataTables.fixedHeader.css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/dataTables.tableTools.css">
 
-    <link type="image/x-icon" href="favicon.png" rel="shortcut icon"/>
+    <link type="image/x-icon" href="<%=basePath%>/favicon.png" rel="shortcut icon"/>
 
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="<%=basePath%>/js/html5shiv.js"></script>
+    <script src="<%=basePath%>/js/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
         /* <![CDATA[ */
@@ -146,7 +151,7 @@
                                 </li>
                                 <li class="item first-item">
                                     <a href="#">
-                                        <img src="img/samples/messages-photo-1.png" alt=""/>
+                                        <img src="<%=basePath%>/img/samples/messages-photo-1.png" alt=""/>
                                         <span class="content">
 <span class="content-headline">
 George Clooney
@@ -161,7 +166,7 @@ right for Marsellus to throw...
                                 </li>
                                 <li class="item">
                                     <a href="#">
-                                        <img src="img/samples/messages-photo-2.png" alt=""/>
+                                        <img src="<%=basePath%>/img/samples/messages-photo-2.png" alt=""/>
                                         <span class="content">
 <span class="content-headline">
 Emma Watson
@@ -176,7 +181,7 @@ right for Marsellus to throw...
                                 </li>
                                 <li class="item">
                                     <a href="#">
-                                        <img src="img/samples/messages-photo-3.png" alt=""/>
+                                        <img src="<%=basePath%>/img/samples/messages-photo-3.png" alt=""/>
                                         <span class="content">
 <span class="content-headline">
 Robert Downey Jr.
@@ -204,7 +209,7 @@ right for Marsellus to throw...
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!------------------------------------------------管理员图片---------------------------------------------------------->
-                                <img src="img/samples/scarlet-159.png" alt=""/>
+                                <img src="<%=basePath%>/img/samples/scarlet.png" alt=""/>
                                 <span class="hidden-xs">admin</span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -230,7 +235,7 @@ right for Marsellus to throw...
                 <section id="col-left" class="col-left-nano">
                     <div id="col-left-inner" class="col-left-nano-content">
                         <div id="user-left-box" class="clearfix hidden-sm hidden-xs">
-                            <img alt="" src="img/samples/scarlet-159.png"/>
+                            <img alt="" src="<%=basePath%>/img/samples/scarlet-159.png"/>
                             <div class="user-box">
 <span class="name">
 Admin
@@ -594,14 +599,16 @@ Admin
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach items="${users}" var="user" >
-                                                    <tr><c:out value="${user.userId}"/></tr>
-                                                    <tr><c:out value="${user.userName}"/></tr>
-                                                    <tr><c:out value="${user.userPassword}"/></tr>
-                                                    <tr><c:out value="${user.userAvatar}"/></tr>
-                                                    <tr><c:out value="${user.userPhone}"/></tr>
-                                                    <tr><c:out value="${user.userEmail}"/></tr>
-                                                    <tr><c:out value="${user.userVip}"/></tr>
-                                                    <tr><c:out value="${user.userPoint}"/></tr>
+                                                    <tr>
+                                                        <th><c:out value="${user.userId}"/></th>
+                                                        <th><c:out value="${user.userName}"/></th>
+                                                        <th><c:out value="${user.userPassword}"/></th>
+                                                        <th><c:out value="${user.userAvatar}"/></th>
+                                                        <th><c:out value="${user.userPhone}"/></th>
+                                                        <th><c:out value="${user.userEmail}"/></th>
+                                                        <th><c:out value="${user.userVip}"/></th>
+                                                        <th><c:out value="${user.userPoint}"/></th>
+                                                    </tr>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -623,19 +630,19 @@ Admin
         </div>
     </div>
 </div>
-<script src="js/demo-skin-changer.js"></script>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.nanoscroller.min.js"></script>
-<script src="js/demo.js"></script>
+<script src="<%=basePath%>/js/demo-skin-changer.js"></script>
+<script src="<%=basePath%>/js/jquery.js"></script>
+<script src="<%=basePath%>/js/bootstrap.js"></script>
+<script src="<%=basePath%>/js/jquery.nanoscroller.min.js"></script>
+<script src="<%=basePath%>/js/demo.js"></script>
 
-<script src="js/jquery.dataTables.js"></script>
-<script src="js/dataTables.fixedHeader.js"></script>
-<script src="js/dataTables.tableTools.js"></script>
-<script src="js/jquery.dataTables.bootstrap.js"></script>
+<script src="<%=basePath%>/js/jquery.dataTables.js"></script>
+<script src="<%=basePath%>/js/dataTables.fixedHeader.js"></script>
+<script src="<%=basePath%>/js/dataTables.tableTools.js"></script>
+<script src="<%=basePath%>/js/jquery.dataTables.bootstrap.js"></script>
 
-<script src="js/scripts.js"></script>
-<script src="js/pace.min.js"></script>
+<script src="<%=basePath%>/js/scripts.js"></script>
+<script src="<%=basePath%>/js/pace.min.js"></script>
 
 <script>
     $(document).ready(function() {
