@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dellpc
@@ -592,16 +593,16 @@ Admin
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td>$320,800</td>
-                                                    <td>$320,800</td>
-                                                    <td>$320,800</td>
-                                                </tr>
+                                                <c:forEach items="${users}" var="user" >
+                                                    <tr><c:out value="${user.userId}"/></tr>
+                                                    <tr><c:out value="${user.userName}"/></tr>
+                                                    <tr><c:out value="${user.userPassword}"/></tr>
+                                                    <tr><c:out value="${user.userAvatar}"/></tr>
+                                                    <tr><c:out value="${user.userPhone}"/></tr>
+                                                    <tr><c:out value="${user.userEmail}"/></tr>
+                                                    <tr><c:out value="${user.userVip}"/></tr>
+                                                    <tr><c:out value="${user.userPoint}"/></tr>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
