@@ -4,7 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
     <!-- 设置struts的Action请求的后缀，支持多个时以逗号隔开。 -->
-    <constant name="struts.action.extension" value="action,jsp" />
+    <constant name="struts.action.extension" value="action" />
     <!-- 开发提示：出错时打印更详细的信息-->
     <constant name="struts.devMode" value="true"/>
     <!--开启注解，部分返回json的也可以直接用注解-->

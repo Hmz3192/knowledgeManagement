@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
-    <context:component-scan base-package="com.controller.mvc"/>
+    <context:component-scan base-package="com.controller"/>
 
 
     <!-- 处理静态资源 -->
@@ -40,7 +40,7 @@
     <!--</bean>-->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-          <property name="prefix" value="/jsp/manager" />
+          <property name="prefix" value="/jsp/" />
           <property name="suffix" value=".jsp" />
     </bean>
 
