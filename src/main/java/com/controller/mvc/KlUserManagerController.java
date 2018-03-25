@@ -5,8 +5,10 @@ import com.model.KlUser;
 import com.service.KlUserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -42,10 +44,10 @@ public class KlUserManagerController {
 
     //列出所有用户
     @RequestMapping(value = "/findAll.mvc", method = RequestMethod.POST)
-    @ResponseBody
-    public List<KlUser> findAll() {
+    public String findAll(Model model) {
         List klUserList = klUserManagerService.findAll();
-        return klUserList;
+        model.addAttribute("users",klUserList);
+        return "mUser";
     }
 
     //增加新用户
