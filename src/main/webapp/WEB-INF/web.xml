@@ -68,11 +68,6 @@
     <!--/*-->
     <url-pattern>*.action</url-pattern>
   </filter-mapping>
-  <filter-mapping>
-    <filter-name>struts2</filter-name>
-    <url-pattern>*.jsp</url-pattern>
-  </filter-mapping>
-
 
   <!-- SpringMVC配置 -->
   <servlet>
@@ -87,6 +82,10 @@
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
     <url-pattern>*.mvc</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>.jsp</url-pattern>
   </servlet-mapping>
   <!-- End SpringMVC配置 -->
 
