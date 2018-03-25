@@ -43,7 +43,7 @@ public class KlUserManagerController {
     }
 
     //列出所有用户
-    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
+    @RequestMapping(value = "/findAll")
     public String findAll(Model model) {
         List klUserList = klUserManagerService.findAll();
         model.addAttribute("users",klUserList);
