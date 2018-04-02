@@ -83,10 +83,6 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>*.mvc</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>springmvc</servlet-name>
-    <url-pattern>*.jsp</url-pattern>
-  </servlet-mapping>
   <!-- End SpringMVC配置 -->
 
   <filter>
