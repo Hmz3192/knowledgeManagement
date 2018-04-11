@@ -267,25 +267,15 @@ Admin
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mUser.jsp" class="dropdown-toggle">
+                                    <a href="/userManager/findAll.mvc" class="dropdown-toggle">
                                         <i class="fa fa-table"></i>
                                         <span>用户管理</span>
                                         <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="mUser.jsp">
+                                            <a href="/userManager/findAll.mvc">
                                                 普通用户
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="mUser.jsp">
-                                                VIP用户
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="mUser.jsp">
-                                                异常用户
                                             </a>
                                         </li>
                                     </ul>
@@ -305,35 +295,53 @@ Admin
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="widgets.html">
+                                    <a href="boke.jsp">
                                         <i class="fa fa-th-large"></i>
                                         <span>博客管理</span>
                                         <span class="label label-success pull-right">New</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle">
+                                    <a href="ziliao.jsp" class="dropdown-toggle">
                                         <i class="fa fa-desktop"></i>
                                         <span>资料上传</span>
+                                        <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="ziliao.jsp">
+                                                文件上传
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#" class="dropdown-toggle">
                                         <i class="fa fa-edit"></i>
                                         <span>文档管理</span>
+                                        <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="wendang.jsp">
+                                                文档管理
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#" class="dropdown-toggle">
                                         <i class="fa fa-desktop"></i>
                                         <span>视频管理</span>
+                                        <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-toggle">
-                                        <i class="fa fa-file-text-o"></i>
-                                        <span>知识树修改</span>
-                                    </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="shipin.jsp">
+                                                视频管理
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -349,7 +357,6 @@ Admin
                                     <li><a href="#">Home</a></li>
                                     <li class="active"><span>网站流量</span></li>
                                 </ol>
-                                <h1>网站流量</h1>
                             </div>
                         </div>
                         <div class="row">

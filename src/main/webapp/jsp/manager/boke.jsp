@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dellpc
-  Date: 2018/3/24
-  Time: 14:40
+  Date: 2018/4/10
+  Time: 22:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,7 +12,7 @@
             + path + "/jsp/manager";
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -34,7 +33,7 @@
                     oracle: 0,
                     paths: {cloudflare: "/cdn-cgi/nexp/dok2v=1613a3a185/"},
                     atok: "1fca8a26fb9678bbb4b5c54c34e227b9",
-                    petok: "edc3bb660c960db01c6473543c337c05ff828e55-1420553994-1800",
+                    petok: "08e52c5dd12ae1e96de2585c39cff0240cf98c14-1420553925-1800",
                     zone: "adbee.technology",
                     rocket: "0",
                     apps: {"ga_key": {"ua": "UA-49262924-2", "ga_bs": "2"}}
@@ -50,7 +49,7 @@
     </script>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/bootstrap/bootstrap.min.css"/>
 
-    <script src="<%=basePath%>/js/demo-rtl.js"></script>
+    <script src="js/demo-rtl.js"></script>
 
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/font-awesome.css"/>
@@ -58,8 +57,8 @@
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/compiled/theme_styles.css"/>
 
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/dataTables.fixedHeader.css">
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/libs/dataTables.tableTools.css">
+    <link rel="stylesheet" href="<%=basePath%>/css/libs/morris.css" type="text/css"/>
+    <link rel="stylesheet" href="<%=basePath%>/css/libs/daterangepicker.css" type="text/css"/>
 
     <link type="image/x-icon" href="<%=basePath%>/favicon.png" rel="shortcut icon"/>
 
@@ -98,11 +97,11 @@
                 "twttr" in b && "events" in twttr && "bind" in twttr.events && twttr.events.bind("tweet", function (a) {
                     if (a) {
                         var b;
-                        if (a.target && a.target.nodeName == "IFRAME")a:{
+                        if (a.target && a.target.nodeName == "IFRAME") a:{
                             if (a = a.target.src) {
                                 a = a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);
                                 b = 0;
-                                for (var c; c = a[b]; ++b)if (c.indexOf("url") === 0) {
+                                for (var c; c = a[b]; ++b) if (c.indexOf("url") === 0) {
                                     b = unescape(c.split("=")[1]);
                                     break a
                                 }
@@ -121,10 +120,25 @@
 <div id="theme-wrapper">
     <header class="navbar" id="header-navbar">
         <div class="container">
-            <a href="#" id="logo" class="navbar-brand">
+            <a href="index.html" id="logo" class="navbar-brand">
                 知木管家
+                <img src="<%=basePath%>/img/logo-black.png" alt="" class="normal-logo logo-black"/>
+                <img src="<%=basePath%>/img/logo-small.png" alt="" class="small-logo hidden-xs hidden-sm hidden"/>
             </a>
             <div class="clearfix">
+                <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
+                    <ul class="nav navbar-nav pull-left">
+                        <li>
+                            <a class="btn" id="make-small-nav">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="nav-no-collapse pull-right" id="header-nav">
                     <ul class="nav navbar-nav pull-right">
                         <li class="mobile-search">
@@ -264,12 +278,11 @@ right for Marsellus to throw...
                         </li>
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!------------------------------------------------管理员图片---------------------------------------------------------->
-                                <img src="<%=basePath%>/img/samples/scarlet.png" alt=""/>
+                                <img src="<%=basePath%>/img/samples/scarlet-159.png" alt=""/>
                                 <span class="hidden-xs">Admin</span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-user"></i>Profile</a></li>
+                                <li><a href="user-profile.html"><i class="fa fa-user"></i>Profile</a></li>
                                 <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
                                 <li><a href="#"><i class="fa fa-envelope-o"></i>Messages</a></li>
                                 <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
@@ -304,13 +317,13 @@ Admin
                         <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="/jsp/manager/home.jsp">
+                                    <a href="home.jsp">
                                         <i class="fa fa-dashboard"></i>
                                         <span>资讯</span>
                                         <span class="label label-info label-circle pull-right">28</span>
                                     </a>
                                 </li>
-                                <li class="open active">
+                                <li>
                                     <a href="/userManager/findAll.mvc" class="dropdown-toggle">
                                         <i class="fa fa-table"></i>
                                         <span>用户管理</span>
@@ -318,70 +331,70 @@ Admin
                                     </a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="/userManager/findAll.mvc" class="active">
+                                            <a href="/userManager/findAll.mvc">
                                                 普通用户
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="/jsp/manager/webFlow.jsp" class="dropdown-toggle">
+                                    <a href="webFlow.jsp" class="dropdown-toggle">
                                         <i class="fa fa-bar-chart-o"></i>
                                         <span>网站流量</span>
                                         <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
-                                    <ul class="submenu">
+                                    <ul class="submenu">>
                                         <li>
-                                            <a href="/jsp/manager/webFlow.jsp">
+                                            <a href="webFlow.jsp">
                                                 网站流量图
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="/jsp/manager/boke.jsp">
+                                <li class="active">
+                                    <a href="boke.jsp">
                                         <i class="fa fa-th-large"></i>
                                         <span>博客管理</span>
                                         <span class="label label-success pull-right">New</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/jsp/manager/ziliao.jsp" class="dropdown-toggle">
+                                    <a href="ziliao.jsp" class="dropdown-toggle">
                                         <i class="fa fa-desktop"></i>
                                         <span>资料上传</span>
                                         <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="/jsp/manager/ziliao.jsp">
+                                            <a href="ziliao.jsp">
                                                 文件上传
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="/jsp/manager/wendang.jsp" class="dropdown-toggle">
+                                    <a href="wendang.jsp" class="dropdown-toggle">
                                         <i class="fa fa-edit"></i>
                                         <span>文档管理</span>
                                         <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="/jsp/manager/wendang.jsp">
+                                            <a href="wendang.jsp">
                                                 文档管理
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="/jsp/manager/shipin.jsp" class="dropdown-toggle">
+                                    <a href="shipin.jsp" class="dropdown-toggle">
                                         <i class="fa fa-desktop"></i>
                                         <span>视频管理</span>
                                         <i class="fa fa-chevron-circle-right drop-icon"></i>
                                     </a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="/jsp/manager/shipin.jsp">
+                                            <a href="shipin.jsp">
                                                 视频管理
                                             </a>
                                         </li>
@@ -399,7 +412,7 @@ Admin
                             <div class="col-lg-12">
                                 <ol class="breadcrumb">
                                     <li><a href="#">Home</a></li>
-                                    <li class="active"><span>用户管理</span></li>
+                                    <li class="active"><span>博客管理</span></li>
                                 </ol>
                             </div>
                         </div>
@@ -408,32 +421,34 @@ Admin
                                 <div class="main-box clearfix">
                                     <div class="main-box-body clearfix">
                                         <div class="table-responsive">
-                                            <table id="table-example" class="table table-hover">
+                                            <table id="user" class="table table-hover" style="clear: both">
                                                 <thead>
                                                 <tr>
-                                                    <th>用户ID</th>
-                                                    <th>用户名</th>
-                                                    <th>用户密码</th>
-                                                    <th>用户等级</th>
-                                                    <th>用户电话</th>
-                                                    <th>E-mail</th>
-                                                    <th>VIP</th>
-                                                    <th>用户得分</th>
+                                                    <th><span>用户</span></th>
+                                                    <th><span>博文</span></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach items="${users}" var="user">
-                                                    <tr>
-                                                        <th><c:out value="${user.userId}"/></th>
-                                                        <th><c:out value="${user.userName}"/></th>
-                                                        <th><c:out value="${user.userPassword}"/></th>
-                                                        <th><c:out value="${user.userAvatar}"/></th>
-                                                        <th><c:out value="${user.userPhone}"/></th>
-                                                        <th><c:out value="${user.userEmail}"/></th>
-                                                        <th><c:out value="${user.userVip}"/></th>
-                                                        <th><c:out value="${user.userPoint}"/></th>
-                                                    </tr>
-                                                </c:forEach>
+                                                <tr>
+                                                    <td width="35%">用户1</td>
+                                                    <td width="65%"><a href="#" id="username" data-type="text"
+                                                                       data-pk="1" data-title="Enter username"
+                                                                       class="editable editable-click">Java</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>用户2</td>
+                                                    <td><a href="#" id="firstname" data-type="text" data-pk="1"
+                                                           data-placement="right" data-placeholder="Required"
+                                                           data-title="Enter your firstname"
+                                                           class="editable editable-click editable-empty">前端精讲</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>用户3</td>
+                                                    <td><a href="#" id="sex" data-type="select2" data-pk="1"
+                                                           data-value="" data-title="Select sex"
+                                                           class="editable editable-click" style="color: gray;">python</a></td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -456,45 +471,70 @@ Admin
         </div>
     </div>
 </div>
+
 <script src="<%=basePath%>/js/demo-skin-changer.js"></script>
 <script src="<%=basePath%>/js/jquery.js"></script>
 <script src="<%=basePath%>/js/bootstrap.js"></script>
 <script src="<%=basePath%>/js/jquery.nanoscroller.min.js"></script>
 <script src="<%=basePath%>/js/demo.js"></script>
 
-<script src="<%=basePath%>/js/jquery.dataTables.js"></script>
-<script src="<%=basePath%>/js/dataTables.fixedHeader.js"></script>
-<script src="<%=basePath%>/js/dataTables.tableTools.js"></script>
-<script src="<%=basePath%>/js/jquery.dataTables.bootstrap.js"></script>
+<script src="<%=basePath%>/js/jquery-ui.custom.min.js"></script>
+<script src="<%=basePath%>/js/fullcalendar.min.js"></script>
+<script src="<%=basePath%>/js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>/js/raphael-min.js"></script>
+<script src="<%=basePath%>/js/morris.min.js"></script>
+<script src="<%=basePath%>/js/moment.min.js"></script>
+<script src="<%=basePath%>/js/daterangepicker.js"></script>
+<script src="<%=basePath%>/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="<%=basePath%>/js/jquery-jvectormap-world-merc-en.js"></script>
+<script src="<%=basePath%>/js/gdp-data.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.min.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.pie.min.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.stack.min.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.resize.min.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.time.min.js"></script>
+<script src="<%=basePath%>/js/flot/jquery.flot.threshold.js"></script>
 
 <script src="<%=basePath%>/js/scripts.js"></script>
 <script src="<%=basePath%>/js/pace.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        var table = $('#table-example').dataTable({
-            'info': false,
-            'sDom': 'lTfr<"clearfix">tip',
-            'oTableTools': {
-                'aButtons': [
-                    {
-                        'sExtends': 'collection',
-                        'sButtonText': '<i class="fa fa-cloud-download"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>',
-                        'aButtons': ['csv', 'xls', 'pdf', 'copy', 'print']
-                    }
-                ]
-            }
+
+        $('.conversation-inner').slimScroll({
+            height: '352px',
+            alwaysVisible: false,
+            railVisible: true,
+            wheelStep: 5,
+            allowPageScroll: false
         });
 
-        //var tt = new $.fn.dataTable.TableTools( table );
-        //$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-
-        var tableFixed = $('#table-example-fixed').dataTable({
-            'info': false,
-            'pageLength': 50
+        //CHARTS
+        graphLine = Morris.Line({
+            element: 'graph-line',
+            data: [
+                {period: '2014-01-01', iphone: 2666, ipad: null, itouch: 2647},
+                {period: '2014-01-02', iphone: 9778, ipad: 2294, itouch: 2441},
+                {period: '2014-01-03', iphone: 4912, ipad: 1969, itouch: 2501},
+                {period: '2014-01-04', iphone: 3767, ipad: 3597, itouch: 5689},
+                {period: '2014-01-05', iphone: 6810, ipad: 1914, itouch: 2293},
+                {period: '2014-01-06', iphone: 5670, ipad: 4293, itouch: 1881},
+                {period: '2014-01-07', iphone: 4820, ipad: 3795, itouch: 1588},
+                {period: '2014-01-08', iphone: 15073, ipad: 5967, itouch: 5175},
+                {period: '2014-01-09', iphone: 10687, ipad: 4460, itouch: 2028},
+                {period: '2014-01-10', iphone: 8432, ipad: 5713, itouch: 1791}
+            ],
+            lineColors: ['#ffffff'],
+            xkey: 'period',
+            ykeys: ['iphone'],
+            labels: ['iPhone'],
+            pointSize: 3,
+            hideHover: 'auto',
+            gridTextColor: '#ffffff',
+            gridLineColor: 'rgba(255, 255, 255, 0.3)',
+            resize: true
         });
-
-        new $.fn.dataTable.FixedHeader(tableFixed);
     });
 </script>
 </body>
